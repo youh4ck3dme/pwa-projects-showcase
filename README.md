@@ -1,4 +1,4 @@
-# Gemini Enterprise Project Marketplace
+# pROJECT - Gemini Enterprise Project Marketplace
 
 ## Prehľad
 

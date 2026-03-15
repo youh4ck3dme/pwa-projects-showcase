@@ -229,7 +229,7 @@ export default function V4FinstatPresentation() {
                                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 8-6 4 6 4V8Z" /><rect width="14" height="12" x="2" y="6" rx="2" ry="2" /></svg>
                                     </div>
                                     <h4 className="text-[34px] md:text-[40px] font-extrabold text-white mb-2">93 / 93</h4>
-                                    <p style={{ color: 'var(--slate-300)', fontSize: 'var(--text-base)', textTransform: 'uppercase', tracking: '0.05em', fontWeight: 'var(--font-semibold)' }}>Úspešných QA Testov</p>
+                                    <p style={{ color: 'var(--slate-300)', fontSize: 'var(--text-base)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 'var(--font-semibold)' }}>Úspešných QA Testov</p>
                                     <p style={{ fontSize: 'var(--text-base)', color: 'var(--slate-400)', marginTop: 'var(--space-2)' }}>Pokrytie kódu 85%+ testami</p>
                                 </div>
                                 <div className="glass-panel p-6 md:p-8 rounded-2xl text-center relative overflow-hidden">
@@ -246,7 +246,7 @@ export default function V4FinstatPresentation() {
                                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M3 9h18" /><path d="M9 21V9" /></svg>
                                     </div>
                                     <h4 className="text-2xl md:text-[28px] font-bold text-white mb-2">Production Ready</h4>
-                                    <p style={{ color: 'var(--slate-300)', fontSize: 'var(--text-base)', textTransform: 'uppercase', tracking: '0.05em', fontWeight: 'var(--font-semibold)' }}>Infraštruktúra</p>
+                                    <p style={{ color: 'var(--slate-300)', fontSize: 'var(--text-base)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 'var(--font-semibold)' }}>Infraštruktúra</p>
                                     <p style={{ fontSize: 'var(--text-base)', color: 'var(--slate-400)', marginTop: 'var(--space-2)' }}>PostgreSQL, Redis cache. Škálovateľné ihneď.</p>
                                 </div>
                             </div>
