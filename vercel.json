@@ -19,8 +19,5 @@
       "src": "/(.*)",
       "dest": "/"
     }
-  ],
-  "env": {
-    "NEXT_PUBLIC_GEMINI_API_KEY": "@gemini-api-key"
-  }
+  ]
 }
