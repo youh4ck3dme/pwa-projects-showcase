@@ -107,17 +107,24 @@ export const SearchAssistant: React.FC<SearchAssistantProps> = ({
   };
 
   return (
-    <div className="search-assistant bg-white rounded-lg shadow-md p-6">
-      <div className="mb-4">
-        <h3 className="text-lg font-semibold text-gray-800 mb-2">
+    <div className="search-assistant border" 
+      style={{ 
+        backgroundColor: 'var(--bg-card)', 
+        borderRadius: 'var(--radius-lg)', 
+        boxShadow: 'var(--shadow-md)', 
+        padding: 'var(--space-6)',
+        borderColor: 'var(--border-subtle)'
+      }}>
+      <div style={{ marginBottom: 'var(--space-4)' }}>
+        <h3 style={{ fontSize: 'var(--text-lg)', fontWeight: 'var(--font-semibold)', color: 'var(--text-primary)', marginBottom: 'var(--space-2)' }}>
           AI Search Assistant
         </h3>
-        <p className="text-sm text-gray-600">
+        <p style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)' }}>
           Get intelligent search suggestions and enhanced results
         </p>
       </div>
 
-      <div className="space-y-4">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
         {/* Search Input */}
         <div className="relative">
           <input
@@ -126,12 +133,30 @@ export const SearchAssistant: React.FC<SearchAssistantProps> = ({
             onChange={(e) => setQuery(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleSearch(query)}
             placeholder="Describe what you're looking for..."
-            className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full pr-12 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+            style={{ 
+              paddingLeft: 'var(--space-4)', 
+              paddingRight: 'var(--space-12)', 
+              paddingTop: 'var(--space-3)', 
+              paddingBottom: 'var(--space-3)', 
+              border: '1px solid var(--border-strong)', 
+              borderRadius: 'var(--radius-lg)',
+              backgroundColor: 'var(--bg-primary)',
+              color: 'var(--text-primary)'
+            }}
           />
           <button
             onClick={() => handleSearch(query)}
             disabled={!query.trim() || isAnalyzing}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white transition-all hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{ 
+              backgroundColor: 'var(--primary-600)', 
+              paddingLeft: 'var(--space-4)', 
+              paddingRight: 'var(--space-4)', 
+              paddingTop: 'var(--space-1)', 
+              paddingBottom: 'var(--space-1)', 
+              borderRadius: 'var(--radius-md)' 
+            }}
           >
             {isAnalyzing ? 'Analyzing...' : 'Search'}
           </button>
@@ -140,13 +165,24 @@ export const SearchAssistant: React.FC<SearchAssistantProps> = ({
         {/* Suggestions */}
         {suggestions.length > 0 && (
           <div className="suggestions">
-            <h4 className="text-sm font-medium text-gray-700 mb-2">Popular searches:</h4>
-            <div className="flex flex-wrap gap-2">
+            <h4 style={{ fontSize: 'var(--text-sm)', fontWeight: 'var(--font-medium)', color: 'var(--text-secondary)', marginBottom: 'var(--space-2)' }}>Popular searches:</h4>
+            <div className="flex flex-wrap" style={{ gap: 'var(--space-2)' }}>
               {suggestions.map((suggestion, index) => (
                 <button
                   key={index}
                   onClick={() => handleSuggestionClick(suggestion)}
-                  className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors"
+                  className="transition-colors"
+                  style={{ 
+                    paddingLeft: 'var(--space-3)', 
+                    paddingRight: 'var(--space-3)', 
+                    paddingTop: 'var(--space-1)', 
+                    paddingBottom: 'var(--space-1)', 
+                    backgroundColor: 'var(--bg-tertiary)', 
+                    color: 'var(--text-primary)', 
+                    borderRadius: 'var(--radius-3xl)', 
+                    fontSize: 'var(--text-sm)',
+                    border: '1px solid var(--border-subtle)'
+                  }}
                 >
                   {suggestion}
                 </button>
@@ -157,29 +193,59 @@ export const SearchAssistant: React.FC<SearchAssistantProps> = ({
 
         {/* Context Builder */}
         <div className="context-builder">
-          <h4 className="text-sm font-medium text-gray-700 mb-2">Add context:</h4>
-          <div className="flex flex-wrap gap-2">
+          <h4 style={{ fontSize: 'var(--text-sm)', fontWeight: 'var(--font-medium)', color: 'var(--text-secondary)', marginBottom: 'var(--space-2)' }}>Add context:</h4>
+          <div className="flex flex-wrap" style={{ gap: 'var(--space-2)' }}>
             <button
               onClick={() => setContext([...context, 'Looking for urgent projects'])}
-              className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200"
+              style={{ 
+                paddingLeft: 'var(--space-3)', 
+                paddingRight: 'var(--space-3)', 
+                paddingTop: 'var(--space-1)', 
+                paddingBottom: 'var(--space-1)', 
+                backgroundColor: 'var(--success-50)', 
+                color: 'var(--success-700)', 
+                borderRadius: 'var(--radius-3xl)', 
+                fontSize: 'var(--text-sm)',
+                border: '1px solid var(--success-200)'
+              }}
             >
               Urgent
             </button>
             <button
               onClick={() => setContext([...context, 'Budget under $5000'])}
-              className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm hover:bg-purple-200"
+              style={{ 
+                paddingLeft: 'var(--space-3)', 
+                paddingRight: 'var(--space-3)', 
+                paddingTop: 'var(--space-1)', 
+                paddingBottom: 'var(--space-1)', 
+                backgroundColor: 'var(--primary-50)', 
+                color: 'var(--primary-700)', 
+                borderRadius: 'var(--radius-3xl)', 
+                fontSize: 'var(--text-sm)',
+                border: '1px solid var(--primary-200)'
+              }}
             >
               Budget-friendly
             </button>
             <button
               onClick={() => setContext([...context, 'Requires React expertise'])}
-              className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm hover:bg-blue-200"
+              style={{ 
+                paddingLeft: 'var(--space-3)', 
+                paddingRight: 'var(--space-3)', 
+                paddingTop: 'var(--space-1)', 
+                paddingBottom: 'var(--space-1)', 
+                backgroundColor: 'var(--secondary-50)', 
+                color: 'var(--secondary-700)', 
+                borderRadius: 'var(--radius-3xl)', 
+                fontSize: 'var(--text-sm)',
+                border: '1px solid var(--secondary-200)'
+              }}
             >
               React required
             </button>
           </div>
           {context.length > 0 && (
-            <div className="mt-2 text-sm text-gray-600">
+            <div style={{ marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>
               Context: {context.join(', ')}
             </div>
           )}

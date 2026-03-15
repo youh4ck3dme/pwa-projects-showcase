@@ -1,16 +1,17 @@
 @import "tailwindcss";
+@import '../styles/design-tokens.css';
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-@theme inline {
+/* @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
+} */
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -23,4 +24,177 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Enhanced focus states for accessibility */
+*:focus {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Improved contrast for text elements */
+.text-gray-400 {
+  color: var(--text-quaternary);
+}
+
+.text-gray-500 {
+  color: var(--text-tertiary);
+}
+
+.text-gray-600 {
+  color: var(--text-secondary);
+}
+
+.text-gray-700 {
+  color: var(--text-primary);
+}
+
+.text-gray-800 {
+  color: var(--text-primary);
+}
+
+.text-gray-900 {
+  color: var(--text-primary);
+}
+
+/* Enhanced border colors for better separation */
+.border-gray-100 {
+  border-color: var(--border-subtle);
+}
+
+.border-gray-200 {
+  border-color: var(--border-default);
+}
+
+.border-gray-300 {
+  border-color: var(--border-strong);
+}
+
+.border-gray-500 {
+  border-color: var(--border-strong);
+}
+
+/* Improved background colors */
+.bg-gray-50 {
+  background-color: var(--bg-secondary);
+}
+
+.bg-gray-100 {
+  background-color: var(--bg-tertiary);
+}
+
+/* Enhanced button contrast */
+.btn-primary {
+  background-color: var(--primary-600);
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-700);
+}
+
+.btn-secondary {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-default);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-secondary);
+}
+
+/* Improved card styling */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Enhanced spacing consistency */
+.section-padding {
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-12);
+}
+
+.container-padding {
+  padding-left: var(--space-6);
+  padding-right: var(--space-6);
+}
+
+/* Typography improvements */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+}
+
+p {
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-4);
+}
+
+/* Link improvements */
+a {
+  color: var(--primary-600);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary-700);
+  text-decoration: underline;
+}
+
+/* Form element improvements */
+input, textarea, select {
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  background-color: var(--bg-card);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Improved shadow consistency */
+.shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+.shadow-xl {
+  box-shadow: var(--shadow-xl);
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .container-padding {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+  
+  .section-padding {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-8);
+  }
 }

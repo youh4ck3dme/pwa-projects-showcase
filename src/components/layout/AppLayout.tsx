@@ -3,29 +3,29 @@ import Link from 'next/link';
 
 export const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
-      <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <header className="sticky top-0 z-50 border-b" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-subtle)' }}>
+        <div className="max-w-7xl mx-auto flex items-center justify-between" style={{ paddingLeft: 'var(--space-4)', paddingRight: 'var(--space-4)', height: 'var(--space-20)' }}>
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-400 bg-clip-text text-transparent">
               Vzorkovník
             </span>
           </Link>
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-sm font-medium text-gray-500 hover:text-primary-600 transition-colors">
+          <nav className="hidden md:flex items-center" style={{ gap: 'var(--space-8)' }}>
+            <Link href="/" className="text-sm font-medium transition-colors" style={{ color: 'var(--text-secondary)' }}>
               Projekty
             </Link>
-            <Link href="/enterprise" className="text-sm font-medium text-primary-600 font-bold hover:text-primary-700 transition-colors flex items-center">
-              <span className="w-2 h-2 bg-primary-500 rounded-full mr-1.5 animate-pulse"></span>
+            <Link href="/enterprise" className="text-sm font-bold transition-colors flex items-center" style={{ color: 'var(--primary-600)' }}>
+              <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: 'var(--primary-500)', marginRight: 'var(--space-1-5, 6px)' }}></span>
               Enterprise
             </Link>
-            <Link href="/content-generator" className="text-sm font-medium text-gray-500 hover:text-primary-600 transition-colors">
+            <Link href="/content-generator" className="text-sm font-medium transition-colors" style={{ color: 'var(--text-secondary)' }}>
               Content AI
             </Link>
-            <a href="#" className="text-sm font-medium text-gray-500 hover:text-primary-600 transition-colors">
+            <a href="#" className="text-sm font-medium transition-colors" style={{ color: 'var(--text-secondary)' }}>
               O nás
             </a>
-            <a href="#" className="text-sm font-medium text-gray-500 hover:text-primary-600 transition-colors">
+            <a href="#" className="text-sm font-medium transition-colors" style={{ color: 'var(--text-secondary)' }}>
               Kontakt
             </a>
           </nav>
@@ -36,19 +36,19 @@ export const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children })
         {children}
       </main>
 
-      <footer className="bg-white border-t border-gray-100 py-12 mt-auto">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
-          <p className="text-sm text-gray-400">
-            © 2026 JetEngine CCT PWA. Všetky práva vyhradené.
+      <footer className="border-t mt-auto" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-subtle)', paddingTop: 'var(--space-12)', paddingBottom: 'var(--space-12)' }}>
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between" style={{ paddingLeft: 'var(--space-4)', paddingRight: 'var(--space-4)' }}>
+          <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+            © {new Date().getFullYear()} JetEngine CCT PWA. Všetky práva vyhradené.
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-gray-400 hover:text-primary-500 transition-colors">
+          <div className="flex mt-4 md:mt-0" style={{ gap: 'var(--space-6)' }}>
+            <a href="#" className="transition-colors" style={{ color: 'var(--text-muted)' }}>
               Facebook
             </a>
-            <a href="#" className="text-gray-400 hover:text-primary-500 transition-colors">
+            <a href="#" className="transition-colors" style={{ color: 'var(--text-muted)' }}>
               Instagram
             </a>
-            <a href="#" className="text-gray-400 hover:text-primary-500 transition-colors">
+            <a href="#" className="transition-colors" style={{ color: 'var(--text-muted)' }}>
               LinkedIn
             </a>
           </div>

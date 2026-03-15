@@ -6,7 +6,13 @@ interface TaglineProps {
 }
 
 export const ProjectTagline: React.FC<TaglineProps> = ({ children, className = '' }) => (
-  <p className={`text-sm font-medium text-primary-600 mb-2 uppercase tracking-wider ${className}`}>
+  <p className={`uppercase tracking-wider ${className}`} 
+    style={{ 
+      fontSize: 'var(--text-sm)', 
+      fontWeight: 'var(--font-medium)', 
+      color: 'var(--primary-600)',
+      marginBottom: 'var(--space-2)'
+    }}>
     {children}
   </p>
 );

@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/service-worker.js",
+      "dest": "/service-worker.js"
+    },
+    {
+      "src": "/sw.js",
+      "dest": "/sw.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ],
+  "env": {
+    "NEXT_PUBLIC_GEMINI_API_KEY": "@gemini-api-key"
+  }
+}

@@ -1,10 +1,26 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { fetchProject, fetchProjects } from '@/api/projects';
 import ProjectDetailClient from './ProjectDetailClient';
+import V4FinstatPresentation from '@/components/V4FinstatPresentation';
 
 // Generate dynamic metadata for SEO
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+  
+  // Specific metadata for V4-Finstat to match user's original HTML
+  if (id === '101') {
+    return {
+      title: '📊 V4-Finstat Projekt v5.0 - Pitch Deck',
+      description: 'Vyhľadávač firiem pre celý región V4. B2B SaaS Softvér | Live na produkcii. Prepojenie registrov SK, CZ, PL, HU.',
+      openGraph: {
+        title: '📊 V4-Finstat Projekt v5.0 - Pitch Deck',
+        description: 'Vyhľadávač firiem pre celý región V4. B2B SaaS Softvér | Live na produkcii. Prepojenie registrov SK, CZ, PL, HU.',
+        images: ['/images/v4-finstat.png'],
+      },
+    };
+  }
+
   try {
     const project = await fetchProject(id);
     return {
@@ -14,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
         images: [project.featured_image_url || `https://placehold.co/1200x600?text=${encodeURIComponent(project.project_title)}`],
       },
     };
-  } catch (e) {
+  } catch {
     return { title: 'Projekt nebol nájdený | PWA Vzorkovník' };
   }
 }
@@ -26,7 +42,7 @@ export async function generateStaticParams() {
     return projects.map((p) => ({
       id: p.api_id ? p.api_id.toString() : p.id.toString(),
     }));
-  } catch (e) {
+  } catch {
     return [];
   }
 }
@@ -36,6 +52,12 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
 
   try {
     const project = await fetchProject(id);
+
+    // Custom presentation render for Project 101
+    if (id === '101' || project.api_id === 101) {
+      return <V4FinstatPresentation />;
+    }
+
     const imageUrl = project.featured_image_url || `https://placehold.co/1200x600?text=${encodeURIComponent(project.project_title)}`;
 
     return (
@@ -69,11 +91,13 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">{project.project_title}</h1>
         </div>
 
-        <div className="rounded-3xl overflow-hidden shadow-2xl mb-12">
-          <img
+        <div className="rounded-3xl overflow-hidden shadow-2xl mb-12 relative aspect-video">
+          <Image
             src={imageUrl}
             alt={project.project_title}
-            className="w-full h-auto object-cover max-h-[600px]"
+            fill
+            className="object-cover"
+            priority
           />
         </div>
 
@@ -88,7 +112,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
             </section>
 
             {project.project_link && (
-               <a
+              <a
                 href={project.project_link}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -129,7 +153,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
         <ProjectDetailClient project={project} />
       </div>
     );
-  } catch (error) {
+  } catch {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
         <h2 className="text-2xl font-bold text-red-600">Projekt nebol nájdený</h2>

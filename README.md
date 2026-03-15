@@ -157,3 +157,82 @@ MIT License
 Pre otázky a spoluprácu kontaktujte:
 - Email: support@projectmarketplace.ai
 - Web: https://projectmarketplace.ai
+
+## Nasadenie
+
+### GitHub Pages
+
+1. Vytvorte repozitár na GitHub
+2. Pridajte súbory do repozitára:
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git branch -M main
+   git remote add origin https://github.com/yourusername/your-repo.git
+   git push -u origin main
+   ```
+
+3. Nastavte GitHub Pages:
+   - Choďte do nastavení repozitára
+   - V sekcii "Pages" vyberte zdroj: `GitHub Actions`
+   - Automaticky sa spustí workflow na nasadenie
+
+### Vercel
+
+1. Nainštalujte Vercel CLI:
+   ```bash
+   npm install -g vercel
+   ```
+
+2. Prihláste sa:
+   ```bash
+   vercel login
+   ```
+
+3. Nasadite projekt:
+   ```bash
+   vercel
+   ```
+
+4. Nastavte premenné prostredia:
+   - `NEXT_PUBLIC_GEMINI_API_KEY` - Váš Gemini API kľúč
+
+5. Pre produkčné nasadenie:
+   ```bash
+   vercel --prod
+   ```
+
+### Vlastná doména
+
+#### GitHub Pages
+1. Pridajte DNS záznamy u vášho poskytovateľa domén
+2. V nastaveniach repozitára nastavte vlastnú doménu
+3. Povolte HTTPS
+
+#### Vercel
+1. Pripojte doménu v nastaveniach projektu
+2. Vytvorte DNS záznamy podľa inštrukcií Vercel
+3. Automaticky sa nastaví HTTPS
+
+### Požadované premenné prostredia
+
+```bash
+NEXT_PUBLIC_GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+### Spustenie lokálne
+
+```bash
+# Inštalácia závislostí
+npm install
+
+# Spustenie vývojového servera
+npm run dev
+
+# Build pre produkciu
+npm run build
+
+# Spustenie produkčného servera
+npm start
+```
