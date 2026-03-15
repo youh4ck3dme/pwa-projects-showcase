@@ -75,6 +75,13 @@ export default function V4FinstatPresentation() {
         .v4-presentation-root { font-family: 'Inter', sans-serif; }
         .v4-presentation-root h1, .v4-presentation-root h2, .v4-presentation-root h3, .v4-presentation-root h4, .outfit {
             font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.02em;
+        }
+        .v4-presentation-root h1, .v4-presentation-root h2 {
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        .v4-presentation-root h3, .v4-presentation-root h4 {
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         .slide {
             transition: opacity 0.5s ease, transform 0.5s ease;

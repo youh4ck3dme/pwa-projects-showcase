@@ -116,7 +116,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
                 href={project.project_link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-xl text-white bg-primary-600 hover:bg-primary-700 transition-colors shadow-lg hover:shadow-xl"
+                className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-xl text-black bg-primary-600 hover:bg-primary-700 transition-colors shadow-lg hover:shadow-xl"
               >
                 Navštíviť projekt
                 <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
