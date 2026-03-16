@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
-import { geminiClient } from '@/lib/gemini';
+import { geminiClient } from '../../lib/gemini';
+import { AILoadingOverlay } from '../../components/molecules/AILoadingOverlay';
 import { Check, Copy, Sparkles, Send, FileText, Share2, CornerDownRight } from 'lucide-react';
 
 export default function ContentGeneratorPage() {
@@ -35,8 +36,7 @@ export default function ContentGeneratorPage() {
     } catch (error) {
       console.error('Content Generation Error:', error);
       setGeneratedContent('## Chyba pri generovaní obsahu\nSkontrolujte API kľúč alebo skúste znova neskôr.');
-    } finally {
-      setIsGenerating(false);
+      setIsGenerating(false); // Hide on error
     }
   };
 
@@ -162,6 +162,11 @@ export default function ContentGeneratorPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="lg:col-span-8 min-h-[700px] flex flex-col"
           >
+            <AILoadingOverlay 
+              isVisible={isGenerating} 
+              onComplete={() => setIsGenerating(false)} 
+              mode="deep" 
+            />
             <div className="bg-white border-2 border-black h-full flex flex-col relative overflow-hidden">
               <div className="p-4 border-b-2 border-black flex justify-between items-center bg-bone">
                 <span className="label-system text-[10px]">OUTPUT / BUFFER / v4.2</span>

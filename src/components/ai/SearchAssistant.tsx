@@ -99,6 +99,7 @@ export const SearchAssistant: React.FC<SearchAssistantProps> = ({
       <AILoadingOverlay 
         isVisible={isAnalyzing} 
         onComplete={handleLoadingComplete}
+        mode="standard"
       />
       
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">

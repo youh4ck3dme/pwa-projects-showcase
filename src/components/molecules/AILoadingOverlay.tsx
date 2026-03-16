@@ -5,11 +5,27 @@ import React, { useState, useEffect } from 'react';
 interface AILoadingOverlayProps {
   isVisible: boolean;
   onComplete?: () => void;
+  /**
+   * 'deep' - Full 5s sequence (LARSEN Synthesis)
+   * 'standard' - 2s sequence (Rapid Sync)
+   * 'nano' - 800ms sequence (Instant Buffer)
+   */
+  mode?: 'deep' | 'standard' | 'nano';
 }
 
-export const AILoadingOverlay: React.FC<AILoadingOverlayProps> = ({ isVisible, onComplete }) => {
+export const AILoadingOverlay: React.FC<AILoadingOverlayProps> = ({ 
+  isVisible, 
+  onComplete,
+  mode = 'standard'
+}) => {
   const [phase, setPhase] = useState<'matrix' | 'liquid'>('matrix');
   const [progress, setProgress] = useState(0);
+
+  const config = {
+    deep: { phase1: 2000, step: 30, text: 'INITIALIZING LARSEN_CORE' },
+    standard: { phase1: 800, step: 10, text: 'RAPID_SYNC_ACTIVE' },
+    nano: { phase1: 200, step: 2, text: 'BUFFER_LOAD' }
+  }[mode];
 
   useEffect(() => {
     if (!isVisible) {
@@ -18,12 +34,12 @@ export const AILoadingOverlay: React.FC<AILoadingOverlayProps> = ({ isVisible, o
       return;
     }
 
-    // Phase 1: Matrix / Code Stream (0s - 2s)
+    // Phase 1: Matrix / Code Stream
     const phase1Timer = setTimeout(() => {
       setPhase('liquid');
-    }, 2000);
+    }, config.phase1);
 
-    // Phase 2: Liquid Progress (2s - 5s)
+    // Phase 2: Liquid Progress
     let progressInterval: NodeJS.Timeout;
     if (phase === 'liquid') {
       progressInterval = setInterval(() => {
@@ -31,20 +47,20 @@ export const AILoadingOverlay: React.FC<AILoadingOverlayProps> = ({ isVisible, o
           if (prev >= 100) {
             clearInterval(progressInterval);
             if (onComplete) {
-              setTimeout(onComplete, 500); // Small delay for visual impact
+              setTimeout(onComplete, mode === 'nano' ? 100 : 300);
             }
             return 100;
           }
-          return prev + 1;
+          return prev + (mode === 'nano' ? 5 : 1);
         });
-      }, 30);
+      }, config.step);
     }
 
     return () => {
       clearTimeout(phase1Timer);
       if (progressInterval) clearInterval(progressInterval);
     };
-  }, [isVisible, phase, onComplete]);
+  }, [isVisible, phase, onComplete, config.phase1, config.step, mode]);
 
   if (!isVisible) return null;
 
@@ -74,28 +90,26 @@ export const AILoadingOverlay: React.FC<AILoadingOverlayProps> = ({ isVisible, o
           
           <div className="z-10 text-center space-y-4">
             <h2 className="text-4xl font-black tracking-tighter uppercase leading-none">
-              INITIALIZING <br /> CORE BUFFER
+              {config.text.split(' ')[0]} <br /> {config.text.split(' ')[1] || ''}
             </h2>
-            <p className="label-system text-[10px] animate-pulse">ESTABLISHING CONNECTION V4.1...</p>
+            <p className="label-system text-[10px] animate-pulse">ESTABLISHING CONNECTION v5.0...</p>
           </div>
         </div>
       ) : (
         <div className="relative w-full h-full flex flex-col items-center justify-center p-8">
           {/* Liquid Fill Effect */}
-          <div className="relative w-64 h-96 border-4 border-black mb-12 overflow-hidden bg-white">
+          <div className={`relative ${mode === 'nano' ? 'w-32 h-48' : 'w-64 h-96'} border-4 border-black mb-12 overflow-hidden bg-white transition-all`}>
             <div 
               className="absolute bottom-0 left-0 right-0 bg-black transition-all duration-300 ease-out"
               style={{ height: `${progress}%` }}
             >
               <div className="absolute top-0 left-0 right-0 h-4 bg-black -translate-y-full flex justify-around opacity-50">
-                   {/* Simple wave representation */}
-                   <div className="w-full h-2 bg-black animate-pulse"></div>
+                    <div className="w-full h-2 bg-black animate-pulse"></div>
               </div>
             </div>
             
-            {/* Ticker in the middle of the tank */}
             <div className={`absolute inset-0 flex items-center justify-center mix-blend-difference text-white z-10`}>
-                <span className="text-6xl font-black font-mono tracking-tighter">
+                <span className={`${mode === 'nano' ? 'text-3xl' : 'text-6xl'} font-black font-mono tracking-tighter`}>
                     {progress}%
                 </span>
             </div>
@@ -103,22 +117,18 @@ export const AILoadingOverlay: React.FC<AILoadingOverlayProps> = ({ isVisible, o
 
           <div className="text-center space-y-4 max-w-sm">
             <div className="flex justify-between label-system text-[9px] font-black pb-2 border-b border-silver">
-                <span>SYSTEM / LIQUID_DATA</span>
-                <span>STATUS: {progress < 100 ? 'FILLING' : 'SYNCHRONIZED'}</span>
+                <span>SYSTEM / {mode.toUpperCase()}</span>
+                <span>STATUS: {progress < 100 ? 'SYNCING' : 'READY'}</span>
             </div>
-            <p className="text-[10px] font-mono font-bold uppercase tracking-widest pt-4">
-              Processing semantic structures and re-indexing target vectors...
-            </p>
-            <div className="w-full h-1 bg-silver mt-4">
-                <div 
-                    className="h-full bg-black transition-all duration-300" 
-                    style={{ width: `${progress}%` }}
-                ></div>
-            </div>
+            {mode !== 'nano' && (
+              <p className="text-[10px] font-mono font-bold uppercase tracking-widest pt-4 animate-pulse">
+                Synthesizing proprietary data structures...
+              </p>
+            )}
           </div>
 
           <div className="absolute bottom-12 label-system text-[8px] opacity-30">
-            SECURE_CHANNEL_ACTIVE // PORT_3000 // LARSEN_CORE
+            SECURE_CHANNEL_ACTIVE // PORT_8080 // LARSEN_CORE
           </div>
         </div>
       )}

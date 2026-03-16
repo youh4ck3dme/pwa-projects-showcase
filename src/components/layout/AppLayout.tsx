@@ -109,7 +109,7 @@ export const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children })
       <footer className="border-t-2 border-black bg-white mt-32">
         <div className="container-tight py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
           <div className="space-y-4">
-            <span className="text-lg font-black tracking-tighter">JETENGINE</span>
+            <span className="text-lg font-black tracking-tighter">LARSEN EVANS</span>
             <p className="label-system text-[9px] leading-relaxed max-w-xs">
               PROFESSIONAL PROJECT SHOWCASE AND AI INTEGRATION FRAMEWORK. BUILT FOR PRECISION AND PERFORMANCE.
             </p>

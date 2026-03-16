@@ -126,7 +126,7 @@ export const MarketAnalyzer: React.FC<MarketAnalyzerProps> = ({
 
         {localIsAnalyzing ? (
           <div className="py-20 flex flex-col items-center justify-center space-y-6">
-             <AILoadingOverlay isVisible={localIsAnalyzing} onComplete={handleLoadingComplete} />
+             <AILoadingOverlay isVisible={localIsAnalyzing} onComplete={handleLoadingComplete} mode="standard" />
           </div>
         ) : analysis ? (
           <div className="space-y-12">

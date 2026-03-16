@@ -24,14 +24,14 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   try {
     const project = await fetchProject(id);
     return {
-      title: `${project.project_title} | PWA Vzorkovník`,
+      title: `${project.project_title} | LARSEN EVANS PROJECTS`,
       description: project.project_desc || project.project_tagline,
       openGraph: {
         images: [project.featured_image_url || `https://placehold.co/1200x600?text=${encodeURIComponent(project.project_title)}`],
       },
     };
   } catch {
-    return { title: 'Projekt nebol nájdený | PWA Vzorkovník' };
+    return { title: 'Projekt nebol nájdený | LARSEN EVANS PROJECTS' };
   }
 }
 
@@ -80,7 +80,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
               image: imageUrl,
               author: {
                 "@type": "Organization",
-                name: "JetEngine CCT PWA"
+                name: "LARSEN EVANS PROJECTS"
               }
             })
           }}
