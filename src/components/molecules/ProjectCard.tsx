@@ -2,8 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { ProjectCCT } from '../../types/project';
-import { ProjectTitle } from '../atoms/ProjectTitle';
-import { ProjectTagline } from '../atoms/ProjectTagline';
 
 interface ProjectCardProps {
   project: ProjectCCT;
@@ -14,46 +12,46 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
   return (
     <Link href={`/project/${project.api_id || project.id}`} 
-      className="group block overflow-hidden transition-all duration-300 border" 
-      style={{ 
-        borderRadius: 'var(--radius-2xl)', 
-        backgroundColor: 'var(--bg-card)', 
-        borderColor: 'var(--border-subtle)',
-        boxShadow: 'var(--shadow-sm)'
-      }}>
-      <div className="aspect-[16/9] overflow-hidden relative" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
+      className="group block border border-silver hover:border-black transition-all duration-100 bg-white"
+    >
+      <div className="aspect-[16/9] overflow-hidden relative border-b border-silver group-hover:border-black transition-colors">
         <Image
           src={imageUrl}
           alt={project.project_title}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
         />
         {project.project_category && (
-          <span className="absolute backdrop-blur-sm border border-white/20" 
-            style={{ 
-              top: 'var(--space-4)', 
-              left: 'var(--space-4)', 
-              backgroundColor: 'rgba(255, 255, 255, 0.9)', 
-              paddingLeft: 'var(--space-3)', 
-              paddingRight: 'var(--space-3)', 
-              paddingTop: 'var(--space-1)', 
-              paddingBottom: 'var(--space-1)',
-              borderRadius: 'var(--radius-3xl)',
-              fontSize: 'var(--text-xs)',
-              fontWeight: 'var(--font-semibold)',
-              color: 'var(--neutral-700)'
-            }}>
+          <div className="absolute top-0 right-0 bg-black text-white px-3 py-1 text-[9px] font-black tracking-widest uppercase">
             {project.project_category}
-          </span>
+          </div>
         )}
       </div>
-      <div style={{ padding: 'var(--space-6)' }}>
-        <ProjectTagline>{project.project_tagline}</ProjectTagline>
-        <ProjectTitle>{project.project_title}</ProjectTitle>
-        <div className="flex items-center justify-between" style={{ marginTop: 'var(--space-4)', fontSize: 'var(--text-sm)', color: 'var(--text-secondary)' }}>
-          <span>{project.project_client}</span>
-          <span>{project.project_date}</span>
+      
+      <div className="p-8 space-y-6">
+        <div className="space-y-4">
+          <div className="flex justify-between items-start">
+            <span className="label-system text-[9px] font-black">{project.project_type || 'CORE PROJECT'}</span>
+            <span className="text-[10px] font-mono text-silver group-hover:text-black">OBJ. {project.api_id || project.id}</span>
+          </div>
+          <h3 className="text-3xl font-black tracking-tighter uppercase leading-none border-b-2 border-transparent group-hover:border-black inline-block pb-1">
+            {project.project_title}
+          </h3>
+          <p className="text-[11px] font-medium text-charcoal leading-relaxed uppercase tracking-tight line-clamp-2">
+            {project.project_desc}
+          </p>
+        </div>
+
+        <div className="pt-6 border-t border-silver flex items-center justify-between">
+          <div className="flex flex-col">
+            <span className="label-system text-[8px] mb-1">CONTRACT / CLIENT</span>
+            <span className="text-[10px] font-black uppercase tracking-widest">{project.project_client}</span>
+          </div>
+          <div className="flex flex-col items-end">
+            <span className="label-system text-[8px] mb-1">SEQUENCE / YEAR</span>
+            <span className="text-[10px] font-mono font-bold">{project.project_date}</span>
+          </div>
         </div>
       </div>
     </Link>

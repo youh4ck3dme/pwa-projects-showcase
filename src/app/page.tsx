@@ -11,20 +11,21 @@ export default async function ProjectsPage() {
     const projects = await fetchProjects();
 
     return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="mb-12">
-          <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
-            Naše projekty <span className="text-primary-600">+ AI</span>
+      <div className="container-tight pt-24 pb-16">
+        <div className="border-b-2 border-black pb-12">
+          <span className="label-system text-[10px] block mb-6">PROJECTS / REPOSITORY / V4.0</span>
+          <h1 className="text-6xl font-black tracking-tighter max-w-4xl leading-[0.9]">
+            ENGINEERING <br /> THE FUTURE <br /> <span className="text-silver">OF PWA.</span>
           </h1>
-          <p className="mt-4 text-lg text-gray-500 max-w-2xl">
-            Prehľad našich najnovších realizácií podporený inteligentným vyhľadávaním a analýzou trhu.
+          <p className="mt-12 text-lg font-medium text-charcoal max-w-xl leading-snug uppercase tracking-tight">
+            SYSTEMATIC COLLECTION OF ADVANCED WEB IMPLEMENTATIONS AND AI-DRIVEN ARCHITECTURES.
           </p>
         </div>
 
         <ProjectsClient initialProjects={projects || []} />
       </div>
     );
-  } catch (error) {
+  } catch {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
         <h2 className="text-2xl font-bold text-red-600">Chyba pri načítaní projektov</h2>

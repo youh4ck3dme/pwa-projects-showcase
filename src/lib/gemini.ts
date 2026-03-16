@@ -17,16 +17,18 @@ export interface GeminiQuery {
 }
 
 export class GeminiEnterpriseClient {
-  private model: GenerativeModel;
+  private flashModel: GenerativeModel;
+  private proModel: GenerativeModel;
 
   constructor() {
-    this.model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash-latest' });
+    this.flashModel = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    this.proModel = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
   }
 
   async search(query: GeminiQuery): Promise<GeminiSearchResult[]> {
     try {
       const prompt = this.buildSearchPrompt(query);
-      const result = await this.model.generateContent(prompt);
+      const result = await this.flashModel.generateContent(prompt);
       const response = await result.response;
       const text = response.text();
       
@@ -41,7 +43,7 @@ export class GeminiEnterpriseClient {
   async generateContent(prompt: string, context?: string[]): Promise<string> {
     try {
       const fullPrompt = this.buildContentPrompt(prompt, context);
-      const result = await this.model.generateContent(fullPrompt);
+      const result = await this.proModel.generateContent(fullPrompt);
       const response = await result.response;
       return response.text();
     } catch (error) {
@@ -50,10 +52,22 @@ export class GeminiEnterpriseClient {
     }
   }
 
+  async generateQuickContent(prompt: string, context?: string[]): Promise<string> {
+    try {
+      const fullPrompt = this.buildContentPrompt(prompt, context);
+      const result = await this.flashModel.generateContent(fullPrompt);
+      const response = await result.response;
+      return response.text();
+    } catch (error) {
+      console.error('Gemini quick content generation error:', error);
+      return '';
+    }
+  }
+
   async analyzeData(data: any, analysisType: 'summary' | 'insights' | 'recommendations'): Promise<string> {
     try {
       const prompt = this.buildAnalysisPrompt(data, analysisType);
-      const result = await this.model.generateContent(prompt);
+      const result = await this.proModel.generateContent(prompt);
       const response = await result.response;
       return response.text();
     } catch (error) {

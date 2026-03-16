@@ -1,7 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
 import { geminiClient } from '@/lib/gemini';
+import { Check, Copy, Sparkles, Send, FileText, Share2, CornerDownRight } from 'lucide-react';
 
 export default function ContentGeneratorPage() {
   const [contentType, setContentType] = useState('blog');
@@ -9,12 +12,13 @@ export default function ContentGeneratorPage() {
   const [keywords, setKeywords] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedContent, setGeneratedContent] = useState('');
+  const [copied, setCopied] = useState(false);
 
   const contentTypes = [
-    { id: 'blog', label: 'Blogový článok', prompt: 'Napíš pútavý blogový článok o projekte' },
-    { id: 'case-study', label: 'Case Study', prompt: 'Vytvor detailnú prípadovú štúdiu pre projekt' },
-    { id: 'social', label: 'Sociálne siete', prompt: 'Vygeneruj príspevky na Instagram, LinkedIn a Facebook pre' },
-    { id: 'marketing', label: 'Marketingový text', prompt: 'Vytvor predajný text pre webovú stránku o' }
+    { id: 'blog', label: 'Blogový článok', prompt: 'Napíš pútavý blogový článok o projekte', icon: <FileText className="w-4 h-4" /> },
+    { id: 'case-study', label: 'Case Study', prompt: 'Vytvor detailnú prípadovú štúdiu pre projekt', icon: <Check className="w-4 h-4" /> },
+    { id: 'social', label: 'Sociálne siete', prompt: 'Vygeneruj príspevky na Instagram, LinkedIn a Facebook pre', icon: <Share2 className="w-4 h-4" /> },
+    { id: 'marketing', label: 'Marketingový text', prompt: 'Vytvor predajný text pre webovú stránku o', icon: <Send className="w-4 h-4" /> }
   ];
 
   const handleGenerate = async () => {
@@ -24,136 +28,218 @@ export default function ContentGeneratorPage() {
 
     try {
       const selectedType = contentTypes.find(t => t.id === contentType);
-      const prompt = `${selectedType?.prompt} "${projectTitle}". Kľúčové slová: ${keywords}. Formátuj v Markdown.`;
+      const prompt = `${selectedType?.prompt} "${projectTitle}". Kľúčové slová: ${keywords}. Formátuj v Markdown. Použi štruktúrované nadpisy a zoznamy.`;
       
       const result = await geminiClient.generateContent(prompt);
       setGeneratedContent(result);
     } catch (error) {
       console.error('Content Generation Error:', error);
-      setGeneratedContent('Chyba pri generovaní obsahu. Skontrolujte API kľúč alebo skúste znova.');
+      setGeneratedContent('## Chyba pri generovaní obsahu\nSkontrolujte API kľúč alebo skúste znova neskôr.');
     } finally {
       setIsGenerating(false);
     }
   };
 
-  return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div className="mb-12 text-center">
-        <h1 className="text-4xl font-extrabold text-gray-900 mb-4">
-          AI <span className="text-primary-600">Content Generator</span>
-        </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Vytvárajte profesionálny marketingový obsah pre vaše projekty v priebehu sekúnd pomocou Gemini AI.
-        </p>
-      </div>
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(generatedContent);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Settings Panel */}
-        <div className="md:col-span-1 space-y-6">
-          <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-4">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Typ obsahu</label>
-              <div className="space-y-2">
-                {contentTypes.map(type => (
-                  <button
-                    key={type.id}
-                    onClick={() => setContentType(type.id)}
-                    className={`w-full text-left px-4 py-2 rounded-xl text-sm transition-all ${
-                      contentType === type.id 
-                        ? 'bg-primary-600 text-white shadow-lg shadow-primary-200' 
-                        : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
-                    }`}
-                  >
-                    {type.label}
-                  </button>
-                ))}
+  return (
+    <div className="min-h-screen bg-[#fafafa] pt-32 pb-24">
+      <div className="container-tight">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-16"
+        >
+          <div className="flex items-center gap-2 mb-6">
+            <span className="label-system text-primary-600 px-3 py-1 bg-primary-600/10 rounded-full">AI CONTENT ENGINE v4.2</span>
+          </div>
+          <h1 className="text-7xl font-black tracking-tighter leading-[0.85] mb-8 text-gradient">
+            CONTENT <br /> GENERATOR.
+          </h1>
+          <p className="text-xl font-medium text-charcoal max-w-2xl uppercase tracking-tighter leading-snug">
+            Professional marketing output for high-end projects, synthesized by Gemini Pro architecture.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Settings Panel */}
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-4 sticky top-32 space-y-8"
+          >
+            <div className="bg-white border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+              <div className="space-y-8">
+                <div>
+                  <h4 className="label-system text-[10px] mb-4">01 / CONTENT TYPE</h4>
+                  <div className="grid grid-cols-1 gap-2">
+                    {contentTypes.map(type => (
+                      <button
+                        key={type.id}
+                        onClick={() => setContentType(type.id)}
+                        className={`flex items-center gap-3 px-4 py-3 text-[11px] font-black uppercase tracking-widest transition-all border ${
+                          contentType === type.id 
+                            ? 'bg-black text-white border-black' 
+                            : 'bg-white text-charcoal border-silver hover:border-black'
+                        }`}
+                      >
+                        {type.icon}
+                        {type.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="label-system text-[10px] mb-4">02 / CORE DATA</h4>
+                  <div className="space-y-4">
+                    <div className="group">
+                      <label className="block text-[8px] font-black uppercase text-silver group-focus-within:text-black transition-colors mb-2">Project Title</label>
+                      <input
+                        type="text"
+                        value={projectTitle}
+                        onChange={(e) => setProjectTitle(e.target.value)}
+                        placeholder="e.g., BRUTALIST VILLA"
+                        className="w-full px-4 py-3 bg-bone border border-silver focus:border-black outline-none text-[13px] font-bold uppercase tracking-tight transition-all"
+                      />
+                    </div>
+
+                    <div className="group">
+                      <label className="block text-[8px] font-black uppercase text-silver group-focus-within:text-black transition-colors mb-2">Target Keywords</label>
+                      <textarea
+                        value={keywords}
+                        onChange={(e) => setKeywords(e.target.value)}
+                        placeholder="e.g., CONCRETE, MINIMAL, GLASS"
+                        rows={3}
+                        className="w-full px-4 py-3 bg-bone border border-silver focus:border-black outline-none text-[13px] font-bold uppercase tracking-tight transition-all resize-none"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  onClick={handleGenerate}
+                  disabled={isGenerating || !projectTitle}
+                  className="w-full py-5 bg-black text-white text-[11px] font-black uppercase tracking-[0.2em] hover:bg-primary-600 transition-all disabled:opacity-20 flex items-center justify-center gap-3"
+                >
+                  {isGenerating ? (
+                    <>
+                      <motion.div 
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                        className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full"
+                      />
+                      <span>SYNTHESIZING...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="w-4 h-4" />
+                      <span>GENERATE DATA</span>
+                    </>
+                  )}
+                </button>
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Názov projektu</label>
-              <input
-                type="text"
-                value={projectTitle}
-                onChange={(e) => setProjectTitle(e.target.value)}
-                placeholder="napr. Moderný Rodinný Dom"
-                className="w-full px-4 py-2 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:ring-2 focus:ring-primary-500 outline-none"
-              />
+            <div className="p-6 border border-silver bg-bone flex items-start gap-4">
+              <CornerDownRight className="w-5 h-5 text-silver mt-1 shrink-0" />
+              <p className="text-[11px] font-medium text-charcoal leading-relaxed uppercase">
+                Using Gemini 1.5 Pro architecture for high-fidelity content synthesis and semantic analysis.
+              </p>
             </div>
+          </motion.div>
 
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Kľúčové slová</label>
-              <textarea
-                value={keywords}
-                onChange={(e) => setKeywords(e.target.value)}
-                placeholder="napr. moderný, energeticky úsporný, drevostavba"
-                rows={3}
-                className="w-full px-4 py-2 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:ring-2 focus:ring-primary-500 outline-none resize-none"
-              />
-            </div>
+          {/* Output Panel */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="lg:col-span-8 min-h-[700px] flex flex-col"
+          >
+            <div className="bg-white border-2 border-black h-full flex flex-col relative overflow-hidden">
+              <div className="p-4 border-b-2 border-black flex justify-between items-center bg-bone">
+                <span className="label-system text-[10px]">OUTPUT / BUFFER / v4.2</span>
+                <AnimatePresence>
+                  {generatedContent && (
+                    <motion.button 
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      onClick={copyToClipboard}
+                      className="flex items-center gap-2 px-4 py-2 bg-black text-white text-[9px] font-black uppercase tracking-widest hover:bg-primary-600 transition-all"
+                    >
+                      {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                      {copied ? 'COPIED TO BUFFER' : 'CLONE DATA'}
+                    </motion.button>
+                  )}
+                </AnimatePresence>
+              </div>
 
-            <button
-              onClick={handleGenerate}
-              disabled={isGenerating || !projectTitle}
-              className="w-full py-3 bg-gray-900 text-white rounded-xl font-bold hover:bg-black transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
-            >
-              {isGenerating ? (
-                <>
-                  <div className="animate-spin h-4 w-4 border-2 border-white/20 border-t-white rounded-full"></div>
-                  <span>Generujem...</span>
-                </>
-              ) : (
-                <>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                  </svg>
-                  <span>Generovať obsah</span>
-                </>
-              )}
-            </button>
-          </div>
-        </div>
+              <div className="flex-grow p-12 overflow-y-auto">
+                <AnimatePresence mode="wait">
+                  {!generatedContent && !isGenerating ? (
+                    <motion.div 
+                      key="empty"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="flex flex-col items-center justify-center h-full text-center space-y-6"
+                    >
+                      <div className="w-24 h-24 bg-bone border border-silver flex items-center justify-center grayscale opacity-50">
+                        <FileText className="w-10 h-10 text-silver" />
+                      </div>
+                      <p className="text-[11px] font-bold text-silver uppercase tracking-[0.2em] italic">Awaiting input sequence for generation.</p>
+                    </motion.div>
+                  ) : isGenerating ? (
+                    <motion.div 
+                      key="generating"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="space-y-8"
+                    >
+                      <div className="h-8 bg-bone animate-pulse w-3/4"></div>
+                      <div className="space-y-4">
+                        <div className="h-4 bg-bone animate-pulse w-full"></div>
+                        <div className="h-4 bg-bone animate-pulse w-5/6"></div>
+                        <div className="h-4 bg-bone animate-pulse w-full"></div>
+                      </div>
+                      <div className="h-40 bg-bone animate-pulse w-full"></div>
+                      <div className="space-y-4">
+                        <div className="h-4 bg-bone animate-pulse w-4/5"></div>
+                        <div className="h-4 bg-bone animate-pulse w-full"></div>
+                      </div>
+                    </motion.div>
+                  ) : (
+                    <motion.div 
+                      key="content"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="prose prose-sm prose-slate max-w-none prose-headings:font-black prose-headings:tracking-tighter prose-headings:uppercase prose-p:text-charcoal prose-p:leading-relaxed prose-li:text-charcoal"
+                    >
+                      <ReactMarkdown>{generatedContent}</ReactMarkdown>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
-        {/* Output Panel */}
-        <div className="md:col-span-2">
-          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm h-full flex flex-col min-h-[500px]">
-            <div className="p-4 border-b border-gray-50 flex justify-between items-center">
-              <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Výstup generátora</span>
-              {generatedContent && (
-                <button 
-                  onClick={() => navigator.clipboard.writeText(generatedContent)}
-                  className="text-xs text-primary-600 font-bold hover:underline"
-                >
-                  Kopírovať
-                </button>
+              {/* Decorative Scanning line for AI effect */}
+              {isGenerating && (
+                <motion.div 
+                  initial={{ top: 0 }}
+                  animate={{ top: '100%' }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                  className="absolute left-0 right-0 h-[2px] bg-primary-600 opacity-50 blur-[2px] z-10"
+                />
               )}
             </div>
-            <div className="flex-grow p-8 overflow-y-auto">
-              {!generatedContent && !isGenerating ? (
-                <div className="flex flex-col items-center justify-center h-full text-center space-y-4">
-                  <div className="p-6 bg-gray-50 rounded-full">
-                    <svg className="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
-                  </div>
-                  <p className="text-gray-400 italic">Váš vygenerovaný obsah sa zobrazí tu.</p>
-                </div>
-              ) : isGenerating ? (
-                <div className="space-y-4">
-                  <div className="h-4 bg-gray-100 rounded w-3/4 animate-pulse"></div>
-                  <div className="h-4 bg-gray-100 rounded w-1/2 animate-pulse"></div>
-                  <div className="h-4 bg-gray-100 rounded w-5/6 animate-pulse"></div>
-                </div>
-              ) : (
-                <div className="prose prose-primary max-w-none">
-                  {/* Simplistic renderer for markdown-like text */}
-                  {generatedContent.split('\n').map((line, i) => (
-                    <p key={i} className="mb-2 text-gray-700">{line}</p>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

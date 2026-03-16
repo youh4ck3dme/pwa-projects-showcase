@@ -2,199 +2,149 @@
 @import '../styles/design-tokens.css';
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(--color-white);
+  --foreground: var(--color-black);
+  
+  /* Premium HSL Tokens */
+  --primary-hsl: 221 83% 53%;
+  --primary-600: hsl(var(--primary-hsl));
+  --primary-500: hsl(221 83% 58%);
+  --primary-400: hsl(221 83% 65%);
+  
+  --accent-hsl: 262 83% 58%;
+  --accent-600: hsl(var(--accent-hsl));
+  
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-blur: 12px;
 }
 
-/* @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-} */
+.glass-premium {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark .glass-premium {
+  --glass-bg: rgba(0, 0, 0, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+.gradient-premium {
+  background: linear-gradient(135deg, var(--primary-600) 0%, var(--accent-600) 100%);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-black) 0%, #444 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  letter-spacing: -0.015em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Enhanced focus states for accessibility */
-*:focus {
-  outline: var(--focus-ring);
+/* Selection and High-Contrast Focus */
+::selection {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-black);
   outline-offset: 2px;
 }
 
-/* Improved contrast for text elements */
-.text-gray-400 {
-  color: var(--text-quaternary);
-}
-
-.text-gray-500 {
-  color: var(--text-tertiary);
-}
-
-.text-gray-600 {
-  color: var(--text-secondary);
-}
-
-.text-gray-700 {
-  color: var(--text-primary);
-}
-
-.text-gray-800 {
-  color: var(--text-primary);
-}
-
-.text-gray-900 {
-  color: var(--text-primary);
-}
-
-/* Enhanced border colors for better separation */
-.border-gray-100 {
-  border-color: var(--border-subtle);
-}
-
-.border-gray-200 {
-  border-color: var(--border-default);
-}
-
-.border-gray-300 {
-  border-color: var(--border-strong);
-}
-
-.border-gray-500 {
-  border-color: var(--border-strong);
-}
-
-/* Improved background colors */
-.bg-gray-50 {
-  background-color: var(--bg-secondary);
-}
-
-.bg-gray-100 {
-  background-color: var(--bg-tertiary);
-}
-
-/* Enhanced button contrast */
-.btn-primary {
-  background-color: var(--primary-600);
-  color: white;
-  border: none;
-}
-
-.btn-primary:hover {
-  background-color: var(--primary-700);
-}
-
-.btn-secondary {
-  background-color: var(--bg-card);
-  color: var(--text-primary);
-  border: 1px solid var(--border-default);
-}
-
-.btn-secondary:hover {
-  background-color: var(--bg-secondary);
-}
-
-/* Improved card styling */
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-}
-
-.card:hover {
-  border-color: var(--border-strong);
-  box-shadow: var(--shadow-lg);
-}
-
-/* Enhanced spacing consistency */
-.section-padding {
-  padding-top: var(--space-12);
-  padding-bottom: var(--space-12);
-}
-
-.container-padding {
-  padding-left: var(--space-6);
-  padding-right: var(--space-6);
-}
-
-/* Typography improvements */
+/* Typography Editorial Scale */
 h1, h2, h3, h4, h5, h6 {
-  color: var(--text-primary);
-  margin-bottom: var(--space-4);
+  font-weight: var(--font-black);
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  line-height: var(--leading-tight);
 }
 
-p {
-  color: var(--text-secondary);
-  line-height: var(--leading-relaxed);
-  margin-bottom: var(--space-4);
+h1 { font-size: var(--text-5xl); }
+h2 { font-size: var(--text-4xl); }
+h3 { font-size: var(--text-3xl); }
+h4 { font-size: var(--text-2xl); }
+
+/* Productivity UI Components (Strict Brutalist) */
+.btn-productivity {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-6);
+  background: var(--color-black);
+  color: var(--color-white);
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  transition: all 0.1s var(--ease-out);
+  border: 1px solid var(--color-black);
 }
 
-/* Link improvements */
-a {
-  color: var(--primary-600);
-  text-decoration: none;
-  transition: color 0.2s ease;
+.btn-productivity:hover {
+  background: var(--color-white);
+  color: var(--color-black);
 }
 
-a:hover {
-  color: var(--primary-700);
-  text-decoration: underline;
+.card-editorial {
+  background: var(--color-white);
+  border: 1px solid var(--color-silver);
+  transition: border-color 0.1s var(--ease-out);
 }
 
-/* Form element improvements */
-input, textarea, select {
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-md);
-  padding: var(--space-3);
-  font-size: var(--text-base);
-  color: var(--text-primary);
-  background-color: var(--bg-card);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+.card-editorial:hover {
+  border-color: var(--color-black);
 }
 
-input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+/* Meta Labels (System Style) */
+.label-system {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: var(--font-bold);
 }
 
-/* Improved shadow consistency */
-.shadow-sm {
-  box-shadow: var(--shadow-sm);
+/* High-End Grid Layouts */
+.container-tight {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-8);
 }
 
-.shadow-md {
-  box-shadow: var(--shadow-md);
-}
-
-.shadow-lg {
-  box-shadow: var(--shadow-lg);
-}
-
-.shadow-xl {
-  box-shadow: var(--shadow-xl);
-}
-
-/* Responsive improvements */
 @media (max-width: 768px) {
-  .container-padding {
-    padding-left: var(--space-4);
-    padding-right: var(--space-4);
-  }
-  
-  .section-padding {
-    padding-top: var(--space-8);
-    padding-bottom: var(--space-8);
-  }
+  h1 { font-size: var(--text-4xl); }
+  .container-tight { padding: 0 var(--space-6); }
+}
+
+/* Utilities for structural rigidity */
+.border-b-grid {
+  border-bottom: 1px solid var(--color-silver);
+}
+.border-r-grid {
+  border-right: 1px solid var(--color-silver);
+}
+
+@keyframes matrix {
+  0% { transform: translateY(-30%); opacity: 0; }
+  20% { opacity: 0.5; }
+  80% { opacity: 0.5; }
+  100% { transform: translateY(30%); opacity: 0; }
+}
+
+@keyframes loader {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
