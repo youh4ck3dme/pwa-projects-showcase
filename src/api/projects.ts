@@ -19,8 +19,8 @@ export const fetchProjects = async (): Promise<ProjectCCT[]> => {
       }
     }
 
-    // Client-side fallback fetching
-    const response = await fetch('/projects_data.json');
+    // Client-side fallback fetching using our API route
+    const response = await fetch('/api/projects');
     if (!response.ok) throw new Error('Failed to fetch projects');
     return response.json();
   }
@@ -31,11 +31,18 @@ export const fetchProjects = async (): Promise<ProjectCCT[]> => {
 };
 
 export const fetchProject = async (id: string | number): Promise<ProjectCCT> => {
-   if (!API_BASE_URL) {
-    const projects = await fetchProjects();
-    const project = projects.find(p => p.id === Number(id) || p.api_id === Number(id));
-    if (!project) throw new Error('Project not found');
-    return project;
+  if (!API_BASE_URL) {
+    if (typeof window === 'undefined') {
+      const projects = await fetchProjects();
+      const project = projects.find(p => p.api_id === Number(id) || p.id === Number(id));
+      if (!project) throw new Error('Project not found');
+      return project;
+    }
+
+    // Use our API route for client-side fetching
+    const response = await fetch(`/api/projects/${id}`);
+    if (!response.ok) throw new Error('Project not found');
+    return response.json();
   }
 
   const response = await fetch(`${API_BASE_URL}/wp-json/wp/v2/projects/${id}?_embed`);
