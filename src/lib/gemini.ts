@@ -25,9 +25,20 @@ export class GeminiEnterpriseClient {
     this.proModel = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
   }
 
+  private sanitizeInput(input: string): string {
+    // Strip non-ISO-8859-1 characters (specifically those > 0xFF)
+    // to avoid "String contains non ISO-8859-1 code point" Header errors
+    return input.replace(/[^\x00-\xFF]/g, '');
+  }
+
   async search(query: GeminiQuery): Promise<GeminiSearchResult[]> {
     try {
-      const prompt = this.buildSearchPrompt(query);
+      const sanitizedQuery = {
+        ...query,
+        query: this.sanitizeInput(query.query),
+        context: query.context?.map(c => this.sanitizeInput(c))
+      };
+      const prompt = this.buildSearchPrompt(sanitizedQuery);
       const result = await this.flashModel.generateContent(prompt);
       const response = await result.response;
       const text = response.text();
@@ -42,7 +53,9 @@ export class GeminiEnterpriseClient {
 
   async generateContent(prompt: string, context?: string[]): Promise<string> {
     try {
-      const fullPrompt = this.buildContentPrompt(prompt, context);
+      const sanitizedPrompt = this.sanitizeInput(prompt);
+      const sanitizedContext = context?.map(c => this.sanitizeInput(c));
+      const fullPrompt = this.buildContentPrompt(sanitizedPrompt, sanitizedContext);
       const result = await this.proModel.generateContent(fullPrompt);
       const response = await result.response;
       return response.text();
@@ -54,7 +67,9 @@ export class GeminiEnterpriseClient {
 
   async generateQuickContent(prompt: string, context?: string[]): Promise<string> {
     try {
-      const fullPrompt = this.buildContentPrompt(prompt, context);
+      const sanitizedPrompt = this.sanitizeInput(prompt);
+      const sanitizedContext = context?.map(c => this.sanitizeInput(c));
+      const fullPrompt = this.buildContentPrompt(sanitizedPrompt, sanitizedContext);
       const result = await this.flashModel.generateContent(fullPrompt);
       const response = await result.response;
       return response.text();
@@ -66,7 +81,8 @@ export class GeminiEnterpriseClient {
 
   async analyzeData(data: any, analysisType: 'summary' | 'insights' | 'recommendations'): Promise<string> {
     try {
-      const prompt = this.buildAnalysisPrompt(data, analysisType);
+      const sanitizedData = JSON.parse(this.sanitizeInput(JSON.stringify(data)));
+      const prompt = this.buildAnalysisPrompt(sanitizedData, analysisType);
       const result = await this.proModel.generateContent(prompt);
       const response = await result.response;
       return response.text();
