@@ -22,11 +22,11 @@ export default function ProjectsClient({ initialProjects }: ProjectsClientProps)
   const categories = ['ALL', ...Array.from(new Set(initialProjects.map(p => p.project_category).filter(Boolean)))];
 
   const tickers = [
-    'GEMINI_PRO_SYNAPSE_CONNECTED',
-    'BUFFER_STREAM_STABLE_v4.2',
-    'SECTOR_ANALYSIS_COMPLETE',
-    'DATA_SEQUENCES_OPTIMIZED',
-    'NEURAL_FILTER_v1.0.4_ACTIVE'
+    'LARSEN_EVANS_CORE_CONNECTED',
+    'SYNAPSE_STREAM_v4.5_ACTIVE',
+    'ELITE_SECTOR_ANALYSIS',
+    'PROPRIETARY_DATA_LOCK',
+    'NEURAL_FILTER_LE_v1.0'
   ];
 
   useEffect(() => {
@@ -132,7 +132,7 @@ export default function ProjectsClient({ initialProjects }: ProjectsClientProps)
                 </h2>
                 <div className="flex items-center gap-4 text-[9px] font-black text-silver">
                    <span className="flex items-center gap-1"><Server className="w-3 h-3" /> BUFFER_ID: 8829-X</span>
-                   <span className="flex items-center gap-1"><Cpu className="w-3 h-3" /> ENGINE: GEMINI_1.5</span>
+                   <span className="flex items-center gap-1"><Cpu className="w-3 h-3" /> ENGINE: LARSEN_SYNTH_PRO</span>
                 </div>
               </div>
               <div className="text-right">

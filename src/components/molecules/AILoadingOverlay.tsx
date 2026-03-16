@@ -118,7 +118,7 @@ export const AILoadingOverlay: React.FC<AILoadingOverlayProps> = ({ isVisible, o
           </div>
 
           <div className="absolute bottom-12 label-system text-[8px] opacity-30">
-            SECURE_CHANNEL_ACTIVE // PORT_3000 // JETENGINE_CORE
+            SECURE_CHANNEL_ACTIVE // PORT_3000 // LARSEN_CORE
           </div>
         </div>
       )}

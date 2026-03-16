@@ -56,13 +56,13 @@ export default function ContentGeneratorPage() {
           className="mb-16"
         >
           <div className="flex items-center gap-2 mb-6">
-            <span className="label-system text-primary-600 px-3 py-1 bg-primary-600/10 rounded-full">AI CONTENT ENGINE v4.2</span>
+            <span className="label-system text-primary-600 px-3 py-1 bg-primary-600/10 rounded-full">LARSEN EVANS SYNTHESIS v5.0</span>
           </div>
           <h1 className="text-7xl font-black tracking-tighter leading-[0.85] mb-8 text-gradient">
             CONTENT <br /> GENERATOR.
           </h1>
           <p className="text-xl font-medium text-charcoal max-w-2xl uppercase tracking-tighter leading-snug">
-            Professional marketing output for high-end projects, synthesized by Gemini Pro architecture.
+            Elite marketing output for global projects, synthesized by proprietary LARSEN architecture.
           </p>
         </motion.div>
 

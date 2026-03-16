@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "JetEngine CCT PWA",
-  description: "Premium Showcase of PWA Projects and AI Solutions",
+  title: "LARSEN EVANS PROJECTS",
+  description: "Elite Showcase of Premium PWA and AI Solutions by LARSEN EVANS",
   manifest: "/manifest.json",
   icons: {
     icon: "/favicon.png",

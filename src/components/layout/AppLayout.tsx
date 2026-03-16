@@ -25,7 +25,7 @@ export const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children })
               <Activity className="w-4 h-4" />
             </div>
             <span className="text-lg md:text-xl font-black tracking-tighter leading-none">
-              JETENGINE<span className="text-primary-600">.</span>
+              LARSEN EVANS<span className="text-primary-600">.</span>
             </span>
           </Link>
 

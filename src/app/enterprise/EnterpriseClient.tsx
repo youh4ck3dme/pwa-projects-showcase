@@ -16,7 +16,7 @@ export default function EnterpriseClient() {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as any } }
   };
 
   return (
@@ -29,8 +29,8 @@ export default function EnterpriseClient() {
           className="mb-20 border-b-2 border-black pb-16"
         >
           <div className="flex items-center gap-3 mb-8">
-            <span className="label-system px-3 py-1 bg-black text-white text-[9px]">GLOBAL ENTERPRISE v4.0</span>
-            <span className="label-system text-silver text-[9px]">INTEL-SYNTHESIS ACTIVE</span>
+            <span className="label-system px-3 py-1 bg-black text-white text-[9px]">LARSEN ENTERPRISE v5.0</span>
+            <span className="label-system text-silver text-[9px]">PROPRIETARY ARCHITECTURE ACTIVE</span>
           </div>
           <h1 className="text-8xl font-black tracking-tighter leading-[0.8] mb-10 text-gradient">
             SCALE <br /> BEYOND.
@@ -53,7 +53,7 @@ export default function EnterpriseClient() {
               {[
                 { 
                   title: 'AI STRATEGY', 
-                  desc: 'End-to-end automation strategies using Gemini Pro architecture.',
+                  desc: 'End-to-end automation strategies using LARSEN-SYNTH architecture.',
                   icon: <Zap className="w-6 h-6" />
                 },
                 { 
