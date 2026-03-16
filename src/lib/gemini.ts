@@ -36,7 +36,7 @@ export class GeminiEnterpriseClient {
 
   constructor() {
     this.flashModel = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
-    this.proModel = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
+    this.proModel = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
   }
 
   private sanitizeInput(input: string): string {
