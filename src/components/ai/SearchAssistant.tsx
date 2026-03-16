@@ -130,22 +130,7 @@ export const SearchAssistant: React.FC<SearchAssistantProps> = ({
               className="w-full pl-0 pr-32 py-8 bg-transparent border-b-2 border-silver focus:border-black outline-none transition-all text-sm font-black tracking-tight placeholder:text-silver placeholder:font-normal uppercase"
             />
             
-            <AnimatePresence>
-              {isAnalyzing && (
-                <motion.div 
-                  initial={{ height: 0 }}
-                  animate={{ height: '100%' }}
-                  exit={{ height: 0 }}
-                  className="absolute left-0 right-0 top-0 pointer-events-none border-x-2 border-primary-600/20 bg-primary-600/5"
-                >
-                  <motion.div 
-                    animate={{ top: ['0%', '100%'] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                    className="absolute left-0 right-0 h-[2px] bg-primary-600 shadow-[0_0_15px_rgba(37,99,235,0.8)] z-10"
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {/* Scanning line removed to prevent chaotic UI behavior */}
 
             <button
               onClick={() => handleSearch(query)}

@@ -110,5 +110,21 @@
     "project_img_id": 7,
     "project_gal_id": "7",
     "featured_image_url": "/images/lumina-os.png"
+  },
+  {
+    "id": 8,
+    "api_id": 108,
+    "project_title": "BetAuthority",
+    "project_tagline": "Hodnotenie kasín v celej Európe",
+    "project_desc": "Porovnávací nástroj pre online kasína a stávkové platformy s dátami v reálnom čase, výplatami a férovými podmienkami.",
+    "project_content": "BetAuthority je pokročilý dátami riadený porovnávací nástroj pre online kasína a stávkové platformy. Systém analyzuje viac ako 127 operátorov, sleduje $2.4M+ výplat a poskytuje reálne informácie o dôveryhodnosti, rýchlosti výplat a férových podmienkach. Platforma zahŕňa vzdelávací hub pre stávkárov, analytické nástroje pre inteligentné rozhodovanie a overené platformy s rýchlymi výplatami. S 98.7% spokojnosťou používateľov a priemerným časom výplaty 2.1 hodiny, BetAuthority poskytuje transparentný pohľad na online hazardný trh.",
+    "project_type": "Web App",
+    "project_category": "Gaming / Fintech",
+    "project_client": "BetAuthority",
+    "project_date": "2025",
+    "project_link": "https://betauthority.com",
+    "project_img_id": 8,
+    "project_gal_id": "8",
+    "featured_image_url": "/images/betauthority.png"
   }
 ]

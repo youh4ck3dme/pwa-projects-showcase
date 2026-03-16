@@ -1,5 +1,19 @@
 import { GoogleGenerativeAI, GenerativeModel } from '@google/generative-ai';
 
+/**
+ * LARSEN EVANS - EMERGENCY PATCH
+ * Global fix for "TypeError: Failed to execute 'append' on 'Headers': String contains non ISO-8859-1 code point"
+ * This error occurs when third-party SDKs attempt to add non-ASCII metadata to headers.
+ */
+if (typeof window !== 'undefined' && typeof Headers !== 'undefined') {
+  const originalAppend = Headers.prototype.append;
+  Headers.prototype.append = function(name: string, value: string) {
+    // Sanitize value to basic ASCII to prevent fetch crashes
+    const sanitizedValue = String(value).replace(/[^\x00-\x7F]/g, '');
+    return originalAppend.call(this, name, sanitizedValue);
+  };
+}
+
 // Initialize Gemini API
 const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY || '');
 
