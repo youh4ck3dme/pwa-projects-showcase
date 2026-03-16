@@ -20,12 +20,28 @@ export const AILoadingOverlay: React.FC<AILoadingOverlayProps> = ({
 }) => {
   const [phase, setPhase] = useState<'matrix' | 'liquid'>('matrix');
   const [progress, setProgress] = useState(0);
+  const [activeMode, setActiveMode] = useState<'deep' | 'standard' | 'nano'>(mode);
+
+  useEffect(() => {
+    if (isVisible) {
+      const now = Date.now();
+      const lastSync = localStorage.getItem('LARSEN_LAST_SYNC');
+      const COOLDOWN = 5 * 60 * 1000; // 5 minutes
+
+      if (lastSync && (now - parseInt(lastSync) < COOLDOWN)) {
+        setActiveMode('nano');
+      } else {
+        setActiveMode(mode);
+        localStorage.setItem('LARSEN_LAST_SYNC', now.toString());
+      }
+    }
+  }, [isVisible, mode]);
 
   const config = {
     deep: { phase1: 2000, step: 30, text: 'INITIALIZING LARSEN_CORE' },
     standard: { phase1: 800, step: 10, text: 'RAPID_SYNC_ACTIVE' },
     nano: { phase1: 200, step: 2, text: 'BUFFER_LOAD' }
-  }[mode];
+  }[activeMode];
 
   useEffect(() => {
     if (!isVisible) {
@@ -98,7 +114,7 @@ export const AILoadingOverlay: React.FC<AILoadingOverlayProps> = ({
       ) : (
         <div className="relative w-full h-full flex flex-col items-center justify-center p-8">
           {/* Liquid Fill Effect */}
-          <div className={`relative ${mode === 'nano' ? 'w-32 h-48' : 'w-64 h-96'} border-4 border-black mb-12 overflow-hidden bg-white transition-all`}>
+          <div className={`relative ${activeMode === 'nano' ? 'w-32 h-48' : 'w-64 h-96'} border-4 border-black mb-12 overflow-hidden bg-white transition-all`}>
             <div 
               className="absolute bottom-0 left-0 right-0 bg-black transition-all duration-300 ease-out"
               style={{ height: `${progress}%` }}
@@ -109,7 +125,7 @@ export const AILoadingOverlay: React.FC<AILoadingOverlayProps> = ({
             </div>
             
             <div className={`absolute inset-0 flex items-center justify-center mix-blend-difference text-white z-10`}>
-                <span className={`${mode === 'nano' ? 'text-3xl' : 'text-6xl'} font-black font-mono tracking-tighter`}>
+                <span className={`${activeMode === 'nano' ? 'text-3xl' : 'text-6xl'} font-black font-mono tracking-tighter`}>
                     {progress}%
                 </span>
             </div>
@@ -117,10 +133,10 @@ export const AILoadingOverlay: React.FC<AILoadingOverlayProps> = ({
 
           <div className="text-center space-y-4 max-w-sm">
             <div className="flex justify-between label-system text-[9px] font-black pb-2 border-b border-silver">
-                <span>SYSTEM / {mode.toUpperCase()}</span>
+                <span>SYSTEM / {activeMode.toUpperCase()}</span>
                 <span>STATUS: {progress < 100 ? 'SYNCING' : 'READY'}</span>
             </div>
-            {mode !== 'nano' && (
+            {activeMode !== 'nano' && (
               <p className="text-[10px] font-mono font-bold uppercase tracking-widest pt-4 animate-pulse">
                 Synthesizing proprietary data structures...
               </p>
