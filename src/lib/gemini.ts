@@ -26,9 +26,9 @@ export class GeminiEnterpriseClient {
   }
 
   private sanitizeInput(input: string): string {
-    // Strip non-ISO-8859-1 characters (specifically those > 0xFF)
-    // to avoid "String contains non ISO-8859-1 code point" Header errors
-    return input.replace(/[^\x00-\xFF]/g, '');
+    // Aggressive sanitization: Strip everything except Basic ASCII (0-127)
+    // to prevent "String contains non ISO-8859-1 code point" in browser Header.append
+    return input.replace(/[^\x00-\x7F]/g, '');
   }
 
   async search(query: GeminiQuery): Promise<GeminiSearchResult[]> {
