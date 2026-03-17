@@ -14,9 +14,9 @@
   --accent-hsl: 262 83% 58%;
   --accent-600: hsl(var(--accent-hsl));
   
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.3);
-  --glass-blur: 12px;
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --glass-blur: 24px;
 }
 
 .glass-premium {
@@ -52,14 +52,27 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Noise Grain Texture */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url("https://www.transparenttextures.com/patterns/60-lines.png");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 9999;
+}
+
 /* Selection and High-Contrast Focus */
 ::selection {
-  background-color: var(--color-black);
+  background-color: var(--primary-600);
   color: var(--color-white);
 }
 
 *:focus-visible {
-  outline: 2px solid var(--color-black);
+  outline: 2px solid var(--primary-600);
   outline-offset: 2px;
 }
 
@@ -125,8 +138,47 @@ h4 { font-size: var(--text-2xl); }
 }
 
 @media (max-width: 768px) {
-  h1 { font-size: var(--text-4xl); }
-  .container-tight { padding: 0 var(--space-6); }
+  h1 { font-size: var(--text-5xl); }
+  .container-tight { padding: 0 var(--space-5); }
+}
+
+/* Pixel-Perfect Grid Utilities */
+.grid-standard {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-8);
+}
+
+.tight-p {
+    line-height: var(--leading-snug);
+    letter-spacing: -0.02em;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.link-underline {
+    position: relative;
+}
+
+.link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: currentColor;
+    transition: width 0.3s var(--ease-out);
+}
+
+.link-underline:hover::after {
+    width: 100%;
 }
 
 /* Utilities for structural rigidity */

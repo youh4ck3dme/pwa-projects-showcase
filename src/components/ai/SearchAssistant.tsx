@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { geminiClient } from '../../lib/gemini';
 import { ProjectData, ProjectAPI } from '../../lib/api';
 import { AILoadingOverlay } from '../molecules/AILoadingOverlay';
 import { Search, Command, Activity, Zap, Cpu } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface SearchAssistantProps {
   onSearchResults: (results: ProjectData[]) => void;
@@ -14,22 +15,15 @@ export const SearchAssistant: React.FC<SearchAssistantProps> = ({
   onSearchResults,
   onLoading
 }) => {
+  const { t } = useLanguage();
   const [query, setQuery] = useState('');
   const [context, setContext] = useState<string[]>([]);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
-  useEffect(() => {
-    generateSuggestions();
-  }, []);
-
-  const generateSuggestions = async () => {
+  const generateSuggestions = useCallback(async () => {
     try {
-      const prompt = `
-        Generate 5 short professional search suggestions for a project marketplace platform.
-        Examples: 'Modern PWA', 'Next.js API', 'AI Dashboard'.
-        Return as a JSON array of strings.
-      `;
+      const prompt = t('suggestions_prompt', 'ai_tools');
       
       const result = await geminiClient.generateQuickContent(prompt);
       const parsed = JSON.parse(result);
@@ -40,7 +34,11 @@ export const SearchAssistant: React.FC<SearchAssistantProps> = ({
     } catch {
       setSuggestions(['MODERN PWA', 'E-COMMERCE API', 'AI ENGINE', 'MOBILE CORE', 'BLOCKCHAIN HUB']);
     }
-  };
+  }, [t]);
+
+  useEffect(() => {
+    generateSuggestions();
+  }, [generateSuggestions]);
 
   const handleSearch = async (searchQuery: string) => {
     if (!searchQuery.trim()) return;
@@ -50,8 +48,7 @@ export const SearchAssistant: React.FC<SearchAssistantProps> = ({
 
     try {
       const enhancedQuery = await geminiClient.generateQuickContent(
-        `Enhance this search query for high-fidelity project matching: "${searchQuery}". 
-        Context: ${context.join(', ')}. Return enhanced query only.`,
+        t('enhance_prompt', 'ai_tools').replace('{searchQuery}', searchQuery).replace('{context}', context.join(', ')),
         context
       );
 
@@ -109,9 +106,9 @@ export const SearchAssistant: React.FC<SearchAssistantProps> = ({
             <div className="space-y-1">
               <h3 className="text-2xl font-black tracking-tighter uppercase leading-none flex items-center gap-3">
                 <Search className="w-5 h-5" />
-                QUERY ASSISTANT
+                {t('query_assistant', 'ai_tools')}
               </h3>
-              <p className="label-system text-[9px] text-silver">SEMANTIC NEURAL ENGINE :: STATUS_ACTIVE</p>
+              <p className="label-system text-[9px] text-silver">{t('neural_engine', 'ai_tools')}</p>
             </div>
             <div className="flex gap-2">
               <span className="w-2 h-2 bg-primary-600 rounded-full animate-pulse" />
@@ -126,7 +123,7 @@ export const SearchAssistant: React.FC<SearchAssistantProps> = ({
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch(query)}
-              placeholder="MOLECULAR QUERY INPUT / ENTER PARAMETERS..."
+              placeholder={t('query_placeholder', 'ai_tools')}
               className="w-full pl-0 pr-32 py-8 bg-transparent border-b-2 border-silver focus:border-black outline-none transition-all text-sm font-black tracking-tight placeholder:text-silver placeholder:font-normal uppercase"
             />
             
@@ -138,7 +135,7 @@ export const SearchAssistant: React.FC<SearchAssistantProps> = ({
               className="absolute right-0 top-1/2 -translate-y-1/2 px-6 py-3 bg-black text-white text-[10px] font-black tracking-[0.2em] uppercase hover:bg-primary-600 transition-all disabled:opacity-20 flex items-center gap-2"
             >
               <Command className="w-3 h-3" />
-              {isAnalyzing ? 'SYNCING' : 'EXECUTE'}
+              {isAnalyzing ? t('syncing', 'ai_tools') : t('execute', 'ai_tools')}
             </button>
           </div>
         </div>
@@ -148,7 +145,7 @@ export const SearchAssistant: React.FC<SearchAssistantProps> = ({
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <Zap className="w-3 h-3 text-primary-600" />
-              <h4 className="label-system text-[10px] font-black">NEURAL SUGGESTIONS</h4>
+              <h4 className="label-system text-[10px] font-black">{t('neural_suggestions', 'ai_tools')}</h4>
             </div>
             <div className="flex flex-wrap gap-2">
               {suggestions.map((suggestion, index) => (
@@ -168,7 +165,7 @@ export const SearchAssistant: React.FC<SearchAssistantProps> = ({
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <Cpu className="w-3 h-3 text-primary-600" />
-              <h4 className="label-system text-[10px] font-black">LOGIC OVERRIDES</h4>
+              <h4 className="label-system text-[10px] font-black">{t('logic_overrides', 'ai_tools')}</h4>
             </div>
             <div className="grid grid-cols-2 gap-2">
               {[

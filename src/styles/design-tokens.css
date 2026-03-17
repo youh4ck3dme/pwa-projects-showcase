@@ -23,9 +23,10 @@
     --text-xl: 20px;
     --text-2xl: 24px;
     --text-3xl: 32px;
-    --text-4xl: 40px;
-    --text-5xl: 56px;
-    --text-6xl: 72px;
+    --text-4xl: clamp(32px, 5vw, 40px);
+    --text-5xl: clamp(40px, 8vw, 56px);
+    --text-6xl: clamp(56px, 12vw, 84px);
+    --text-7xl: clamp(72px, 15vw, 110px);
 
     /* Line Heights */
     --leading-none: 1;
@@ -72,6 +73,11 @@
     
     /* Animation - Cut instead of fade */
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    
+    /* Layout */
+    --max-content-width: 1280px;
+    --header-height: 80px;
 }
 
 /* High Contrast Mode Support */

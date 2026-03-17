@@ -4,8 +4,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { MarketAnalyzer } from '@/components/ai/MarketAnalyzer';
 import { Building2, ShieldCheck, Zap, Briefcase, ChevronRight, BarChart3, Globe2 } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function EnterpriseClient() {
+  const { t } = useLanguage();
+  
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
@@ -29,14 +32,14 @@ export default function EnterpriseClient() {
           className="mb-20 border-b-2 border-black pb-16"
         >
           <div className="flex items-center gap-3 mb-8">
-            <span className="label-system px-3 py-1 bg-black text-white text-[9px]">LARSEN ENTERPRISE v5.0</span>
-            <span className="label-system text-silver text-[9px]">PROPRIETARY ARCHITECTURE ACTIVE</span>
+            <span className="label-system px-3 py-1 bg-black text-white text-[9px]">{t('tagline', 'enterprise')}</span>
+            <span className="label-system text-silver text-[9px] uppercase">{t('proprietary', 'enterprise')}</span>
           </div>
-          <h1 className="text-8xl font-black tracking-tighter leading-[0.8] mb-10 text-gradient">
-            SCALE <br /> BEYOND.
+          <h1 className="text-8xl font-black tracking-tighter leading-[0.8] mb-10 text-gradient whitespace-pre-line">
+            {t('heading', 'enterprise')}
           </h1>
           <p className="text-2xl font-medium text-charcoal max-w-3xl uppercase tracking-tighter leading-snug">
-            Intelligent enterprise solutions and AI-driven talent infrastructure for high-velocity organizations.
+            {t('description', 'enterprise')}
           </p>
         </motion.div>
 
@@ -52,23 +55,23 @@ export default function EnterpriseClient() {
             >
               {[
                 { 
-                  title: 'AI STRATEGY', 
-                  desc: 'End-to-end automation strategies using LARSEN-SYNTH architecture.',
+                  title: t('strategy_title', 'enterprise'), 
+                  desc: t('strategy_desc', 'enterprise'),
                   icon: <Zap className="w-6 h-6" />
                 },
                 { 
-                  title: 'ELITE SELECTION', 
-                  desc: 'AI-vetted talent pool optimized for enterprise-scale deployments.',
+                  title: t('elite_title', 'enterprise'), 
+                  desc: t('elite_desc', 'enterprise'),
                   icon: <Briefcase className="w-6 h-6" />
                 },
                 { 
-                  title: 'SECURE INFRA', 
-                  desc: 'Military-grade security protocols for all AI-integrated workflows.',
+                  title: t('secure_title', 'enterprise'), 
+                  desc: t('secure_desc', 'enterprise'),
                   icon: <ShieldCheck className="w-6 h-6" />
                 },
                 { 
-                  title: 'GLOBAL REACH', 
-                  desc: 'Distributed systems designed for multi-region scalability.',
+                  title: t('global_title', 'enterprise'), 
+                  desc: t('global_desc', 'enterprise'),
                   icon: <Globe2 className="w-6 h-6" />
                 }
               ].map((item, i) => (
@@ -85,7 +88,7 @@ export default function EnterpriseClient() {
                     {item.desc}
                   </p>
                   <div className="mt-8 pt-8 border-t border-silver group-hover:border-charcoal flex items-center gap-2 text-[10px] font-black tracking-widest uppercase">
-                    Learn More <ChevronRight className="w-3 h-3" />
+                    {t('learn_more', 'enterprise')} <ChevronRight className="w-3 h-3" />
                   </div>
                 </motion.div>
               ))}
@@ -99,13 +102,15 @@ export default function EnterpriseClient() {
               className="relative overflow-hidden bg-black text-white p-12 shadow-[12px_12px_0px_0px_var(--primary-600)]"
             >
               <div className="relative z-10 max-w-xl">
-                <h4 className="label-system text-primary-400 mb-6">NEW FEATURE</h4>
-                <h2 className="text-4xl font-black tracking-tighter mb-6 leading-tight uppercase">AI PROPOSAL <br /> ENGINE.</h2>
+                <h4 className="label-system text-primary-400 mb-6 uppercase">{t('new_feature', 'enterprise')}</h4>
+                <h2 className="text-4xl font-black tracking-tighter mb-6 leading-tight uppercase whitespace-pre-line">
+                   {t('proposal_heading', 'enterprise')}
+                </h2>
                 <p className="text-lg font-medium mb-10 opacity-70 uppercase tracking-tight">
-                  Generate comprehensive business proposals and architecture blueprints in 30 seconds.
+                  {t('proposal_desc', 'enterprise')}
                 </p>
                 <button className="px-8 py-4 bg-primary-600 text-white text-xs font-black uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all">
-                  Access Alpha
+                  {t('access_alpha', 'enterprise')}
                 </button>
               </div>
               <div className="absolute right-[-10%] top-[-10%] opacity-10 pointer-events-none">
@@ -121,7 +126,7 @@ export default function EnterpriseClient() {
               viewport={{ once: true }}
               className="p-8 border-2 border-black bg-white"
             >
-              <h4 className="label-system text-[10px] mb-8 underline underline-offset-8">MARKET INTELLIGENCE</h4>
+              <h4 className="label-system text-[10px] mb-8 underline underline-offset-8 uppercase">{t('market_intel', 'enterprise')}</h4>
               <MarketAnalyzer onAnalysisComplete={(a) => console.log('Market:', a)} />
             </motion.div>
 
@@ -132,12 +137,12 @@ export default function EnterpriseClient() {
               transition={{ delay: 0.2 }}
               className="p-8 border-2 border-black bg-black text-white"
             >
-              <h4 className="label-system text-silver mb-6">WHY SCALE?</h4>
+              <h4 className="label-system text-silver mb-6 uppercase">{t('why_scale', 'enterprise')}</h4>
               <ul className="space-y-6">
                 {[
-                  { icon: <BarChart3 className="w-4 h-4" />, text: 'GUARANTEED 99.9% UPTIME' },
-                  { icon: <Briefcase className="w-4 h-4" />, text: 'DEDICATED ARCHITECTS' },
-                  { icon: <Zap className="w-4 h-4" />, text: 'REAL-TIME PERFORMANCE' }
+                  { icon: <BarChart3 className="w-4 h-4" />, text: t('uptime', 'enterprise') },
+                  { icon: <Briefcase className="w-4 h-4" />, text: t('architects', 'enterprise') },
+                  { icon: <Zap className="w-4 h-4" />, text: t('realtime', 'enterprise') }
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-4 text-[11px] font-black uppercase tracking-widest text-silver">
                     <span className="text-primary-600 font-bold">{item.icon}</span>

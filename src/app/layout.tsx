@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AppLayout } from "../components/layout/AppLayout";
+import { LanguageProvider, useLanguage } from "@/context/LanguageContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -28,18 +29,32 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+function RootLayoutContent({ children }: { children: React.ReactNode }) {
+  const { language, t } = useLanguage();
+
   return (
-    <html lang="en">
+    <html lang={language.toLowerCase()}>
+      <head>
+        <title>{t('title', 'seo')}</title>
+        <meta name="description" content={t('description', 'seo')} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AppLayout>{children}</AppLayout>
       </body>
     </html>
+  );
+}
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <LanguageProvider>
+      <RootLayoutContent>{children}</RootLayoutContent>
+    </LanguageProvider>
   );
 }

@@ -19,6 +19,11 @@ export interface ProjectCCT {
   ai_recommendations?: string[];
   popularity_score?: number;
   similar_projects?: ProjectCCT[];
+  ai_tech_stack?: string[];
+  ai_architecture?: string;
+  ai_market_intel?: string;
+  suggested_budget?: string;
+  suggested_timeline?: string;
 }
 
 export interface ProjectTypeCCT {
