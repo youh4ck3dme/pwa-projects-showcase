@@ -126,5 +126,21 @@
     "project_img_id": 8,
     "project_gal_id": "8",
     "featured_image_url": "/images/betauthority.png"
+  },
+  {
+    "id": 9,
+    "api_id": 109,
+    "project_title": "Neon Bloom Messenger",
+    "project_tagline": "Premium Communication Ecosystem",
+    "project_desc": "High-performance, privacy-focused communication platform built on Matrix protocol with ElysiaJS and React.",
+    "project_content": "Neon Bloom Messenger is a complete communication infrastructure designed for privacy, speed, and premium aesthetics. Built on the Matrix protocol and powered by ElysiaJS (Bun) and React. Features include end-to-end encryption, ultra-fast backend, integrated file storage with MinIO, automatic updates via Watchtower, and full data control. The system provides a decentralized communication protocol with a brutalist premium UI design.",
+    "project_type": "Communication Platform",
+    "project_category": "Messaging / Privacy",
+    "project_client": "Neon Bloom Systems",
+    "project_date": "2025",
+    "project_link": "https://h4ck3d.cloud",
+    "project_img_id": 9,
+    "project_gal_id": "9",
+    "featured_image_url": "/images/neon-bloom-messenger.png"
   }
 ]

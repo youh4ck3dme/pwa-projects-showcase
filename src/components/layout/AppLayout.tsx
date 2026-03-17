@@ -108,15 +108,6 @@ export const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children })
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-white z-40 md:hidden"
           >
-            <Link 
-                  href="/admin" 
-                  className="hidden sm:flex items-center gap-2 group"
-                >
-                  <div className="w-4 h-4 rounded border border-charcoal/20 flex items-center justify-center group-hover:bg-black group-hover:border-black transition-all">
-                     <span className="text-[7px] font-black group-hover:text-white transition-colors">A</span>
-                  </div>
-                </Link>
-                <div className="hidden sm:flex flex-col text-right items-end justify-center">
             <div className="flex flex-col h-full pt-32 p-8">
               <div className="space-y-4">
                 <span className="label-system text-[10px] text-silver block mb-8">SYSTEM_NAVIGATION / v5.0</span>

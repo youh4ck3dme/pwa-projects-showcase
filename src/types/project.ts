@@ -26,6 +26,42 @@ export interface ProjectCCT {
   suggested_timeline?: string;
 }
 
+export interface Project {
+  id: string;
+  title: string;
+  tagline: string;
+  description: string;
+  image: string;
+  category: string;
+  techStack: string[];
+  year: string;
+  client?: string;
+  status: 'live' | 'development' | 'concept';
+  features: string[];
+  languages?: {
+    sk?: string;
+    en?: string;
+    de?: string;
+    fr?: string;
+    es?: string;
+  };
+  liveUrl?: string;
+  githubUrl?: string;
+  documentation?: {
+    sk?: string;
+    en?: string;
+    de?: string;
+    fr?: string;
+    es?: string;
+  };
+  screenshots?: string[];
+  metrics?: {
+    users?: number;
+    performance?: string;
+    security?: string;
+  };
+}
+
 export interface ProjectTypeCCT {
   id: number;
   name: string;

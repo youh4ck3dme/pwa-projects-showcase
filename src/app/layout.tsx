@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AppLayout } from "../components/layout/AppLayout";
-import { LanguageProvider, useLanguage } from "@/context/LanguageContext";
+import { LanguageProvider } from "@/context/LanguageContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -29,24 +29,6 @@ export const metadata: Metadata = {
   },
 };
 
-function RootLayoutContent({ children }: { children: React.ReactNode }) {
-  const { language, t } = useLanguage();
-
-  return (
-    <html lang={language.toLowerCase()}>
-      <head>
-        <title>{t('title', 'seo')}</title>
-        <meta name="description" content={t('description', 'seo')} />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <AppLayout>{children}</AppLayout>
-      </body>
-    </html>
-  );
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -54,7 +36,17 @@ export default function RootLayout({
 }>) {
   return (
     <LanguageProvider>
-      <RootLayoutContent>{children}</RootLayoutContent>
+      <html lang="sk">
+        <head>
+          <title>LARSEN EVANS PROJECTS</title>
+          <meta name="description" content="Elite Showcase of Premium PWA and AI Solutions by LARSEN EVANS" />
+        </head>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <AppLayout>{children}</AppLayout>
+        </body>
+      </html>
     </LanguageProvider>
   );
 }

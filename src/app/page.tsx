@@ -24,39 +24,6 @@ export default function ProjectsPage() {
       });
   }, []);
 
-    return (
-      <div className="container-tight pt-32 pb-24">
-        <div className="border-b-2 border-black pb-16">
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-2 mb-8"
-          >
-             <div className="w-2 h-2 bg-primary-600 rounded-full animate-pulse" />
-             <span className="label-system text-[10px] tracking-[0.3em]">{t('label', 'home')}</span>
-          </motion.div>
-          <motion.h1 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-7xl font-black tracking-tighter max-w-5xl leading-[0.85] uppercase"
-            dangerouslySetInnerHTML={{ __html: t('heading', 'home') }}
-          />
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="mt-12 text-xl font-medium text-charcoal max-w-xl leading-snug uppercase tracking-tighter"
-          >
-            {t('description', 'home')}
-          </motion.p>
-        </div>
-
-        <ProjectsClient initialProjects={projects} />
-      </div>
-    );
-  }
-
   if (loading) {
     return (
       <div className="container-tight pt-32 pb-24 text-center">
@@ -75,5 +42,35 @@ export default function ProjectsPage() {
     );
   }
 
-  return null;
+  return (
+    <div className="container-tight pt-32 pb-24">
+      <div className="border-b-2 border-black pb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex items-center gap-2 mb-8"
+        >
+           <div className="w-2 h-2 bg-primary-600 rounded-full animate-pulse" />
+           <span className="label-system text-[10px] tracking-[0.3em]">{t('label', 'home')}</span>
+        </motion.div>
+        <motion.h1 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.1 }}
+          className="text-7xl font-black tracking-tighter max-w-5xl leading-[0.85] uppercase"
+          dangerouslySetInnerHTML={{ __html: t('heading', 'home') }}
+        />
+        <motion.p 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="mt-12 text-xl font-medium text-charcoal max-w-xl leading-snug uppercase tracking-tighter"
+        >
+          {t('description', 'home')}
+        </motion.p>
+      </div>
+
+      <ProjectsClient initialProjects={projects} />
+    </div>
+  );
 }
