@@ -33,12 +33,26 @@ export default function ContentGeneratorPage() {
       const selectedType = contentTypes.find(t => t.id === contentType);
       const prompt = `${selectedType?.prompt} "${projectTitle}". ${t('keywords_label', 'generator')} ${keywords}. ${t('prompt_suffix', 'generator')}`;
       
-      const result = await geminiClient.generateContent(prompt);
-      setGeneratedContent(result);
+      try {
+        const result = await geminiClient.generateContent(prompt);
+        setGeneratedContent(result);
+      } catch (sdkError) {
+        console.warn('SDK failed, falling back to API route:', sdkError);
+        const response = await fetch('/api/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt, model: 'gemini-1.5-pro' })
+        });
+        
+        if (!response.ok) throw new Error('API route also failed');
+        const data = await response.json();
+        setGeneratedContent(data.text);
+      }
     } catch (error) {
       console.error('Content Generation Error:', error);
       setGeneratedContent(`## ${t('error_title', 'generator')}\n${t('error_desc', 'generator')}`);
-      setIsGenerating(false); // Hide on error
+    } finally {
+      setIsGenerating(false);
     }
   };
 

@@ -10,6 +10,7 @@ export interface ProjectData {
   timeline: string;
   skills: string[];
   files?: string[];
+  featured_image_url?: string;
   createdAt: string;
 }
 

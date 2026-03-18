@@ -6,6 +6,15 @@ const withPWA = withPWAInit({
   disable: process.env.NODE_ENV === "development",
   register: true,
   sw: "sw.js",
+  cacheOnFrontEndNav: true,
+  aggressiveFrontEndNavCaching: true,
+  reloadOnOnline: true,
+  swMinify: true,
+  workboxOptions: {
+    skipWaiting: true,
+    clientsClaim: true,
+    // Disable problematic plugins for the start URL if necessary
+  }
 });
 
 const nextConfig: NextConfig = {

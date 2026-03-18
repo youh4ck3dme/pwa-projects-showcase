@@ -57,7 +57,7 @@ export default function ProjectsClient({ initialProjects }: ProjectsClientProps)
         project_link: p.id,
         project_img_id: 0,
         project_gal_id: '',
-        featured_image_url: `https://placehold.co/600x400?text=${encodeURIComponent(p.title)}`
+        featured_image_url: p.featured_image_url || `https://placehold.co/600x400?text=${encodeURIComponent(p.title)}`
       };
     });
   };
