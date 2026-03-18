@@ -21,7 +21,10 @@ export const fetchProjects = async (): Promise<ProjectCCT[]> => {
 
     // Client-side fallback fetching using our API route
     const response = await fetch('/api/projects');
-    if (!response.ok) throw new Error('Failed to fetch projects');
+    if (!response.ok) {
+        console.error('Failed to fetch projects, response status:', response.status);
+        throw new Error('Failed to fetch projects');
+    }
     return response.json();
   }
 

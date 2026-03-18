@@ -3,6 +3,8 @@
 import { fetchProjects } from '@/api/projects';
 import ProjectsClient from './ProjectsClient';
 import { motion } from 'framer-motion';
+import { SearchAssistant } from '@/components/ai/SearchAssistant';
+import { MarketAnalyzer } from '@/components/ai/MarketAnalyzer';
 import { useLanguage } from '@/context/LanguageContext';
 import { useState, useEffect } from 'react';
 
@@ -70,7 +72,15 @@ export default function ProjectsPage() {
         </motion.p>
       </div>
 
-      <ProjectsClient initialProjects={projects} />
+      <SearchAssistant />
+      <div className="grid grid-cols-4 gap-8">
+        <div className="col-span-3">
+          <ProjectsClient initialProjects={projects} />
+        </div>
+        <div className="col-span-1">
+          <MarketAnalyzer />
+        </div>
+      </div>
     </div>
   );
 }

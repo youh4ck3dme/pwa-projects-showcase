@@ -51,8 +51,10 @@ export async function POST(req: Request) {
 export async function GET() {
   try {
     const projects = await getProjects();
+    console.log('API returning projects count:', projects.length);
     return NextResponse.json(projects);
-  } catch {
+  } catch (error) {
+    console.error('Error in API GET /api/projects:', error);
     return NextResponse.json(
       { error: 'Failed to fetch projects' },
       { status: 500 }

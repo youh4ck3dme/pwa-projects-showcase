@@ -122,65 +122,35 @@
   {
     "id": 5,
     "api_id": 105,
-    "project_title": "EcoFlow",
-    "project_tagline": "Sustainable Energy Management",
-    "project_desc": "Monitoring and optimizing renewable energy consumption for smart homes.",
-    "project_content": "A sophisticated IoT platform that tracks energy production from solar panels and automates home appliances to maximize efficiency.",
-    "project_type": "Smart Home",
-    "project_category": "Sustainability",
-    "project_client": "GreenTech Solutions",
-    "project_date": "2025",
-    "project_link": "https://ecoflow-nexus.io",
+    "project_title": "BizAgent",
+    "project_tagline": "AI Business Assistant pre SZČO",
+    "project_desc": "Kompletné riešenie pre faktúry, výdavky a accounting špeciálne navrhnuté pre slovenský trh.",
+    "project_content": "BizAgent je inteligentný asistent pre malých podnikateľov. Ponúka automatické číslovanie faktúr, generovanie PAY by square QR kódov, OCR skenovanie bločkov s AI kategorizáciou výdavkov a exporty pre účtovníkov. Aplikácia funguje ako offline-first PWA s vysokým výkonom vďaka CanvasKit rendereru a bezpečnou synchronizáciou cez Firebase.",
+    "project_type": "Web App / PWA",
+    "project_category": "Fintech / AI / Business",
+    "project_client": "Slovenskí podnikatelia",
+    "project_date": "2026",
+    "project_link": "https://bizagent.sk",
     "project_img_id": 5,
     "project_gal_id": "5",
-    "featured_image_url": "/images/ecoflow.png",
-    "suggested_budget": "$35k - $60k",
-    "suggested_timeline": "4-5 Months",
+    "featured_image_url": "/images/bizagent.png",
+    "suggested_budget": "$30k - $70k",
+    "suggested_timeline": "4-6 Months",
     "neural_meta": {
-      "tech_stack": ["IoT Core", "MQTT", "React Native", "TimescaleDB"],
-      "architecture": "Real-time sensor data pipeline with predictive energy optimization models.",
-      "market_intel": "Growing sustainability market; B2B and B2C potential.",
-      "arch_analysis": "Fault-tolerant IoT mesh with edge computing capabilities for local grid balancing.",
-      "security_audit": "End-to-end device encryption with hardware-backed secure boot.",
+      "tech_stack": ["Flutter 3.x", "Riverpod", "Firebase", "OCR", "CanvasKit"],
+      "architecture": "Micro-services on Firebase with Riverpod state management and Offline-first PWA sync.",
+      "market_intel": "Targeted at 600k+ SZČO in Slovakia with potential for automated accounting.",
+      "arch_analysis": "High-performance CanvasKit renderer with robust OCR data extraction pipeline.",
+      "security_audit": "Hardened security rules with validated file uploads and encrypted PII.",
       "context_weights": {
-        "architecture": 0.9,
-        "market": 0.85,
+        "architecture": 0.90,
+        "market": 0.95,
         "tech": 0.85
       }
     }
   },
   {
     "id": 6,
-    "api_id": 106,
-    "project_title": "Zenith CRM",
-    "project_tagline": "Enterprise Relationship Platform",
-    "project_desc": "Next-gen CRM tool for high-performing sales teams with integrated AI analytics.",
-    "project_content": "Scalable CRM system featuring predictive lead scoring, automated outreach, and deep integration with existing enterprise communication tools.",
-    "project_type": "SaaS",
-    "project_category": "Business / AI",
-    "project_client": "Zenith Corp",
-    "project_date": "2025",
-    "project_link": "https://zenithcrm.com",
-    "project_img_id": 6,
-    "project_gal_id": "6",
-    "featured_image_url": "/images/zenith-crm.png",
-    "suggested_budget": "$50k - $100k",
-    "suggested_timeline": "6-9 Months",
-    "neural_meta": {
-      "tech_stack": ["Go", "React", "gRPC", "Elasticsearch"],
-      "architecture": "Distributed CRM architecture with AI-driven lead scoring and automated sales funnels.",
-      "market_intel": "Enterprise SaaS with strong recurring revenue potential.",
-      "arch_analysis": "High-throughput gRPC microservices with cross-region replication.",
-      "security_audit": "SOC2-compliant data isolation with full audit logging and encryption.",
-      "context_weights": {
-        "architecture": 0.9,
-        "market": 0.9,
-        "tech": 0.8
-      }
-    }
-  },
-  {
-    "id": 7,
     "api_id": 107,
     "project_title": "Lumina OS",
     "project_tagline": "Next-Gen Operating System",
@@ -191,8 +161,8 @@
     "project_client": "Lumina Research Lab",
     "project_date": "2025",
     "project_link": "https://lumina-os.dev",
-    "project_img_id": 7,
-    "project_gal_id": "7",
+    "project_img_id": 6,
+    "project_gal_id": "6",
     "featured_image_url": "/images/lumina-os.png",
     "suggested_budget": "$200k+",
     "suggested_timeline": "12-24 Months",
@@ -210,7 +180,7 @@
     }
   },
   {
-    "id": 8,
+    "id": 7,
     "api_id": 108,
     "project_title": "BetAuthority",
     "project_tagline": "Hodnotenie kasín v celej Európe",
@@ -221,8 +191,8 @@
     "project_client": "BetAuthority",
     "project_date": "2025",
     "project_link": "https://betauthority.com",
-    "project_img_id": 8,
-    "project_gal_id": "8",
+    "project_img_id": 7,
+    "project_gal_id": "7",
     "featured_image_url": "/images/betauthority.png",
     "suggested_budget": "$45k - $80k",
     "suggested_timeline": "4-6 Months",
@@ -240,7 +210,7 @@
     }
   },
   {
-    "id": 9,
+    "id": 8,
     "api_id": 109,
     "project_title": "Neon Bloom Messenger",
     "project_tagline": "Premium Communication Ecosystem",
@@ -251,8 +221,8 @@
     "project_client": "Neon Bloom Systems",
     "project_date": "2025",
     "project_link": "https://h4ck3d.cloud",
-    "project_img_id": 9,
-    "project_gal_id": "9",
+    "project_img_id": 8,
+    "project_gal_id": "8",
     "featured_image_url": "/images/neon-bloom-messenger.png",
     "suggested_budget": "$50k - $90k",
     "suggested_timeline": "4-7 Months",
@@ -265,6 +235,66 @@
       "context_weights": {
         "architecture": 0.95,
         "market": 0.8,
+        "tech": 0.95
+      }
+    }
+  },
+  {
+    "id": 9,
+    "api_id": 110,
+    "project_title": "V4-Finstat v5.0",
+    "project_tagline": "Enterprise Ready B2B SaaS",
+    "project_desc": "SaaS softvér pre B2B monitoring firiem v regióne V4.",
+    "project_content": "V4-Finstat v5.0 je enterprise riešenie pre B2B monitoring firiem v regióne V4. Integruje štátne registre SR, ČR, PL a HU do jedného kliknutia, generuje interaktívne grafy prepojení, ponúka ERP integrácie (Pohoda, SAP, Money S3) a automatizované varovania o riziku. Systém je postavený na PostgreSQL a Redis, je plne škálovateľný a pripravený na produkčné nasadenie.",
+    "project_type": "B2B SaaS",
+    "project_category": "DevOps / Fintech",
+    "project_client": "V4 Finstat Systems",
+    "project_date": "2026",
+    "project_link": "https://v4-finstat.com",
+    "project_img_id": 9,
+    "project_gal_id": "9",
+    "featured_image_url": "/images/v4-finstat.png",
+    "suggested_budget": "$50k - $100k",
+    "suggested_timeline": "3-6 Months",
+    "neural_meta": {
+      "tech_stack": ["PostgreSQL", "Redis", "Next.js", "ERP Integrations"],
+      "architecture": "Enterprise-grade B2B SaaS architecture with centralized data aggregation from V4 regional registries.",
+      "market_intel": "High-margin B2B SaaS, strong recurring revenue potential, low churn rate.",
+      "arch_analysis": "Highly scalable monitoring system with real-time risk alerts and ERP-integrated fraud detection.",
+      "security_audit": "GDPR-compliant with automated audit logging and hardened data isolation.",
+      "context_weights": {
+        "architecture": 0.95,
+        "market": 0.9,
+        "tech": 0.9
+      }
+    }
+  },
+  {
+    "id": 10,
+    "api_id": 111,
+    "project_title": "RubberDuck.Space",
+    "project_tagline": "AI-Powered Autonomous Code Analysis & Repair",
+    "project_desc": "Autonomous code analysis and repair platform for modern engineering teams, capable of root-cause diagnosis and surgical patching.",
+    "project_content": "RubberDuck.Space is an AI-powered platform that provides autonomous code analysis and repair capabilities. Our agent goes beyond simple pattern matching to understand the root cause of issues before proposing surgical fixes. Features include root-cause analysis of stack traces, test-aware patching verified against CI pipelines, and PR-ready diff generation with full audit trails. It ensures enterprise-grade security where code is never used to train public models.",
+    "project_type": "AI Tool / SaaS",
+    "project_category": "AI / DevOps",
+    "project_client": "RubberDuck Space",
+    "project_date": "2026",
+    "project_link": "https://rubberduck.space",
+    "project_img_id": 10,
+    "project_gal_id": "10",
+    "featured_image_url": "/images/rubberduck-space.png",
+    "suggested_budget": "$50k - $120k",
+    "suggested_timeline": "4-6 Months",
+    "neural_meta": {
+      "tech_stack": ["React 19", "TypeScript", "Vite 6", "Tailwind CSS v4", "Node.js", "Google GenAI", "Vitest"],
+      "architecture": "Autonomous agentic architecture with recursive code analysis and surgical patching loops.",
+      "market_intel": "Enterprise-grade AI code repair targeting 40%+ reduction in technical debt maintenance.",
+      "arch_analysis": "Multi-agent orchestration layer with isolated sandbox verification and cryptographic audit trails.",
+      "security_audit": "Hardened local data processing with zero-training data policy and full provenance tracking.",
+      "context_weights": {
+        "architecture": 0.95,
+        "market": 0.90,
         "tech": 0.95
       }
     }

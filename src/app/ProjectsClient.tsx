@@ -122,7 +122,7 @@ export default function ProjectsClient({ initialProjects }: ProjectsClientProps)
 
       {/* Main Content: Search & Grid */}
       <div className="flex-grow flex flex-col order-1 lg:order-none">
-        <div className="border-b border-black p-8 lg:p-10 bg-bone sticky top-20 z-20">
+        <div className="border-b border-black p-8 lg:p-10 bg-bone">
           <SearchAssistant 
             onSearchResults={handleSearchResults}
             onLoading={setIsLoading}
@@ -130,7 +130,7 @@ export default function ProjectsClient({ initialProjects }: ProjectsClientProps)
         </div>
 
         <div className="flex-grow flex flex-col">
-          <div className="p-0 border-b border-black bg-white sticky top-[calc(20px+120px)] lg:top-20 z-10">
+          <div className="p-0 border-b border-black bg-white sticky top-20 z-10">
             <div className="p-8 lg:p-10 flex items-center justify-between">
               <div className="space-y-3">
                 <h2 className="text-base font-black tracking-[0.25em] uppercase flex items-center gap-3">
