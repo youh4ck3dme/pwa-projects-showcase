@@ -32,6 +32,35 @@ export default function ProjectsClient({ initialProjects }: ProjectsClientProps)
   ];
 
   useEffect(() => {
+    console.log('ProjectsClient: initialProjects changed', initialProjects?.length);
+    if (initialProjects && initialProjects.length > 0) {
+      setProjects(initialProjects);
+    }
+  }, [initialProjects]);
+
+  // Robust fallback: if projects still empty after 1s, try to fetch again
+  useEffect(() => {
+    if (projects.length === 0 && !isLoading) {
+      const timer = setTimeout(async () => {
+        console.log('ProjectsClient: Projects still empty, attempting emergency fetch');
+        try {
+          const response = await fetch('/api/projects');
+          if (response.ok) {
+            const data = await response.json();
+            if (data && data.length > 0) {
+               setProjects(data);
+               console.log('ProjectsClient: Emergency fetch successful');
+            }
+          }
+        } catch (e) {
+          console.error('ProjectsClient: Emergency fetch failed', e);
+        }
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [projects.length, isLoading]);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setTickerIndex((prev) => (prev + 1) % tickers.length);
     }, 3000);
