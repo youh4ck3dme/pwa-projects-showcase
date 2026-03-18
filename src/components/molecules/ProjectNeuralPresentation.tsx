@@ -29,15 +29,17 @@ export default function ProjectNeuralPresentation({ project, isOpen, onClose }: 
       id: 'intel',
       label: '02 / ARCHITECTURE',
       title: t('arch_neural_map', 'detail'),
-      content: project.ai_architecture || 'Neural mapping in progress...',
-      tech: project.ai_tech_stack || [],
+      content: project.neural_meta?.architecture || project.ai_architecture || 'Neural mapping in progress...',
+      tech: project.neural_meta?.tech_stack || project.ai_tech_stack || [],
+      analysis: project.neural_meta?.arch_analysis,
       icon: <Cpu className="w-8 h-8 text-primary-600" />
     },
     {
       id: 'market',
       label: '03 / POTENTIAL',
       title: t('market_potential', 'detail'),
-      content: project.ai_market_intel || 'Analyzing market trajectories...',
+      content: project.neural_meta?.market_intel || project.ai_market_intel || 'Analyzing market trajectories...',
+      security: project.neural_meta?.security_audit,
       icon: <Globe className="w-8 h-8 text-primary-600" />
     },
     {
@@ -58,7 +60,7 @@ export default function ProjectNeuralPresentation({ project, isOpen, onClose }: 
     }
   ];
 
-  const [weights, setWeights] = useState(project.neuralMetadata?.contextWeights || {
+  const [weights, setWeights] = useState(project.neural_meta?.context_weights || {
     architecture: 50,
     market: 50,
     tech: 50
@@ -164,6 +166,20 @@ export default function ProjectNeuralPresentation({ project, isOpen, onClose }: 
                                {slides[currentSlide].tech.map((t, i) => (
                                  <span key={i} className="px-4 py-2 bg-white text-black text-[11px] font-black uppercase tracking-widest">{t}</span>
                                ))}
+                            </div>
+                          )}
+
+                          {slides[currentSlide].analysis && (
+                            <div className="mt-12 p-6 border-l-4 border-primary-600 bg-white/5">
+                               <p className="text-[10px] font-black text-primary-400 uppercase tracking-widest mb-2">Deep_Arch_Analysis</p>
+                               <p className="text-lg font-bold text-white uppercase tracking-tight">{slides[currentSlide].analysis}</p>
+                            </div>
+                          )}
+
+                          {slides[currentSlide].security && (
+                            <div className="mt-12 p-6 border-l-4 border-green-600 bg-white/5">
+                               <p className="text-[10px] font-black text-green-400 uppercase tracking-widest mb-2">Security_Audit_Log</p>
+                               <p className="text-lg font-bold text-white uppercase tracking-tight">{slides[currentSlide].security}</p>
                             </div>
                           )}
                        </div>

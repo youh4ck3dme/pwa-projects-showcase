@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { geminiClient } from '../../lib/gemini';
+import { useLanguage } from '@/context/LanguageContext';
+import { TrendingUp, DollarSign, Target, ChevronRight, Zap, RefreshCcw } from 'lucide-react';
 
 interface RevenueOptimizerProps {
   projects: any[];
@@ -10,6 +12,7 @@ export const RevenueOptimizer: React.FC<RevenueOptimizerProps> = ({
   projects,
   onOptimizationComplete
 }) => {
+  const { t } = useLanguage();
   const [isOptimizing, setIsOptimizing] = useState(false);
   const [optimization, setOptimization] = useState<any>(null);
   const [strategy, setStrategy] = useState('all');
@@ -44,10 +47,8 @@ export const RevenueOptimizer: React.FC<RevenueOptimizerProps> = ({
 
   const parseOptimizationResult = (result: string): any => {
     try {
-      // Try to parse as JSON first
       return JSON.parse(result);
     } catch {
-      // Fallback to structured parsing
       return {
         currentRevenue: '$50,000/month',
         potentialRevenue: '$75,000/month',
@@ -100,179 +101,153 @@ export const RevenueOptimizer: React.FC<RevenueOptimizerProps> = ({
       style: 'currency',
       currency: 'USD',
       maximumFractionDigits: 0
-    }).format(parseInt(amount.replace(/[^0-9]/g, '')));
+    }).format(parseInt(amount.replace(/[^0-9]/g, '')) || 0);
   };
 
   return (
-    <div className="revenue-optimizer border" 
-      style={{ 
-        backgroundColor: 'var(--bg-card)', 
-        borderRadius: 'var(--radius-lg)', 
-        boxShadow: 'var(--shadow-md)', 
-        padding: 'var(--space-6)',
-        borderColor: 'var(--border-subtle)'
-      }}>
-      <div style={{ marginBottom: 'var(--space-4)' }}>
-        <h3 style={{ fontSize: 'var(--text-lg)', fontWeight: 'var(--font-semibold)', color: 'var(--text-primary)', marginBottom: 'var(--space-2)' }}>
-          Revenue Optimization
+    <div className="space-y-12 py-4">
+      <div className="space-y-2 border-b border-black pb-8">
+        <h3 className="text-xl font-black tracking-tight uppercase leading-none flex items-center gap-3">
+          <TrendingUp className="w-5 h-5 text-primary-600" />
+          Revenue Optimizer
         </h3>
-        <p style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)' }}>
-          AI-powered analysis to maximize your platform&apos;s revenue potential
+        <p className="label-system text-[9px] uppercase tracking-widest text-silver">
+          AI-POWERED FINANCIAL TRAJECTORY ANALYSIS
         </p>
       </div>
 
-      <div style={{ marginBottom: 'var(--space-4)' }}>
-        <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 'var(--font-medium)', color: 'var(--text-secondary)', marginBottom: 'var(--space-2)' }}>
-          Optimization Strategy
-        </label>
-        <select
-          value={strategy}
-          onChange={(e) => setStrategy(e.target.value)}
-          className="w-full focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-          style={{ 
-            paddingLeft: 'var(--space-3)', 
-            paddingRight: 'var(--space-3)', 
-            paddingTop: 'var(--space-2)', 
-            paddingBottom: 'var(--space-2)', 
-            border: '1px solid var(--border-strong)', 
-            borderRadius: 'var(--radius-md)',
-            backgroundColor: 'var(--bg-primary)',
-            color: 'var(--text-primary)'
-          }}
-        >
-          {strategies.map(strat => (
-            <option key={strat.value} value={strat.value}>
-              {strat.label}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {isOptimizing ? (
-        <div className="flex items-center justify-center" style={{ paddingTop: 'var(--space-8)', paddingBottom: 'var(--space-8)' }}>
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2" style={{ borderColor: 'var(--success-600)' }}></div>
-          <span style={{ marginLeft: 'var(--space-3)', color: 'var(--text-secondary)' }}>Optimizing revenue strategy...</span>
+      <div className="space-y-6">
+        <div className="space-y-3">
+          <label className="label-system text-[8px] font-black block uppercase tracking-widest text-silver">
+            Optimization Strategy
+          </label>
+          <select
+            value={strategy}
+            onChange={(e) => setStrategy(e.target.value)}
+            className="w-full bg-white border border-black px-4 py-3 text-[10px] font-black tracking-widest uppercase focus:ring-0 outline-none hover:bg-bone transition-colors cursor-pointer"
+          >
+            {strategies.map(strat => (
+              <option key={strat.value} value={strat.value}>
+                {strat.label}
+              </option>
+            ))}
+          </select>
         </div>
-      ) : optimization ? (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-          {/* Revenue Overview */}
-          <div className="revenue-overview">
-            <h4 style={{ fontWeight: 'var(--font-semibold)', color: 'var(--text-primary)', marginBottom: 'var(--space-3)' }}>Revenue Overview</h4>
-            <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: 'var(--space-4)' }}>
-              <div style={{ backgroundColor: 'var(--primary-50)', padding: 'var(--space-4)', borderRadius: 'var(--radius-lg)' }}>
-                <h5 style={{ fontWeight: 'var(--font-medium)', color: 'var(--primary-900)', marginBottom: 'var(--space-1)' }}>Current Revenue</h5>
-                <p style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', color: 'var(--primary-800)' }}>
-                  {formatCurrency(optimization.currentRevenue || '$50,000')}
+
+        {isOptimizing ? (
+          <div className="py-20 flex flex-col items-center justify-center space-y-6 border border-black bg-bone">
+             <RefreshCcw className="w-12 h-12 animate-spin text-primary-600" />
+             <p className="label-system text-[9px] font-black animate-pulse uppercase tracking-[0.2em]">Recalculating Profit Vectors...</p>
+          </div>
+        ) : optimization ? (
+          <div className="space-y-12">
+            {/* Revenue Overview */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-black border border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+              <div className="bg-white p-8 space-y-3">
+                <h5 className="label-system text-[8px] text-silver font-black">CURRENT_REVENUE</h5>
+                <p className="text-3xl font-black text-black leading-none">
+                  {formatCurrency(optimization.currentRevenue)}
                 </p>
               </div>
-              <div style={{ backgroundColor: 'var(--success-50)', padding: 'var(--space-4)', borderRadius: 'var(--radius-lg)' }}>
-                <h5 style={{ fontWeight: 'var(--font-medium)', color: 'var(--success-900)', marginBottom: 'var(--space-1)' }}>Potential Revenue</h5>
-                <p style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', color: 'var(--success-800)' }}>
-                  {formatCurrency(optimization.potentialRevenue || '$75,000')}
+              <div className="bg-primary-600 p-8 space-y-3 text-white">
+                <h5 className="label-system text-[8px] text-white/60 font-black">POTENTIAL_REVENUE</h5>
+                <p className="text-3xl font-black leading-none">
+                  {formatCurrency(optimization.potentialRevenue)}
                 </p>
               </div>
-              <div style={{ backgroundColor: 'var(--primary-50)', padding: 'var(--space-4)', borderRadius: 'var(--radius-lg)' }}>
-                <h5 style={{ fontWeight: 'var(--font-medium)', color: 'var(--primary-900)', marginBottom: 'var(--space-1)' }}>Revenue Increase</h5>
-                <p style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', color: 'var(--primary-800)' }}>
+              <div className="bg-black p-8 space-y-3 text-white">
+                <h5 className="label-system text-[8px] text-primary-400 font-black">OPTIMIZED_OFFSET</h5>
+                <p className="text-3xl font-black text-primary-400 leading-none">
                   +{formatCurrency('$25,000')}
                 </p>
               </div>
             </div>
-          </div>
 
-          {/* Optimization Areas */}
-          {optimization.optimizationAreas && (
-            <div className="optimization-areas">
-              <h4 style={{ fontWeight: 'var(--font-semibold)', color: 'var(--text-primary)', marginBottom: 'var(--space-3)' }}>Optimization Areas</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-                {optimization.optimizationAreas.map((area: any, index: number) => (
-                  <div key={index} className="border" style={{ borderColor: 'var(--border-strong)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-4)' }}>
-                    <div className="flex justify-between items-start" style={{ marginBottom: 'var(--space-2)' }}>
-                      <h5 style={{ fontWeight: 'var(--font-medium)', color: 'var(--text-primary)' }}>{area.area}</h5>
-                      <span style={{ color: 'var(--success-600)', fontWeight: 'var(--font-semibold)' }}>{area.impact}</span>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 text-sm" style={{ gap: 'var(--space-4)' }}>
-                      <div>
-                        <span style={{ color: 'var(--text-muted)' }}>Current:</span>
-                        <p style={{ color: 'var(--text-primary)', marginTop: 'var(--space-1)' }}>{area.current}</p>
+            {/* Optimization Areas */}
+            <div className="space-y-6">
+               <h4 className="label-system text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
+                 <Target className="w-4 h-4 text-primary-600" />
+                 Optimization Nodes
+               </h4>
+               <div className="grid grid-cols-1 gap-6">
+                 {optimization.optimizationAreas?.map((area: any, index: number) => (
+                   <div key={index} className="border border-black p-6 bg-white flex flex-col md:flex-row justify-between gap-6 group hover:bg-bone transition-colors">
+                     <div className="space-y-4">
+                        <h5 className="text-sm font-black uppercase tracking-tight flex items-center gap-3">
+                          <span className="w-4 h-[1px] bg-black" />
+                          {area.area}
+                        </h5>
+                        <div className="grid grid-cols-2 gap-8">
+                           <div>
+                              <span className="text-[8px] font-black text-silver uppercase">Standard</span>
+                              <p className="text-[10px] font-bold uppercase">{area.current}</p>
+                           </div>
+                           <div>
+                              <span className="text-[8px] font-black text-primary-600 uppercase">Optimized</span>
+                              <p className="text-[10px] font-black uppercase text-primary-600">{area.optimized}</p>
+                           </div>
+                        </div>
+                     </div>
+                     <div className="flex flex-col justify-end items-end">
+                        <span className="text-[9px] font-black text-silver uppercase mb-1">Impact</span>
+                        <span className="text-xl font-black text-green-600">{area.impact}</span>
+                     </div>
+                   </div>
+                 ))}
+               </div>
+            </div>
+
+            {/* Implementation Roadmap */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 pt-8 border-t border-black">
+               <div className="space-y-6">
+                  <h4 className="label-system text-[10px] font-black uppercase tracking-widest">Growth Recommendations</h4>
+                  <ul className="space-y-4">
+                    {optimization.recommendations?.map((rec: string, index: number) => (
+                      <li key={index} className="flex gap-4 items-start border-b border-silver pb-4">
+                        <Zap className="w-3 h-3 text-primary-600 mt-1 flex-shrink-0" />
+                        <span className="text-[10px] font-bold uppercase tracking-tight leading-tight">{rec}</span>
+                      </li>
+                    ))}
+                  </ul>
+               </div>
+
+               <div className="space-y-6 bg-black text-white p-8 border border-black">
+                  <h4 className="label-system text-[10px] font-black uppercase tracking-widest text-primary-400">Implementation Workflow</h4>
+                  <div className="space-y-6">
+                    {optimization.implementationSteps?.map((step: string, index: number) => (
+                      <div key={index} className="flex gap-6 items-center">
+                        <span className="text-2xl font-black text-white/20 italic">0{index + 1}</span>
+                        <span className="text-[10px] font-black uppercase tracking-[0.1em]">{step}</span>
                       </div>
-                      <div>
-                        <span style={{ color: 'var(--text-muted)' }}>Optimized:</span>
-                        <p style={{ color: 'var(--success-800)', marginTop: 'var(--space-1)', fontWeight: 'var(--font-medium)' }}>{area.optimized}</p>
-                      </div>
-                    </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+               </div>
             </div>
-          )}
 
-          {/* Recommendations */}
-          {optimization.recommendations && (
-            <div className="recommendations">
-              <h4 style={{ fontWeight: 'var(--font-semibold)', color: 'var(--text-primary)', marginBottom: 'var(--space-3)' }}>Top Recommendations</h4>
-              <ul style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-                {optimization.recommendations.map((rec: string, index: number) => (
-                  <li key={index} className="flex items-start">
-                    <span className="rounded-full flex-shrink-0" style={{ width: 'var(--space-2)', height: 'var(--space-2)', backgroundColor: 'var(--success-600)', marginTop: 'var(--space-2)', marginRight: 'var(--space-3)' }}></span>
-                    <span style={{ color: 'var(--text-secondary)' }}>{rec}</span>
-                  </li>
-                ))}
-              </ul>
+            {/* Action Toolbar */}
+            <div className="pt-8 flex flex-col md:flex-row gap-4">
+              <button
+                onClick={optimizeRevenue}
+                disabled={isOptimizing}
+                className="flex-grow py-5 bg-black text-white text-[10px] font-black uppercase tracking-[0.3em] hover:bg-primary-600 transition-all flex items-center justify-center gap-3"
+              >
+                <RefreshCcw className={`w-4 h-4 ${isOptimizing ? 'animate-spin' : ''}`} />
+                Recalculate Stream
+              </button>
+              <button
+                onClick={() => onOptimizationComplete(optimization)}
+                className="px-12 py-5 border border-black text-[10px] font-black uppercase tracking-[0.3em] hover:bg-black hover:text-white transition-all flex items-center justify-center gap-3"
+              >
+                Export Protocol <ChevronRight className="w-4 h-4" />
+              </button>
             </div>
-          )}
-
-          {/* Implementation Steps */}
-          {optimization.implementationSteps && (
-            <div className="implementation">
-              <h4 style={{ fontWeight: 'var(--font-semibold)', color: 'var(--text-primary)', marginBottom: 'var(--space-3)' }}>Implementation Steps</h4>
-              <ol style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-                {optimization.implementationSteps.map((step: string, index: number) => (
-                  <li key={index} className="flex items-start">
-                    <span className="flex items-center justify-center flex-shrink-0" 
-                      style={{ 
-                        width: 'var(--space-6)', 
-                        height: 'var(--space-6)', 
-                        backgroundColor: 'var(--primary-600)', 
-                        color: 'white', 
-                        borderRadius: 'var(--radius-3xl)', 
-                        fontSize: 'var(--text-xs)', 
-                        fontWeight: 'var(--font-semibold)', 
-                        marginRight: 'var(--space-3)' 
-                      }}>
-                      {index + 1}
-                    </span>
-                    <span style={{ color: 'var(--text-secondary)' }}>{step}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          )}
-
-          {/* Action Buttons */}
-          <div className="flex" style={{ marginTop: 'var(--space-6)', gap: 'var(--space-3)' }}>
-            <button
-              onClick={optimizeRevenue}
-              disabled={isOptimizing}
-              className="px-4 py-2 text-white rounded-md transition-all hover:opacity-90 disabled:opacity-50"
-              style={{ backgroundColor: 'var(--success-600)' }}
-            >
-              Re-optimize
-            </button>
-            <button
-              onClick={() => onOptimizationComplete(optimization)}
-              className="px-4 py-2 text-white rounded-md transition-all hover:opacity-90"
-              style={{ backgroundColor: 'var(--primary-600)' }}
-            >
-              Export Plan
-            </button>
           </div>
-        </div>
-      ) : (
-        <div className="text-center text-gray-500" style={{ paddingTop: 'var(--space-8)', paddingBottom: 'var(--space-8)' }}>
-          Add projects to start revenue optimization analysis
-        </div>
-      )}
+        ) : (
+          <div className="py-20 text-center border border-black bg-bone">
+            <p className="label-system text-[9px] font-black uppercase tracking-widest">Awaiting Project Data Ingestion...</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

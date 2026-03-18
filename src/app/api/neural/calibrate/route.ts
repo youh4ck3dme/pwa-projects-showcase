@@ -14,10 +14,10 @@ export async function POST(request: Request) {
     const { projectId, contextWeights } = await request.json();
     const projects = await getProjects();
     
-    // Convert to number since IDs in JSON are numbers
-    const targetId = typeof projectId === 'string' ? parseInt(projectId) : projectId;
+    // Convert to string for ID comparison
+    const targetId = String(projectId);
     
-    const projectIndex = projects.findIndex(p => p.api_id === targetId || p.id === targetId);
+    const projectIndex = projects.findIndex(p => String(p.api_id) === targetId || String(p.id) === targetId);
     
     if (projectIndex === -1) {
       return NextResponse.json({ error: 'Project not found' }, { status: 404 });
@@ -47,4 +47,4 @@ export async function POST(request: Request) {
       { status: 500 }
     );
   }
-}
+}

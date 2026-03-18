@@ -38,7 +38,7 @@ export default function ProjectDetailWrapper({ project, id }: ProjectDetailWrapp
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation Header */}
-      <div className="border-b-2 border-black bg-white sticky top-20 z-30">
+      <div className="border-b border-black bg-white sticky top-20 z-30">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link 
             href="/" 
@@ -147,28 +147,39 @@ export default function ProjectDetailWrapper({ project, id }: ProjectDetailWrapp
               </div>
 
               {/* Neural Intelligence Expansion [MECHANICAL CORE] */}
-              {(project.ai_tech_stack || project.ai_architecture) && (
+              {(project.neural_meta || project.ai_tech_stack) && (
                 <div className="pt-8 border-t border-black/10 space-y-8">
                    <h3 className="text-[9px] font-black text-primary-600 uppercase tracking-[0.3em] flex items-center gap-2">
                      <div className="w-1.5 h-1.5 bg-primary-600 rounded-full" />
                      MECHANICAL_CORE
                    </h3>
                    
-                   {project.ai_tech_stack && (
+                   {(project.neural_meta?.tech_stack || project.ai_tech_stack) && (
                      <div className="space-y-4">
                        <dt className="text-[8px] font-black text-silver uppercase tracking-[0.2em]">{t('stack_intelligence', 'detail')}</dt>
                        <div className="flex flex-wrap gap-1.5">
-                         {project.ai_tech_stack.map((tech, i) => (
+                         {(project.neural_meta?.tech_stack || project.ai_tech_stack || []).map((tech, i) => (
                            <span key={i} className="px-2 py-0.5 bg-black text-white text-[8px] font-black uppercase tracking-widest">{tech}</span>
                          ))}
                        </div>
                      </div>
                    )}
 
-                   {project.ai_architecture && (
+                   {(project.neural_meta?.architecture || project.ai_architecture) && (
                      <div className="space-y-3">
                        <dt className="text-[8px] font-black text-silver uppercase tracking-[0.2em]">{t('arch_neural_map', 'detail')}</dt>
-                       <dd className="text-[11px] font-bold text-black border-l border-black/40 pl-3 py-0.5 uppercase leading-tight">{project.ai_architecture}</dd>
+                       <dd className="text-[11px] font-bold text-black border-l border-black/40 pl-3 py-0.5 uppercase leading-tight">
+                         {project.neural_meta?.architecture || project.ai_architecture}
+                       </dd>
+                     </div>
+                   )}
+
+                   {project.neural_meta?.arch_analysis && (
+                     <div className="space-y-3">
+                       <dt className="text-[8px] font-black text-silver uppercase tracking-[0.2em]">{t('arch_analysis', 'detail')}</dt>
+                       <dd className="text-[10px] font-medium text-charcoal bg-bone p-3 border border-silver/30 uppercase tracking-tighter leading-snug">
+                         {project.neural_meta.arch_analysis}
+                       </dd>
                      </div>
                    )}
                 </div>
@@ -197,10 +208,21 @@ export default function ProjectDetailWrapper({ project, id }: ProjectDetailWrapp
                       )}
                    </dl>
                    
-                   {project.ai_market_intel && (
+                   {(project.neural_meta?.market_intel || project.ai_market_intel) && (
                      <div className="space-y-3">
                        <dt className="text-[8px] font-black text-silver uppercase tracking-[0.2em]">{t('market_potential', 'detail')}</dt>
-                       <dd className="text-[10px] font-medium text-charcoal bg-black/5 p-4 border border-black/10 uppercase tracking-tighter leading-snug">{project.ai_market_intel}</dd>
+                       <dd className="text-[10px] font-medium text-charcoal bg-black/5 p-4 border border-black/10 uppercase tracking-tighter leading-snug">
+                         {project.neural_meta?.market_intel || project.ai_market_intel}
+                       </dd>
+                     </div>
+                   )}
+
+                   {project.neural_meta?.security_audit && (
+                     <div className="space-y-3 pt-4 border-t border-black/5">
+                       <dt className="text-[8px] font-black text-primary-600 uppercase tracking-[0.2em]">{t('security_audit', 'detail')}</dt>
+                       <dd className="text-[10px] font-bold text-black uppercase tracking-tighter leading-snug">
+                         {project.neural_meta.security_audit}
+                       </dd>
                      </div>
                    )}
                 </div>

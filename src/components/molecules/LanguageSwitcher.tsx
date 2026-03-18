@@ -8,7 +8,7 @@ export const LanguageSwitcher: React.FC = () => {
   const { language, setLanguage } = useLanguage();
 
   return (
-    <div className="flex border-2 border-black h-10 overflow-hidden bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+    <div className="flex border border-black h-10 overflow-hidden bg-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
       {(['SK', 'EN'] as const).map((lang) => (
         <button
           key={lang}

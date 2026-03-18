@@ -113,14 +113,14 @@ export default function IngestionDashboard() {
   return (
     <div className="space-y-12">
       {/* Upload Zone */}
-      <section className="bg-white border-4 border-black p-12 shadow-[16px_16px_0px_0px_rgba(0,0,0,1)]">
+      <section className="bg-white border border-black p-12 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
         <h2 className="text-4xl font-black tracking-tighter uppercase mb-8">{t('upload_zip', 'ingestion')}</h2>
-        
+
         {!ingestedData && !isProcessing && (
           <div className="border-4 border-dashed border-silver p-16 text-center group hover:border-black transition-colors relative">
-            <input 
-              type="file" 
-              accept=".zip" 
+            <input
+              type="file"
+              accept=".zip"
               onChange={onFileChange}
               aria-label="DRAG & DROP PROJECT ZIP"
               className="absolute inset-0 opacity-0 cursor-pointer"
@@ -135,21 +135,21 @@ export default function IngestionDashboard() {
         )}
 
         {isProcessing && (
-          <div className="p-16 text-center border-4 border-black bg-black text-white">
+          <div className="p-16 text-center border border-black bg-black text-white">
             <RefreshCcw className="w-16 h-16 mx-auto mb-6 animate-spin text-primary-400" />
             <p className="text-2xl font-black uppercase tracking-[0.2em]">{t('analyzing', 'ingestion')}</p>
           </div>
         )}
 
         {error && (
-          <div className="mt-8 p-6 bg-red-100 border-2 border-red-600 text-red-600 flex items-center gap-4">
+          <div className="mt-8 p-6 bg-red-100 border border-red-600 text-red-600 flex items-center gap-4">
             <AlertTriangle className="w-6 h-6" />
             <p className="font-bold uppercase tracking-widest">{error}</p>
           </div>
         )}
 
         {file && !isProcessing && !ingestedData && (
-          <button 
+          <button
             onClick={processFile}
             className="mt-8 w-full py-6 bg-black text-white text-xl font-black uppercase tracking-[0.3em] hover:bg-primary-600 transition-all flex items-center justify-center gap-4 shadow-[8px_8px_0px_0px_rgba(37,99,235,0.3)]"
           >
@@ -161,101 +161,101 @@ export default function IngestionDashboard() {
       {/* Results View */}
       <AnimatePresence>
         {ingestedData && (
-          <motion.section 
+          <motion.section
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             className="space-y-12"
           >
-            <div className="bg-primary-600 text-white p-6 border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] flex items-center justify-between">
-               <div className="flex items-center gap-4">
-                 <CheckCircle2 className="w-8 h-8" />
-                 <h3 className="text-2xl font-black uppercase tracking-widest">{t('success', 'ingestion')}</h3>
-               </div>
-               <button onClick={() => setIngestedData(null)} className="text-xs font-black uppercase border-b-2 border-white">{t('refine', 'ingestion')}</button>
+            <div className="bg-primary-600 text-white p-6 border border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <CheckCircle2 className="w-8 h-8" />
+                <h3 className="text-2xl font-black uppercase tracking-widest">{t('success', 'ingestion')}</h3>
+              </div>
+              <button onClick={() => setIngestedData(null)} className="text-xs font-black uppercase border-b border-white">{t('refine', 'ingestion')}</button>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-               {/* Left Column: Form */}
-               <div className="lg:col-span-8 space-y-8 bg-white border-4 border-black p-10">
-                  <div className="space-y-6">
-                    <label className="block text-[10px] font-black uppercase tracking-widest text-silver">Project Identity</label>
-                    <input 
-                      type="text" 
-                      value={ingestedData.title}
-                      className="w-full text-4xl font-black bg-bone border-2 border-black p-4 focus:ring-4 ring-primary-600/20 outline-none uppercase tracking-tighter"
-                    />
-                    <input 
-                      type="text" 
-                      value={ingestedData.tagline}
-                      className="w-full text-xl font-bold bg-bone border-2 border-black p-4 focus:ring-4 ring-primary-600/20 outline-none uppercase tracking-tight"
-                    />
+              {/* Left Column: Form */}
+              <div className="lg:col-span-8 space-y-8 bg-white border border-black p-10">
+                 <div className="space-y-6">
+                   <label className="block text-[10px] font-black uppercase tracking-widest text-silver">Project Identity</label>
+                   <input 
+                     type="text" 
+                     value={ingestedData.title}
+                     className="w-full text-4xl font-black bg-bone border border-black p-4 focus:ring-4 ring-primary-600/20 outline-none uppercase tracking-tighter"
+                   />
+                   <input 
+                     type="text" 
+                     value={ingestedData.tagline}
+                     className="w-full text-xl font-bold bg-bone border border-black p-4 focus:ring-4 ring-primary-600/20 outline-none uppercase tracking-tight"
+                   />
+                 </div>
+
+                 <div className="space-y-4">
+                   <label className="block text-[10px] font-black uppercase tracking-widest text-silver">Contextual Description</label>
+                   <textarea 
+                     rows={6}
+                     value={ingestedData.description}
+                     className="w-full bg-bone border border-black p-6 font-medium text-lg leading-snug uppercase tracking-tighter"
+                   />
+                 </div>
+
+                 <div className="grid grid-cols-2 gap-8">
+                   <div className="space-y-4">
+                     <label className="block text-[10px] font-black uppercase tracking-widest text-silver">{t('market_intel', 'ingestion')}</label>
+                     <div className="bg-bone p-4 border border-black text-sm font-bold uppercase">{ingestedData.marketIntel}</div>
+                   </div>
+                   <div className="space-y-4">
+                     <label className="block text-[10px] font-black uppercase tracking-widest text-silver">{t('architecture', 'ingestion')}</label>
+                     <div className="bg-bone p-4 border border-black text-sm font-bold uppercase">{ingestedData.architecture}</div>
+                   </div>
+                 </div>
+              </div>
+
+              {/* Right Column: Metadata */}
+              <div className="lg:col-span-4 space-y-8">
+                <div className="bg-black text-white border border-black p-10 space-y-10">
+                  <div>
+                    <h4 className="text-[11px] font-black text-primary-400 uppercase tracking-widest mb-6 underline underline-offset-8">AI INTEL</h4>
+                    <div className="space-y-6">
+                      <div className="flex justify-between items-end border-b border-white/10 pb-4">
+                        <span className="text-[9px] font-black text-silver uppercase">Category</span>
+                        <span className="text-lg font-black">{ingestedData.category}</span>
+                      </div>
+                      <div className="flex justify-between items-end border-b border-white/10 pb-4">
+                        <span className="text-[9px] font-black text-silver uppercase">Type</span>
+                        <span className="text-lg font-black">{ingestedData.type}</span>
+                      </div>
+                      <div className="flex justify-between items-end border-b border-white/10 pb-4">
+                        <span className="text-[9px] font-black text-silver uppercase">Budget Est.</span>
+                        <span className="text-lg font-black">{ingestedData.suggestedBudget}</span>
+                      </div>
+                      <div className="flex justify-between items-end border-b border-white/10 pb-4">
+                        <span className="text-[9px] font-black text-silver uppercase">Timeline Est.</span>
+                        <span className="text-lg font-black">{ingestedData.suggestedTimeline}</span>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="space-y-4">
-                    <label className="block text-[10px] font-black uppercase tracking-widest text-silver">Contextual Description</label>
-                    <textarea 
-                      rows={6}
-                      value={ingestedData.description}
-                      className="w-full bg-bone border-2 border-black p-6 font-medium text-lg leading-snug uppercase tracking-tighter"
-                    />
+                  <div>
+                    <h4 className="text-[11px] font-black text-primary-400 uppercase tracking-widest mb-6 underline underline-offset-8">{t('tech_stack', 'ingestion')}</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {ingestedData.techStack.map((tech, i) => (
+                        <span key={i} className="px-3 py-1 bg-white text-black text-[10px] font-black uppercase tracking-widest">{tech}</span>
+                      ))}
+                    </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-8">
-                     <div className="space-y-4">
-                        <label className="block text-[10px] font-black uppercase tracking-widest text-silver">{t('market_intel', 'ingestion')}</label>
-                        <div className="bg-bone p-4 border-2 border-black text-sm font-bold uppercase">{ingestedData.marketIntel}</div>
-                     </div>
-                     <div className="space-y-4">
-                        <label className="block text-[10px] font-black uppercase tracking-widest text-silver">{t('architecture', 'ingestion')}</label>
-                        <div className="bg-bone p-4 border-2 border-black text-sm font-bold uppercase">{ingestedData.architecture}</div>
-                     </div>
-                  </div>
-               </div>
-
-               {/* Right Column: Metadata */}
-               <div className="lg:col-span-4 space-y-8">
-                  <div className="bg-black text-white border-4 border-black p-10 space-y-10">
-                     <div>
-                       <h4 className="text-[11px] font-black text-primary-400 uppercase tracking-widest mb-6 underline underline-offset-8">AI INTEL</h4>
-                       <div className="space-y-6">
-                          <div className="flex justify-between items-end border-b border-white/10 pb-4">
-                             <span className="text-[9px] font-black text-silver uppercase">Category</span>
-                             <span className="text-lg font-black">{ingestedData.category}</span>
-                          </div>
-                          <div className="flex justify-between items-end border-b border-white/10 pb-4">
-                             <span className="text-[9px] font-black text-silver uppercase">Type</span>
-                             <span className="text-lg font-black">{ingestedData.type}</span>
-                          </div>
-                          <div className="flex justify-between items-end border-b border-white/10 pb-4">
-                             <span className="text-[9px] font-black text-silver uppercase">Budget Est.</span>
-                             <span className="text-lg font-black">{ingestedData.suggestedBudget}</span>
-                          </div>
-                          <div className="flex justify-between items-end border-b border-white/10 pb-4">
-                             <span className="text-[9px] font-black text-silver uppercase">Timeline Est.</span>
-                             <span className="text-lg font-black">{ingestedData.suggestedTimeline}</span>
-                          </div>
-                       </div>
-                     </div>
-
-                     <div>
-                       <h4 className="text-[11px] font-black text-primary-400 uppercase tracking-widest mb-6 underline underline-offset-8">{t('tech_stack', 'ingestion')}</h4>
-                       <div className="flex flex-wrap gap-2">
-                          {ingestedData.techStack.map((tech, i) => (
-                            <span key={i} className="px-3 py-1 bg-white text-black text-[10px] font-black uppercase tracking-widest">{tech}</span>
-                          ))}
-                       </div>
-                     </div>
-
-                     <button 
-                       onClick={handleSave}
-                       disabled={isSaving || saveSuccess}
-                       className="w-full py-5 bg-primary-600 text-white font-black uppercase tracking-[0.3em] flex items-center justify-center gap-3 hover:bg-white hover:text-black transition-all disabled:opacity-50"
-                     >
-                       {isSaving ? <RefreshCcw className="w-5 h-5 animate-spin" /> : saveSuccess ? <CheckCircle2 className="w-5 h-5" /> : <Save className="w-5 h-5" />}
-                       {saveSuccess ? 'SAVED_TO_CORE' : isSaving ? 'ENCRYPTING...' : t('save', 'ingestion')}
-                     </button>
-                  </div>
-               </div>
+                  <button
+                    onClick={handleSave}
+                    disabled={isSaving || saveSuccess}
+                    className="w-full py-5 bg-primary-600 text-white font-black uppercase tracking-[0.3em] flex items-center justify-center gap-3 hover:bg-white hover:text-black transition-all disabled:opacity-50"
+                  >
+                    {isSaving ? <RefreshCcw className="w-5 h-5 animate-spin" /> : saveSuccess ? <CheckCircle2 className="w-5 h-5" /> : <Save className="w-5 h-5" />}
+                    {saveSuccess ? 'SAVED_TO_CORE' : isSaving ? 'ENCRYPTING...' : t('save', 'ingestion')}
+                  </button>
+                </div>
+              </div>
             </div>
           </motion.section>
         )}

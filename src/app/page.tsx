@@ -44,7 +44,7 @@ export default function ProjectsPage() {
 
   return (
     <div className="container-tight pt-32 pb-24">
-      <div className="border-b-2 border-black pb-16">
+      <div className="border-b border-black pb-16">
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}

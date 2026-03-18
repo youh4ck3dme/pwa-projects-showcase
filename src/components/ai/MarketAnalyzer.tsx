@@ -94,7 +94,7 @@ export const MarketAnalyzer: React.FC<MarketAnalyzerProps> = ({
 
   return (
     <div className="space-y-12 py-4">
-      <div className="space-y-2 border-b-2 border-black pb-8">
+      <div className="space-y-2 border-b border-black pb-8">
         <h3 className="text-xl font-black tracking-tight uppercase leading-none">
           {t('market_analyzer', 'ai_tools')}
         </h3>
@@ -111,7 +111,7 @@ export const MarketAnalyzer: React.FC<MarketAnalyzerProps> = ({
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="w-full bg-white border-2 border-black px-4 py-3 text-[10px] font-black tracking-widest uppercase focus:ring-0 outline-none hover:bg-bone transition-colors cursor-pointer"
+            className="w-full bg-white border border-black px-4 py-3 text-[10px] font-black tracking-widest uppercase focus:ring-0 outline-none hover:bg-bone transition-colors cursor-pointer"
           >
             {categories.map(category => (
               <option key={category} value={category}>
@@ -177,7 +177,7 @@ export const MarketAnalyzer: React.FC<MarketAnalyzerProps> = ({
             )}
 
             {/* Action Button */}
-            <div className="pt-12 border-t-2 border-black flex flex-col gap-4">
+            <div className="pt-12 border-t border-black flex flex-col gap-4">
               <button
                 onClick={analyzeMarket}
                 disabled={localIsAnalyzing}
@@ -187,14 +187,14 @@ export const MarketAnalyzer: React.FC<MarketAnalyzerProps> = ({
               </button>
               <button
                 onClick={() => onAnalysisComplete(analysis)}
-                className="px-4 py-4 border-2 border-black text-[9px] font-black tracking-widest uppercase hover:bg-black hover:text-white transition-all"
+                className="px-4 py-4 border border-black text-[9px] font-black tracking-widest uppercase hover:bg-black hover:text-white transition-all"
               >
                 {t('export_raw', 'ai_tools')}
               </button>
             </div>
           </div>
         ) : (
-          <div className="text-center py-20 border-2 border-black bg-bone">
+          <div className="text-center py-20 border border-black bg-bone">
             <p className="label-system text-[9px] font-black">{t('system_standby', 'ai_tools')}</p>
           </div>
         )}

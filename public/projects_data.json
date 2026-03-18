@@ -14,11 +14,20 @@
     "project_img_id": 1,
     "project_gal_id": "1",
     "featured_image_url": "/images/v4-finstat.png",
-    "ai_tech_stack": "Docker, GitHub Actions, Nginx, Linux",
-    "ai_architecture": "Microservices with standardized namespace and containerized deployment pipelines.",
-    "ai_market_intel": "Enterprise compliance automation with high revenue potential in fintech.",
     "suggested_budget": "$15k - $30k",
-    "suggested_timeline": "2-3 Months"
+    "suggested_timeline": "2-3 Months",
+    "neural_meta": {
+      "tech_stack": ["Docker", "GitHub Actions", "Nginx", "Linux"],
+      "architecture": "Microservices with standardized namespace and containerized deployment pipelines.",
+      "market_intel": "Enterprise compliance automation with high revenue potential in fintech.",
+      "arch_analysis": "Precision-engineered Docker orchestration layer with isolated network namespaces.",
+      "security_audit": "Hardened container images with automated vulnerability scanning in CI.",
+      "context_weights": {
+        "architecture": 0.9,
+        "market": 0.7,
+        "tech": 0.95
+      }
+    }
   },
   {
     "id": 2,
@@ -35,11 +44,20 @@
     "project_img_id": 2,
     "project_gal_id": "2",
     "featured_image_url": "/images/ico-atlas.png",
-    "ai_tech_stack": "Python, FastAPI, React, Chart.js, PostgreSQL",
-    "ai_architecture": "Real-time data ingestion engine with WebSocket updates and sentiment analysis pipeline.",
-    "ai_market_intel": "High-demand market for crypto insights; scalable SaaS model.",
     "suggested_budget": "$40k - $75k",
-    "suggested_timeline": "4-6 Months"
+    "suggested_timeline": "4-6 Months",
+    "neural_meta": {
+      "tech_stack": ["Python", "FastAPI", "React", "Chart.js", "PostgreSQL"],
+      "architecture": "Real-time data ingestion engine with WebSocket updates and sentiment analysis pipeline.",
+      "market_intel": "High-demand market for crypto insights; scalable SaaS model.",
+      "arch_analysis": "High-concurrency data stream processing with distributed Postgres scaling.",
+      "security_audit": "Secure WebSocket protocols with JWT-based tiered access controls.",
+      "context_weights": {
+        "architecture": 0.85,
+        "market": 0.95,
+        "tech": 0.8
+      }
+    }
   },
   {
     "id": 3,
@@ -56,11 +74,20 @@
     "project_img_id": 3,
     "project_gal_id": "3",
     "featured_image_url": "/images/booking-buddy.png",
-    "ai_tech_stack": "Next.js, OpenAI API, LangChain, TailwindCSS",
-    "ai_architecture": "LLM-driven agent architecture for itinerary planning and price optimization.",
-    "ai_market_intel": "Disruptive potential in travel tech; B2C subscription model.",
     "suggested_budget": "$25k - $50k",
-    "suggested_timeline": "3-4 Months"
+    "suggested_timeline": "3-4 Months",
+    "neural_meta": {
+      "tech_stack": ["Next.js", "OpenAI API", "LangChain", "TailwindCSS"],
+      "architecture": "LLM-driven agent architecture for itinerary planning and price optimization.",
+      "market_intel": "Disruptive potential in travel tech; B2C subscription model.",
+      "arch_analysis": "Self-correcting agent chains with recursive prompt optimization techniques.",
+      "security_audit": "Anonymized PII data handling with strict API rate limiting protocols.",
+      "context_weights": {
+        "architecture": 0.8,
+        "market": 0.9,
+        "tech": 0.9
+      }
+    }
   },
   {
     "id": 4,
@@ -77,11 +104,20 @@
     "project_img_id": 4,
     "project_gal_id": "4",
     "featured_image_url": "/images/dream-casino.png",
-    "ai_tech_stack": "Node.js, WebGL, Socket.io, Redis",
-    "ai_architecture": "High-concurrency gaming engine with secure payment gateway integration.",
-    "ai_market_intel": "High-conversion gaming platform targeting the premium market.",
     "suggested_budget": "$60k - $120k",
-    "suggested_timeline": "5-8 Months"
+    "suggested_timeline": "5-8 Months",
+    "neural_meta": {
+      "tech_stack": ["Node.js", "WebGL", "Socket.io", "Redis"],
+      "architecture": "High-concurrency gaming engine with secure payment gateway integration.",
+      "market_intel": "High-conversion gaming platform targeting the premium market.",
+      "arch_analysis": "Low-latency event-driven architecture with sub-10ms state synchronization.",
+      "security_audit": "Multi-signature payment escrow with distributed anti-fraud monitoring.",
+      "context_weights": {
+        "architecture": 0.95,
+        "market": 0.8,
+        "tech": 0.9
+      }
+    }
   },
   {
     "id": 5,
@@ -98,11 +134,20 @@
     "project_img_id": 5,
     "project_gal_id": "5",
     "featured_image_url": "/images/ecoflow.png",
-    "ai_tech_stack": "IoT Core, MQTT, React Native, TimescaleDB",
-    "ai_architecture": "Real-time sensor data pipeline with predictive energy optimization models.",
-    "ai_market_intel": "Growing sustainability market; B2B and B2C potential.",
     "suggested_budget": "$35k - $60k",
-    "suggested_timeline": "4-5 Months"
+    "suggested_timeline": "4-5 Months",
+    "neural_meta": {
+      "tech_stack": ["IoT Core", "MQTT", "React Native", "TimescaleDB"],
+      "architecture": "Real-time sensor data pipeline with predictive energy optimization models.",
+      "market_intel": "Growing sustainability market; B2B and B2C potential.",
+      "arch_analysis": "Fault-tolerant IoT mesh with edge computing capabilities for local grid balancing.",
+      "security_audit": "End-to-end device encryption with hardware-backed secure boot.",
+      "context_weights": {
+        "architecture": 0.9,
+        "market": 0.85,
+        "tech": 0.85
+      }
+    }
   },
   {
     "id": 6,
@@ -119,11 +164,20 @@
     "project_img_id": 6,
     "project_gal_id": "6",
     "featured_image_url": "/images/zenith-crm.png",
-    "ai_tech_stack": "Go, React, gRPC, Elasticsearch",
-    "ai_architecture": "Distributed CRM architecture with AI-driven lead scoring and automated sales funnels.",
-    "ai_market_intel": "Enterprise SaaS with strong recurring revenue potential.",
     "suggested_budget": "$50k - $100k",
-    "suggested_timeline": "6-9 Months"
+    "suggested_timeline": "6-9 Months",
+    "neural_meta": {
+      "tech_stack": ["Go", "React", "gRPC", "Elasticsearch"],
+      "architecture": "Distributed CRM architecture with AI-driven lead scoring and automated sales funnels.",
+      "market_intel": "Enterprise SaaS with strong recurring revenue potential.",
+      "arch_analysis": "High-throughput gRPC microservices with cross-region replication.",
+      "security_audit": "SOC2-compliant data isolation with full audit logging and encryption.",
+      "context_weights": {
+        "architecture": 0.9,
+        "market": 0.9,
+        "tech": 0.8
+      }
+    }
   },
   {
     "id": 7,
@@ -140,11 +194,20 @@
     "project_img_id": 7,
     "project_gal_id": "7",
     "featured_image_url": "/images/lumina-os.png",
-    "ai_tech_stack": "Rust, WebAssembly, TensorFlow.js",
-    "ai_architecture": "Neural-first kernel design with adaptive UI generation based on brain-computer interface concept.",
-    "ai_market_intel": "Edge-case innovation with long-term R&D value.",
     "suggested_budget": "$200k+",
-    "suggested_timeline": "12-24 Months"
+    "suggested_timeline": "12-24 Months",
+    "neural_meta": {
+      "tech_stack": ["Rust", "WebAssembly", "TensorFlow.js"],
+      "architecture": "Neural-first kernel design with adaptive UI generation based on brain-computer interface concept.",
+      "market_intel": "Edge-case innovation with long-term R&D value.",
+      "arch_analysis": "Zero-overhead Rust-based kernel targeting WebAssembly sandboxed runtimes.",
+      "security_audit": "Memory-safe execution environment with cryptographic isolation layers.",
+      "context_weights": {
+        "architecture": 0.95,
+        "market": 0.6,
+        "tech": 1.0
+      }
+    }
   },
   {
     "id": 8,
@@ -152,7 +215,7 @@
     "project_title": "BetAuthority",
     "project_tagline": "Hodnotenie kasín v celej Európe",
     "project_desc": "Porovnávací nástroj pre online kasína a stávkové platformy s dátami v reálnom čase, výplatami a férovými podmienkami.",
-    "project_content": "BetAuthority je pokročilý dátami riadený porovnávací nástroj pre online kasína a stávkové platformy. Systém analyzuje viac ako 127 operátorov, sleduje $2.4M+ výplat a poskytuje reálne informácie o dôveryhodnosti, rýchlosti výplat a férových podmienkach. Platforma zahŕňa vzdelávací hub pre stávkárov, analytické nástroje pre inteligentné rozhodovanie a overené platformy s rýchlymi výplatami. S 98.7% spokojnosťou používateľov a priemerným časom výplaty 2.1 hodiny, BetAuthority poskytuje transparentný pohľad na online hazardný trh.",
+    "project_content": "BetAuthority je pokročilý dátami riadený porovnávací nástroj pre online kasína a stávkové platformy. Systém analyzuje viac ako 127 operátorov, sleduje $2.4M+ výplat a poskytuje reálne informácie o dôveryhodnosti, rýchlosti výplat a férových podmienkami. Platforma zahŕňa vzdelávací hub pre stávkárov, analytické nástroje pre inteligentné rozhodovanie a overené platformy s rýchlymi výplatami. S 98.7% spokojnosťou používateľov and priemerným časom výplaty 2.1 hodiny, BetAuthority poskytuje transparentný pohľad na online hazardný trh.",
     "project_type": "Web App",
     "project_category": "Gaming / Fintech",
     "project_client": "BetAuthority",
@@ -161,11 +224,20 @@
     "project_img_id": 8,
     "project_gal_id": "8",
     "featured_image_url": "/images/betauthority.png",
-    "ai_tech_stack": "Typescript, Next.js, Puppeteer, Supabase",
-    "ai_architecture": "Automated data scraping and verification network for real-time betting audits.",
-    "ai_market_intel": "Market leader in affiliate transparency and data-driven trust scoring.",
     "suggested_budget": "$45k - $80k",
-    "suggested_timeline": "4-6 Months"
+    "suggested_timeline": "4-6 Months",
+    "neural_meta": {
+      "tech_stack": ["Typescript", "Next.js", "Puppeteer", "Supabase"],
+      "architecture": "Automated data scraping and verification network for real-time betting audits.",
+      "market_intel": "Market leader in affiliate transparency and data-driven trust scoring.",
+      "arch_analysis": "Distributed scraping cluster with AI-based pattern recognition for audit detection bypass.",
+      "security_audit": "Encrypted database layers with anonymized transaction ledger.",
+      "context_weights": {
+        "architecture": 0.85,
+        "market": 0.9,
+        "tech": 0.9
+      }
+    }
   },
   {
     "id": 9,
@@ -182,10 +254,19 @@
     "project_img_id": 9,
     "project_gal_id": "9",
     "featured_image_url": "/images/neon-bloom-messenger.png",
-    "ai_tech_stack": "Matrix, ElysiaJS, Bun, React, MinIO",
-    "ai_architecture": "Decentralized messaging infrastructure with E2E encryption and ultra-fast Bun-powered API.",
-    "ai_market_intel": "Privacy-first communication niche with high growth potential.",
     "suggested_budget": "$50k - $90k",
-    "suggested_timeline": "4-7 Months"
+    "suggested_timeline": "4-7 Months",
+    "neural_meta": {
+      "tech_stack": ["Matrix", "ElysiaJS", "Bun", "React", "MinIO"],
+      "architecture": "Decentralized messaging infrastructure with E2E encryption and ultra-fast Bun-powered API.",
+      "market_intel": "Privacy-first communication niche with high growth potential.",
+      "arch_analysis": "Zero-knowledge server architecture with distributed data shards via MinIO.",
+      "security_audit": "Full Matrix E2EE implementation with automated session termination and secure credential vault.",
+      "context_weights": {
+        "architecture": 0.95,
+        "market": 0.8,
+        "tech": 0.95
+      }
+    }
   }
 ]

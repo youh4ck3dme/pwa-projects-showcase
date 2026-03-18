@@ -102,7 +102,7 @@ export const SearchAssistant: React.FC<SearchAssistantProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         {/* Search Input Section */}
         <div className="lg:col-span-12 space-y-8">
-          <div className="flex items-end justify-between border-b-2 border-black pb-4">
+          <div className="flex items-end justify-between border-b border-black pb-4">
             <div className="space-y-1">
               <h3 className="text-2xl font-black tracking-tighter uppercase leading-none flex items-center gap-3">
                 <Search className="w-5 h-5" />
@@ -124,7 +124,7 @@ export const SearchAssistant: React.FC<SearchAssistantProps> = ({
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch(query)}
               placeholder={t('query_placeholder', 'ai_tools')}
-              className="w-full pl-0 pr-32 py-8 bg-transparent border-b-2 border-silver focus:border-black outline-none transition-all text-sm font-black tracking-tight placeholder:text-silver placeholder:font-normal uppercase"
+              className="w-full pl-0 pr-32 py-8 bg-transparent border-b border-silver focus:border-black outline-none transition-all text-sm font-black tracking-tight placeholder:text-silver placeholder:font-normal uppercase"
             />
             
             {/* Scanning line removed to prevent chaotic UI behavior */}

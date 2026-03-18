@@ -121,7 +121,10 @@ const translations = {
       market_potential: 'TRHOVÝ POTENCIÁL',
       view_presentation: 'SPUSTIŤ PREZENTÁCIU',
       not_found: 'Projekt nebol nájdený',
-      back_to_list: 'Späť na zoznam projektov'
+      back_to_list: 'Späť na zoznam projektov',
+      arch_analysis: 'ARCHITEKTURALNA ANALÝZA',
+      security_audit: 'BEZPEČNOSTNÝ AUDIT',
+      sync_protocol: 'SYNCHRONIZAČNÝ PROTOKOL'
     },
     ai_tools: {
       search_assistant: 'ASISTENT VYHĽADÁVANIA',
@@ -285,7 +288,10 @@ const translations = {
       lumina_os_desc: 'Konceptualizácia OS zameraná na neurálne rozhrania a adaptívny dizajn UI.',
       betauthority_title: 'BetAuthority',
       betauthority_tagline: 'Hodnotenie kasín v celej Európe',
-      betauthority_desc: 'Porovnávací nástroj pre online kasína a stávkové platformy s dátami v reálnom čase, výplatami a férovými podmienkami.'
+      betauthority_desc: 'Porovnávací nástroj pre online kasína a stávkové platformy s dátami v reálnom čase, výplatami a férovými podmienkami.',
+      neon_bloom_messenger_title: 'Neon Bloom Messenger',
+      neon_bloom_messenger_tagline: 'Prémiový komunikačný ekosystém',
+      neon_bloom_messenger_desc: 'Vysokovýkonná platforma zameraná na súkromie postavená na protokole Matrix.'
     },
     ingestion: {
       tech_stack: 'Technologický Stack',
@@ -409,7 +415,10 @@ const translations = {
       market_potential: 'MARKET POTENTIAL',
       view_presentation: 'VIEW PRESENTATION',
       not_found: 'Project Not Found',
-      back_to_list: 'Back to projects index'
+      back_to_list: 'Back to projects index',
+      arch_analysis: 'ARCHITECTURAL ANALYSIS',
+      security_audit: 'SECURITY AUDIT',
+      sync_protocol: 'SYNC PROTOCOL'
     },
     ai_tools: {
       search_assistant: 'SEARCH ASSISTANT',
@@ -573,7 +582,10 @@ const translations = {
       lumina_os_desc: 'A concept OS focusing on neural interfaces and adaptive UI design.',
       betauthority_title: 'BetAuthority',
       betauthority_tagline: 'European Casino Rankings',
-      betauthority_desc: 'Comparison tool for online casinos and betting platforms with real-time data and fair terms.'
+      betauthority_desc: 'Comparison tool for online casinos and betting platforms with real-time data and fair terms.',
+      neon_bloom_messenger_title: 'Neon Bloom Messenger',
+      neon_bloom_messenger_tagline: 'Premium Communication Ecosystem',
+      neon_bloom_messenger_desc: 'High-performance, privacy-focused communication platform built on Matrix protocol.'
     },
     ingestion: {
       tech_stack: 'Tech Stack',

@@ -75,9 +75,9 @@ export default function ProjectsClient({ initialProjects }: ProjectsClientProps)
     : projects.filter(p => p.project_category === activeCategory);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-0 border-t-2 border-black min-h-screen bg-white">
+    <div className="flex flex-col lg:flex-row gap-0 border-t border-black min-h-screen bg-white">
       {/* Sidebar: Categories & Market Analyzer */}
-      <aside className="lg:w-80 border-r-2 border-black order-2 lg:order-none flex flex-col bg-white">
+      <aside className="lg:w-80 border-r border-black order-2 lg:order-none flex flex-col bg-white">
         <div className="p-8 lg:p-10 space-y-12 flex-grow overflow-y-auto lg:sticky lg:top-20 lg:h-[calc(100vh-80px)]">
           <div className="space-y-8">
             <h4 className="label-system text-[10px] font-black underline underline-offset-8 decoration-primary-600">{t('categories', 'repository')}</h4>
@@ -86,7 +86,7 @@ export default function ProjectsClient({ initialProjects }: ProjectsClientProps)
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`text-[11px] font-black tracking-[0.2em] uppercase transition-all text-left w-full px-5 py-4 border-l-4 ${
+                  className={`text-[11px] font-black tracking-[0.2em] uppercase transition-all text-left w-full px-5 py-4 border-l-2 ${
                     activeCategory === cat 
                       ? 'bg-black text-white border-primary-600' 
                       : 'text-charcoal border-transparent hover:border-silver hover:bg-bone'
@@ -122,7 +122,7 @@ export default function ProjectsClient({ initialProjects }: ProjectsClientProps)
 
       {/* Main Content: Search & Grid */}
       <div className="flex-grow flex flex-col order-1 lg:order-none">
-        <div className="border-b-2 border-black p-8 lg:p-10 bg-bone sticky top-20 z-20">
+        <div className="border-b border-black p-8 lg:p-10 bg-bone sticky top-20 z-20">
           <SearchAssistant 
             onSearchResults={handleSearchResults}
             onLoading={setIsLoading}
@@ -130,7 +130,7 @@ export default function ProjectsClient({ initialProjects }: ProjectsClientProps)
         </div>
 
         <div className="flex-grow flex flex-col">
-          <div className="p-0 border-b-2 border-black bg-white sticky top-[calc(20px+120px)] lg:top-20 z-10">
+          <div className="p-0 border-b border-black bg-white sticky top-[calc(20px+120px)] lg:top-20 z-10">
             <div className="p-8 lg:p-10 flex items-center justify-between">
               <div className="space-y-3">
                 <h2 className="text-base font-black tracking-[0.25em] uppercase flex items-center gap-3">
