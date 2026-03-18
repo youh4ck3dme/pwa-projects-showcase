@@ -1,5 +1,20 @@
 # pROJECT - Gemini Enterprise Project Marketplace
 
+## 🚀 Rýchle Spustenie: Pridanie Gemini API kľúča do Vercel Produkcie
+
+Pred nasadením je nutné pridať váš `NEXT_PUBLIC_GEMINI_API_KEY` kľúč do Vercelu pomocou CLI. Stačí bežať tento príkaz:
+```bash
+npx vercel env add NEXT_PUBLIC_GEMINI_API_KEY
+```
+*(Po spustení vložte kľúč a vyberte všetky prostredia: Production, Preview, Development)*
+
+Následne pre okamžité nasadenie na produkciu:
+```bash
+npx vercel --prod --yes
+```
+
+---
+
 ## Prehľad
 
 Toto je kompletná implementácia projektu pre využitie Google Gemini Enterprise na vytvorenie inteligentnej platformy pre projektový trh s následnými 5 obchodnými modelmi na generovanie príjmov.
