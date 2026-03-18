@@ -39,6 +39,31 @@ export class ProjectAPI {
     }
   }
 
+  private static async fetchAllProjects(): Promise<ProjectData[]> {
+    try {
+      // In a real environment, this would call the /api/projects route
+      // or read the file if on the server.
+      const response = await fetch('/api/projects');
+      if (!response.ok) return [];
+      const projectsCCT = await response.json();
+      return projectsCCT.map((p: any) => ({
+        id: String(p.api_id || p.id),
+        title: p.project_title,
+        description: p.project_desc,
+        category: p.project_category,
+        type: p.project_type,
+        budget: p.suggested_budget || '$10k - $50k',
+        timeline: p.suggested_timeline || '3-6 months',
+        skills: p.neural_meta?.tech_stack || [],
+        featured_image_url: p.featured_image_url,
+        createdAt: p.project_date || new Date().toISOString()
+      }));
+    } catch (e) {
+      console.error('Failed to fetch projects for context:', e);
+      return [];
+    }
+  }
+
   static async searchProjects(params: SearchParams): Promise<{
     projects: ProjectData[];
     total: number;
@@ -46,12 +71,12 @@ export class ProjectAPI {
     totalPages: number;
   }> {
     return this.handleGeminiRequest(async () => {
-      // Build context from existing projects
-      const context = await this.buildSearchContext(params);
+      // Get all real projects first to provide context and match results
+      const allProjects = await this.fetchAllProjects();
       
       const query: GeminiQuery = {
         query: params.query || 'Find relevant projects',
-        context,
+        context: allProjects.map(p => `${p.title}: ${p.description}`),
         filters: {
           category: params.category,
           type: params.type,
@@ -60,17 +85,42 @@ export class ProjectAPI {
         }
       };
 
-      // Use Gemini for intelligent search
-      const searchResults = await geminiClient.search(query);
-      
-      // Convert search results to project format
-      const projects = await this.convertToProjects(searchResults, params);
+      // Use Gemini for intelligent ranking/search if query is provided
+      // Otherwise just filter the allProjects
+      let filteredProjects = allProjects;
+
+      if (params.query) {
+        const searchResults = await geminiClient.search(query);
+        // Match Gemini results back to our real project objects to keep images
+        filteredProjects = searchResults.map(res => {
+          const match = allProjects.find(p => 
+            p.title.toLowerCase().includes(res.title.toLowerCase()) || 
+            res.title.toLowerCase().includes(p.title.toLowerCase())
+          );
+          return match || {
+            id: `gen-${Math.random()}`,
+            title: res.title,
+            description: res.snippet,
+            category: params.category || 'General',
+            type: params.type || 'Standard',
+            budget: '$10k - $50k',
+            timeline: '3-6 months',
+            skills: [],
+            createdAt: new Date().toISOString()
+          };
+        });
+      }
+
+      // Apply basic filters if any
+      if (params.category && params.category !== 'all' && params.category !== 'ALL') {
+        filteredProjects = filteredProjects.filter(p => p.category.toLowerCase() === params.category?.toLowerCase());
+      }
       
       return {
-        projects,
-        total: projects.length,
+        projects: filteredProjects,
+        total: filteredProjects.length,
         page: params.page || 1,
-        totalPages: Math.ceil(projects.length / (params.limit || 10))
+        totalPages: Math.ceil(filteredProjects.length / (params.limit || 10))
       };
     }).then(result => result.data!);
   }
