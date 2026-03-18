@@ -22,7 +22,7 @@ export const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children })
     <div className="min-h-screen flex flex-col bg-white text-black antialiased selection:bg-black selection:text-white">
       {/* Header - Fixed Grid Structure with Glassmorphism */}
       {/* Header - Fixed Grid Structure with Glassmorphism */}
-      <header className="sticky top-0 z-50 glass-premium border-b-2 border-black h-20">
+      <header className="sticky top-0 z-50 glass-premium border-b border-black h-20">
         <div className="container-tight flex items-stretch h-full">
           {/* Logo Section */}
           <Link href="/" className="flex items-center pr-4 md:pr-10 border-r border-silver group">
@@ -167,7 +167,7 @@ export const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children })
       <div className="noise-overlay" />
 
       {/* Footer - Systematic Documentation Style */}
-      <footer className="border-t-2 border-black bg-white mt-32">
+      <footer className="border-t border-black bg-white mt-32">
         <div className="container-tight py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
           <div className="space-y-4">
             <span className="text-lg font-black tracking-tighter">LARSEN EVANS</span>

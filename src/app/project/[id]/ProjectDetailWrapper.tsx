@@ -126,56 +126,81 @@ export default function ProjectDetailWrapper({ project, id }: ProjectDetailWrapp
             <div className="bg-bone border-2 border-black p-10 lg:p-12 space-y-12 sticky top-40">
               <div>
                 <h3 className="text-[10px] font-black text-black uppercase tracking-[0.3em] mb-10 pb-4 border-b border-black/10">{t('intel', 'detail')}</h3>
-                <dl className="space-y-10">
-                  <div>
-                    <dt className="text-[9px] font-black text-silver uppercase tracking-[0.2em] mb-2">{t('ident_client', 'detail')}</dt>
-                    <dd className="text-xl font-black text-black tracking-tight uppercase">{project.project_client}</dd>
+                <dl className="space-y-6">
+                  <div className="flex justify-between items-end border-b border-black/5 pb-2 hover:border-black/20 transition-colors">
+                    <dt className="text-[8px] font-black text-silver uppercase tracking-[0.2em]">{t('ident_client', 'detail')}</dt>
+                    <dd className="text-xs font-black text-black uppercase tracking-tight">{project.project_client}</dd>
                   </div>
-                  <div>
-                    <dt className="text-[9px] font-black text-silver uppercase tracking-[0.2em] mb-2">{t('sector_cat', 'detail')}</dt>
-                    <dd className="text-xl font-black text-black tracking-tight uppercase">{project.project_category}</dd>
+                  <div className="flex justify-between items-end border-b border-black/5 pb-2 hover:border-black/20 transition-colors">
+                    <dt className="text-[8px] font-black text-silver uppercase tracking-[0.2em]">{t('sector_cat', 'detail')}</dt>
+                    <dd className="text-xs font-black text-black uppercase tracking-tight">{project.project_category}</dd>
                   </div>
-                  <div>
-                    <dt className="text-[9px] font-black text-silver uppercase tracking-[0.2em] mb-2">{t('mech_type', 'detail')}</dt>
-                    <dd className="text-xl font-black text-black tracking-tight uppercase">{project.project_type}</dd>
+                  <div className="flex justify-between items-end border-b border-black/5 pb-2 hover:border-black/20 transition-colors">
+                    <dt className="text-[8px] font-black text-silver uppercase tracking-[0.2em]">{t('mech_type', 'detail')}</dt>
+                    <dd className="text-xs font-black text-black uppercase tracking-tight">{project.project_type}</dd>
                   </div>
-                  <div>
-                    <dt className="text-[9px] font-black text-silver uppercase tracking-[0.2em] mb-2">{t('tx_timestamp', 'detail')}</dt>
-                    <dd className="text-xl font-black text-black tracking-tight uppercase">{project.project_date}</dd>
+                  <div className="flex justify-between items-end border-b border-black/5 pb-2 hover:border-black/20 transition-colors">
+                    <dt className="text-[8px] font-black text-silver uppercase tracking-[0.2em]">{t('tx_timestamp', 'detail')}</dt>
+                    <dd className="text-xs font-black text-black uppercase tracking-tight">{project.project_date}</dd>
                   </div>
                 </dl>
               </div>
 
-              {/* Neural Intelligence Expansion [BIG UPGRADE] */}
-              {(project.ai_tech_stack || project.ai_architecture || project.ai_market_intel) && (
-                <div className="pt-10 border-t-2 border-black space-y-10">
-                   <h3 className="text-[10px] font-black text-primary-600 uppercase tracking-[0.4em] flex items-center gap-2">
-                     <div className="w-2 h-2 bg-primary-600 rounded-full animate-pulse" />
-                     {t('neural_intel', 'detail')}
+              {/* Neural Intelligence Expansion [MECHANICAL CORE] */}
+              {(project.ai_tech_stack || project.ai_architecture) && (
+                <div className="pt-8 border-t border-black/10 space-y-8">
+                   <h3 className="text-[9px] font-black text-primary-600 uppercase tracking-[0.3em] flex items-center gap-2">
+                     <div className="w-1.5 h-1.5 bg-primary-600 rounded-full" />
+                     MECHANICAL_CORE
                    </h3>
                    
                    {project.ai_tech_stack && (
                      <div className="space-y-4">
-                       <dt className="text-[9px] font-black text-silver uppercase tracking-[0.2em]">{t('stack_intelligence', 'detail')}</dt>
-                       <div className="flex flex-wrap gap-2">
+                       <dt className="text-[8px] font-black text-silver uppercase tracking-[0.2em]">{t('stack_intelligence', 'detail')}</dt>
+                       <div className="flex flex-wrap gap-1.5">
                          {project.ai_tech_stack.map((tech, i) => (
-                           <span key={i} className="px-3 py-1 bg-black text-white text-[9px] font-black uppercase tracking-widest">{tech}</span>
+                           <span key={i} className="px-2 py-0.5 bg-black text-white text-[8px] font-black uppercase tracking-widest">{tech}</span>
                          ))}
                        </div>
                      </div>
                    )}
 
                    {project.ai_architecture && (
-                     <div className="space-y-4">
-                       <dt className="text-[9px] font-black text-silver uppercase tracking-[0.2em]">{t('arch_neural_map', 'detail')}</dt>
-                       <dd className="text-sm font-bold text-black border-l-2 border-black pl-4 py-1 uppercase leading-tight">{project.ai_architecture}</dd>
+                     <div className="space-y-3">
+                       <dt className="text-[8px] font-black text-silver uppercase tracking-[0.2em]">{t('arch_neural_map', 'detail')}</dt>
+                       <dd className="text-[11px] font-bold text-black border-l border-black/40 pl-3 py-0.5 uppercase leading-tight">{project.ai_architecture}</dd>
                      </div>
                    )}
+                </div>
+              )}
 
+              {/* Strategic Intelligence [STRATEGIC INTEL] */}
+              {(project.ai_market_intel || project.suggested_budget || project.suggested_timeline) && (
+                <div className="pt-8 border-t border-black/10 space-y-8">
+                   <h3 className="text-[9px] font-black text-accent-600 uppercase tracking-[0.3em] flex items-center gap-2">
+                     <div className="w-1.5 h-1.5 bg-accent-600 rounded-full" />
+                     STRATEGIC_INTEL
+                   </h3>
+
+                   <dl className="grid grid-cols-2 gap-4">
+                      {project.suggested_budget && (
+                        <div>
+                          <dt className="text-[8px] font-black text-silver uppercase tracking-[0.1em] mb-1">BUDGET_EST</dt>
+                          <dd className="text-xs font-black bg-accent-600/5 border border-accent-600/10 p-2 uppercase text-accent-600">{project.suggested_budget}</dd>
+                        </div>
+                      )}
+                      {project.suggested_timeline && (
+                        <div>
+                          <dt className="text-[8px] font-black text-silver uppercase tracking-[0.1em] mb-1">TIMELINE</dt>
+                          <dd className="text-xs font-black bg-accent-600/5 border border-accent-600/10 p-2 uppercase text-accent-600">{project.suggested_timeline}</dd>
+                        </div>
+                      )}
+                   </dl>
+                   
                    {project.ai_market_intel && (
-                     <div className="space-y-4">
-                       <dt className="text-[9px] font-black text-silver uppercase tracking-[0.2em]">{t('market_potential', 'detail')}</dt>
-                       <dd className="text-xs font-medium text-charcoal bg-black/5 p-4 border border-black/10 uppercase tracking-tighter leading-relaxed">{project.ai_market_intel}</dd>
+                     <div className="space-y-3">
+                       <dt className="text-[8px] font-black text-silver uppercase tracking-[0.2em]">{t('market_potential', 'detail')}</dt>
+                       <dd className="text-[10px] font-medium text-charcoal bg-black/5 p-4 border border-black/10 uppercase tracking-tighter leading-snug">{project.ai_market_intel}</dd>
                      </div>
                    )}
                 </div>

@@ -36,6 +36,36 @@
   background: linear-gradient(135deg, var(--primary-600) 0%, var(--accent-600) 100%);
 }
 
+.neural-glow {
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
+  border-color: var(--primary-400) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.neural-glow::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    transparent 0deg,
+    var(--primary-400) 20deg,
+    transparent 40deg
+  );
+  animation: rotate-slow 10s linear infinite;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 .text-gradient {
   background: linear-gradient(135deg, var(--color-black) 0%, #444 100%);
   -webkit-background-clip: text;
@@ -108,6 +138,19 @@ h4 { font-size: var(--text-2xl); }
 .btn-productivity:hover {
   background: var(--color-white);
   color: var(--color-black);
+  transform: translateY(-1px);
+}
+
+.border-premium {
+  border: 1px solid var(--color-black);
+}
+
+.shadow-premium {
+  box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+}
+
+.shadow-premium-blue {
+  box-shadow: 4px 4px 0px 0px rgba(37,99,235,1);
 }
 
 .card-editorial {

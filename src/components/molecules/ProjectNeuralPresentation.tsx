@@ -48,8 +48,46 @@ export default function ProjectNeuralPresentation({ project, isOpen, onClose }: 
       budget: project.suggested_budget,
       timeline: project.suggested_timeline,
       icon: <Zap className="w-8 h-8 text-primary-600" />
+    },
+    {
+      id: 'calibrate',
+      label: '05 / CALIBRATION',
+      title: 'Neural Tuning',
+      content: 'Adjust context weights to refine AI prioritization.',
+      icon: <Shield className="w-8 h-8 text-primary-600" />
     }
   ];
+
+  const [weights, setWeights] = useState(project.neuralMetadata?.contextWeights || {
+    architecture: 50,
+    market: 50,
+    tech: 50
+  });
+  const [isCalibrating, setIsCalibrating] = useState(false);
+  const [caliberSuccess, setCaliberSuccess] = useState(false);
+
+  const handleCalibrate = async () => {
+    setIsCalibrating(true);
+    setCaliberSuccess(false);
+    try {
+      const response = await fetch('/api/neural/calibrate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          projectId: project.api_id || project.id,
+          contextWeights: weights
+        })
+      });
+      if (response.ok) {
+        setCaliberSuccess(true);
+        setTimeout(() => setCaliberSuccess(false), 3000);
+      }
+    } catch (err) {
+      console.error('Calibration failed', err);
+    } finally {
+      setIsCalibrating(false);
+    }
+  };
 
   const nextSlide = React.useCallback(() => setCurrentSlide((prev) => (prev + 1) % slides.length), [slides.length]);
   const prevSlide = React.useCallback(() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length), [slides.length]);
@@ -144,10 +182,40 @@ export default function ProjectNeuralPresentation({ project, isOpen, onClose }: 
                                  <p className="text-2xl font-black">{slides[currentSlide].timeline}</p>
                                </div>
                              )}
+
+                             {currentSlide === 4 && (
+                                <div className="space-y-6">
+                                   {Object.entries(weights).map(([key, value]) => (
+                                     <div key={key} className="space-y-2">
+                                        <div className="flex justify-between text-[8px] font-black uppercase text-silver">
+                                           <span>{key}_context</span>
+                                           <span>{value}%</span>
+                                        </div>
+                                        <input 
+                                          type="range" 
+                                          min="0" 
+                                          max="100" 
+                                          value={value}
+                                          onChange={(e) => setWeights({...weights, [key]: parseInt(e.target.value)})}
+                                          className="w-full accent-primary-600 bg-white/10 h-1 appearance-none cursor-pointer"
+                                        />
+                                     </div>
+                                   ))}
+                                   <button 
+                                     onClick={handleCalibrate}
+                                     disabled={isCalibrating}
+                                     className={`w-full py-4 text-[10px] font-black uppercase tracking-[0.3em] border-2 border-white transition-all ${
+                                       caliberSuccess ? 'bg-green-600 border-green-600' : 'bg-transparent hover:bg-white hover:text-black'
+                                     }`}
+                                   >
+                                     {isCalibrating ? 'CALIBRATING...' : caliberSuccess ? 'SYNC_COMPLETE' : 'PUSH_NEURAL_WEIGHTS'}
+                                   </button>
+                                </div>
+                             )}
                           </div>
                           
                           <div className="hidden lg:block">
-                             <Shield className="w-12 h-12 text-white/10" />
+                             <Shield className={`w-12 h-12 transition-colors ${currentSlide === 4 ? 'text-primary-600' : 'text-white/10'}`} />
                           </div>
                        </div>
                     </div>

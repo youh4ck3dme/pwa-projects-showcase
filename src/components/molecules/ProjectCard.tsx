@@ -47,38 +47,38 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
       </div>
       
-      <div className="p-10 space-y-8 flex flex-col h-full">
-        <div className="space-y-5 flex-grow">
-          <div className="flex justify-between items-start">
+      <div className="p-8 space-y-8 flex flex-col h-full border-l border-black/5 group-hover:border-black/20 transition-colors mx-2">
+        <div className="space-y-6 flex-grow">
+          <div className="flex justify-between items-center bg-bone px-3 py-2 border border-silver group-hover:border-black transition-colors">
             <span 
               data-testid="project-type"
-              className="label-system text-[9px] font-black border-l-2 border-primary-600 pl-3"
+              className="text-[9px] font-black tracking-widest uppercase text-primary-600"
             >
               {project.project_type || 'CORE PROJECT'}
             </span>
-            <span className="text-[10px] font-mono font-bold text-silver group-hover:text-black transition-colors">
-              OBJ. {String(project.api_id || project.id).padStart(4, '0')}
+            <span className="text-[9px] font-mono font-bold text-silver group-hover:text-black">
+              #{String(project.api_id || project.id).slice(-4)}
             </span>
           </div>
           <h3 
             data-testid="project-title"
-            className="text-4xl font-black tracking-tighter uppercase leading-[0.9] transition-all group-hover:text-primary-600"
+            className="text-4xl font-black tracking-tighter uppercase leading-[0.85] transition-all group-hover:text-primary-600"
           >
             {translatedTitle}
           </h3>
-          <p className="text-[12px] font-medium text-charcoal leading-snug uppercase tracking-tight line-clamp-3 tight-p opacity-80 group-hover:opacity-100 transition-opacity">
+          <p className="text-[11px] font-medium text-charcoal leading-snug uppercase tracking-tight line-clamp-2 tight-p opacity-60 group-hover:opacity-100 transition-opacity max-w-[90%]">
             {translatedDesc}
           </p>
         </div>
 
-        <div className="pt-8 border-t border-silver/50 flex items-center justify-between group-hover:border-black transition-colors">
+        <div className="pt-6 border-t border-silver/40 flex items-center justify-between group-hover:border-black/40 transition-colors">
           <div className="flex flex-col">
-            <span className="label-system text-[8px] mb-1.5 text-silver group-hover:text-black transition-colors">{t('contract_client', 'repository')}</span>
-            <span className="text-[11px] font-black uppercase tracking-widest">{project.project_client}</span>
+            <span className="text-[8px] font-black text-silver uppercase mb-1">{t('contract_client', 'repository')}</span>
+            <span className="text-[10px] font-black uppercase tracking-widest">{project.project_client}</span>
           </div>
           <div className="flex flex-col items-end">
-            <span className="label-system text-[8px] mb-1.5 text-silver group-hover:text-black transition-colors">{t('seq_year', 'repository')}</span>
-            <span className="text-[11px] font-mono font-black">{project.project_date}</span>
+            <span className="text-[8px] font-black text-silver uppercase mb-1">{t('seq_year', 'repository')}</span>
+            <span className="text-[10px] font-mono font-black">{project.project_date}</span>
           </div>
         </div>
       </div>

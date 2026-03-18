@@ -24,6 +24,10 @@ export interface ProjectCCT {
   ai_market_intel?: string;
   suggested_budget?: string;
   suggested_timeline?: string;
+  neuralMetadata?: {
+    contextWeights?: Record<string, number>;
+    lastCalibration?: string;
+  };
 }
 
 export interface Project {
@@ -59,6 +63,10 @@ export interface Project {
     users?: number;
     performance?: string;
     security?: string;
+  };
+  neuralMetadata?: {
+    contextWeights?: Record<string, number>;
+    lastCalibration?: string;
   };
 }
 
