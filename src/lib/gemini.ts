@@ -59,9 +59,12 @@ export class GeminiEnterpriseClient {
       
       // Parse the response into structured results
       return this.parseSearchResults(text);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Gemini search error:', error);
-      return [];
+      if (error?.status === 503 || error?.message?.includes('503') || error?.message?.includes('capacity')) {
+        throw new Error('AI_CAPACITY_EXHAUSTED');
+      }
+      throw error;
     }
   }
 
@@ -73,9 +76,12 @@ export class GeminiEnterpriseClient {
       const result = await this.proModel.generateContent(fullPrompt);
       const response = await result.response;
       return response.text();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Gemini content generation error:', error);
-      return '';
+      if (error?.status === 503 || error?.message?.includes('503') || error?.message?.includes('capacity')) {
+        throw new Error('AI_CAPACITY_EXHAUSTED');
+      }
+      throw error;
     }
   }
 
@@ -87,9 +93,12 @@ export class GeminiEnterpriseClient {
       const result = await this.flashModel.generateContent(fullPrompt);
       const response = await result.response;
       return response.text();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Gemini quick content generation error:', error);
-      return '';
+      if (error?.status === 503 || error?.message?.includes('503') || error?.message?.includes('capacity')) {
+        throw new Error('AI_CAPACITY_EXHAUSTED');
+      }
+      throw error;
     }
   }
 

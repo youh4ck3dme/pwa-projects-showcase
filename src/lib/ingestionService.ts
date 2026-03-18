@@ -76,9 +76,12 @@ export class IngestionService {
       // Clean up potential markdown formatting in response
       const jsonStr = aiResponse.replace(/```json|```/g, '').trim();
       return JSON.parse(jsonStr);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Gemini Analysis Error:', error);
-      throw new Error('Failed to analyze project with AI');
+      if (error.message === 'AI_CAPACITY_EXHAUSTED') {
+        throw new Error('AI Engine is currently at capacity. Please try again in 1-2 minutes.');
+      }
+      throw new Error('Failed to analyze project with AI. Ensure your ZIP contains a README or package.json.');
     }
   }
 }
