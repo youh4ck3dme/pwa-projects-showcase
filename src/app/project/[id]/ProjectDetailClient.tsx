@@ -69,9 +69,9 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
             >
               <div className="p-8 lg:p-12 border-b-2 border-black flex justify-between items-center bg-bone">
                 <div className="space-y-1">
-                  <h4 className="label-system text-[10px] text-primary-600 font-black tracking-[0.3em]">PROJECT DOCUMENTATION</h4>
+                  <h4 className="label-system text-[10px] text-primary-600 font-black tracking-[0.3em]">{t('documentation', 'detail')}</h4>
                   <h2 className="text-2xl font-black tracking-tighter uppercase">{project.project_title}</h2>
-                  <p className="text-[12px] text-silver font-medium uppercase">{t('documentation', 'detail')}</p>
+                  <p className="text-[12px] text-silver font-medium uppercase">{t('available_languages', 'detail')}</p>
                 </div>
                 <button 
                   onClick={() => setShowDocs(false)}
@@ -86,7 +86,7 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                   {/* Language Selector */}
                   <div className="flex items-center gap-4 border-b-2 border-silver pb-4">
                     <Globe className="w-5 h-5 text-primary-600" />
-                    <span className="text-[10px] font-black uppercase tracking-widest text-silver">LANGUAGE</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-silver">{t('language', 'ai_tools') || 'LANGUAGE'}</span>
                     <div className="flex gap-2">
                       {['sk', 'en', 'de', 'fr', 'es'].map((lang) => (
                         <button
@@ -107,8 +107,7 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                     <div className="p-6 bg-silver/20 rounded-lg border-2 border-silver">
                       <h3 className="text-lg font-black mb-4">README {language.toUpperCase()}</h3>
                       <p className="text-sm text-charcoal">
-                        Documentation for {project.project_title} is available in multiple languages.
-                        Select your preferred language above to view the complete project documentation.
+                        {t('docs_desc', 'detail').replace('{title}', project.project_title)}
                       </p>
                       <div className="mt-4 space-y-2">
                         <div className="flex items-center gap-2 text-[10px] font-black uppercase">

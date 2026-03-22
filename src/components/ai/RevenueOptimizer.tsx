@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { geminiClient } from '../../lib/gemini';
 import { useLanguage } from '@/context/LanguageContext';
-import { TrendingUp, DollarSign, Target, ChevronRight, Zap, RefreshCcw } from 'lucide-react';
+import { TrendingUp, Target, ChevronRight, Zap, RefreshCcw } from 'lucide-react';
 
 interface RevenueOptimizerProps {
   projects: any[];
@@ -18,11 +18,11 @@ export const RevenueOptimizer: React.FC<RevenueOptimizerProps> = ({
   const [strategy, setStrategy] = useState('all');
 
   const strategies = [
-    { value: 'all', label: 'Complete Revenue Optimization' },
-    { value: 'pricing', label: 'Pricing Strategy' },
-    { value: 'commission', label: 'Commission Optimization' },
-    { value: 'upselling', label: 'Upselling Opportunities' },
-    { value: 'retention', label: 'Customer Retention' }
+    { value: 'all', label: t('strat_complete', 'ai_tools') },
+    { value: 'pricing', label: t('strat_pricing', 'ai_tools') },
+    { value: 'commission', label: t('strat_commission', 'ai_tools') },
+    { value: 'upselling', label: t('strat_upselling', 'ai_tools') },
+    { value: 'retention', label: t('strat_retention', 'ai_tools') }
   ];
 
   const optimizeRevenue = useCallback(async () => {
@@ -109,17 +109,17 @@ export const RevenueOptimizer: React.FC<RevenueOptimizerProps> = ({
       <div className="space-y-2 border-b border-black pb-8">
         <h3 className="text-xl font-black tracking-tight uppercase leading-none flex items-center gap-3">
           <TrendingUp className="w-5 h-5 text-primary-600" />
-          Revenue Optimizer
+          {t('revenue_optimizer_hero', 'ai_tools')}
         </h3>
         <p className="label-system text-[9px] uppercase tracking-widest text-silver">
-          AI-POWERED FINANCIAL TRAJECTORY ANALYSIS
+          {t('revenue_optimizer_tagline', 'ai_tools')}
         </p>
       </div>
 
       <div className="space-y-6">
         <div className="space-y-3">
           <label className="label-system text-[8px] font-black block uppercase tracking-widest text-silver">
-            Optimization Strategy
+            {t('optimization_strategy', 'ai_tools')}
           </label>
           <select
             value={strategy}
@@ -144,19 +144,19 @@ export const RevenueOptimizer: React.FC<RevenueOptimizerProps> = ({
             {/* Revenue Overview */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-black border border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
               <div className="bg-white p-8 space-y-3">
-                <h5 className="label-system text-[8px] text-silver font-black">CURRENT_REVENUE</h5>
+                <h5 className="label-system text-[8px] text-silver font-black">{t('current_revenue', 'ai_tools')}</h5>
                 <p className="text-3xl font-black text-black leading-none">
                   {formatCurrency(optimization.currentRevenue)}
                 </p>
               </div>
               <div className="bg-primary-600 p-8 space-y-3 text-white">
-                <h5 className="label-system text-[8px] text-white/60 font-black">POTENTIAL_REVENUE</h5>
+                <h5 className="label-system text-[8px] text-white/60 font-black">{t('potential_revenue', 'ai_tools')}</h5>
                 <p className="text-3xl font-black leading-none">
                   {formatCurrency(optimization.potentialRevenue)}
                 </p>
               </div>
               <div className="bg-black p-8 space-y-3 text-white">
-                <h5 className="label-system text-[8px] text-primary-400 font-black">OPTIMIZED_OFFSET</h5>
+                <h5 className="label-system text-[8px] text-primary-400 font-black">{t('revenue_increase', 'ai_tools')}</h5>
                 <p className="text-3xl font-black text-primary-400 leading-none">
                   +{formatCurrency('$25,000')}
                 </p>
@@ -167,7 +167,7 @@ export const RevenueOptimizer: React.FC<RevenueOptimizerProps> = ({
             <div className="space-y-6">
                <h4 className="label-system text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
                  <Target className="w-4 h-4 text-primary-600" />
-                 Optimization Nodes
+                 {t('optimization_areas', 'ai_tools')}
                </h4>
                <div className="grid grid-cols-1 gap-6">
                  {optimization.optimizationAreas?.map((area: any, index: number) => (
@@ -183,7 +183,7 @@ export const RevenueOptimizer: React.FC<RevenueOptimizerProps> = ({
                               <p className="text-[10px] font-bold uppercase">{area.current}</p>
                            </div>
                            <div>
-                              <span className="text-[8px] font-black text-primary-600 uppercase">Optimized</span>
+                              <span className="text-[8px] font-black text-primary-600 uppercase">{t('optimized_label', 'ai_tools')}</span>
                               <p className="text-[10px] font-black uppercase text-primary-600">{area.optimized}</p>
                            </div>
                         </div>
@@ -200,7 +200,7 @@ export const RevenueOptimizer: React.FC<RevenueOptimizerProps> = ({
             {/* Implementation Roadmap */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 pt-8 border-t border-black">
                <div className="space-y-6">
-                  <h4 className="label-system text-[10px] font-black uppercase tracking-widest">Growth Recommendations</h4>
+                  <h4 className="label-system text-[10px] font-black uppercase tracking-widest">{t('top_recommendations', 'ai_tools')}</h4>
                   <ul className="space-y-4">
                     {optimization.recommendations?.map((rec: string, index: number) => (
                       <li key={index} className="flex gap-4 items-start border-b border-silver pb-4">
@@ -212,7 +212,7 @@ export const RevenueOptimizer: React.FC<RevenueOptimizerProps> = ({
                </div>
 
                <div className="space-y-6 bg-black text-white p-8 border border-black">
-                  <h4 className="label-system text-[10px] font-black uppercase tracking-widest text-primary-400">Implementation Workflow</h4>
+                  <h4 className="label-system text-[10px] font-black uppercase tracking-widest text-primary-400">{t('implementation_steps', 'ai_tools')}</h4>
                   <div className="space-y-6">
                     {optimization.implementationSteps?.map((step: string, index: number) => (
                       <div key={index} className="flex gap-6 items-center">
@@ -232,19 +232,19 @@ export const RevenueOptimizer: React.FC<RevenueOptimizerProps> = ({
                 className="flex-grow py-5 bg-black text-white text-[10px] font-black uppercase tracking-[0.3em] hover:bg-primary-600 transition-all flex items-center justify-center gap-3"
               >
                 <RefreshCcw className={`w-4 h-4 ${isOptimizing ? 'animate-spin' : ''}`} />
-                Recalculate Stream
+                {t('re_optimize', 'ai_tools')}
               </button>
               <button
                 onClick={() => onOptimizationComplete(optimization)}
                 className="px-12 py-5 border border-black text-[10px] font-black uppercase tracking-[0.3em] hover:bg-black hover:text-white transition-all flex items-center justify-center gap-3"
               >
-                Export Protocol <ChevronRight className="w-4 h-4" />
+                {t('export_plan', 'ai_tools')} <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           </div>
         ) : (
           <div className="py-20 text-center border border-black bg-bone">
-            <p className="label-system text-[9px] font-black uppercase tracking-widest">Awaiting Project Data Ingestion...</p>
+            <p className="label-system text-[9px] font-black uppercase tracking-widest">{t('awaiting_ingestion', 'ai_tools')}</p>
           </div>
         )}
       </div>

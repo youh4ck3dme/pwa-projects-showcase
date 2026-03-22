@@ -21,12 +21,21 @@ export interface ProjectCCT {
   similar_projects?: ProjectCCT[];
   ai_tech_stack?: string[];
   ai_architecture?: string;
+  ai_arch_analysis?: string;
   ai_market_intel?: string;
+  ai_security_audit?: string;
   suggested_budget?: string;
   suggested_timeline?: string;
   neuralMetadata?: {
     contextWeights?: Record<string, number>;
     lastCalibration?: string;
+  };
+  neural_meta?: {
+    tech_stack?: string[];
+    architecture?: string;
+    arch_analysis?: string;
+    market_intel?: string;
+    security_audit?: string;
   };
 }
 

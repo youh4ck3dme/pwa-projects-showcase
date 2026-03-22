@@ -61,15 +61,15 @@ describe('UI Components Suite', () => {
     expect(screen.getByText('UI Component Test')).toBeInTheDocument();
   });
 
-  it('should apply brutalist styles to ProjectCard', async () => {
+  it('should apply glassmorphism styles to ProjectCard', async () => {
     const { container } = render(
       <LanguageProvider>
         <ProjectCard project={mockProject} />
       </LanguageProvider>
     );
     const card = container.querySelector('a');
-    expect(card?.className).toContain('border-silver');
-    expect(card?.className).toContain('hover:border-black');
+    expect(card?.className).toContain('glass');
+    expect(card?.className).toContain('hover:bg-white/5');
   });
 
   it('should render placeholder image if featured_image_url is missing', () => {
@@ -90,7 +90,7 @@ describe('UI Components Suite', () => {
     );
     const card = container.querySelector('a');
     expect(card?.className).toContain('transition-all');
-    expect(card?.className).toContain('duration-300');
+    expect(card?.className).toContain('duration-500');
   });
 
   it('should render multiple ProjectCards in a grid', () => {

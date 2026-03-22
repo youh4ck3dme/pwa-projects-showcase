@@ -121,7 +121,11 @@ export default function ProjectsClient({ initialProjects }: ProjectsClientProps)
                       : 'text-charcoal border-transparent hover:border-silver hover:bg-bone'
                   }`}
                 >
-                  {cat === 'ALL' ? t('all', 'repository') : cat}
+                  {cat === 'ALL' 
+                    ? t('all', 'repository') 
+                    : (t(`cat_${cat.toLowerCase().replace(/[^a-z0-9]/g, '_')}`, 'ai_tools') !== `cat_${cat.toLowerCase().replace(/[^a-z0-9]/g, '_')}` 
+                        ? t(`cat_${cat.toLowerCase().replace(/[^a-z0-9]/g, '_')}`, 'ai_tools') 
+                        : cat)}
                 </button>
               ))}
             </nav>
@@ -187,20 +191,19 @@ export default function ProjectsClient({ initialProjects }: ProjectsClientProps)
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-0 flex-grow bg-silver/10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6 lg:p-10 flex-grow bg-bone/30">
             <AnimatePresence mode="popLayout">
               {filteredProjects?.map((project, idx) => (
                 <motion.div 
                   key={project.id} 
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.98 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ 
-                    duration: 0.4,
-                    delay: idx * 0.03,
+                    duration: 0.5,
+                    delay: idx * 0.05,
                     ease: [0.23, 1, 0.32, 1]
                   }}
-                  className="border-r border-b border-silver last:border-r-0 bg-white"
                 >
                   <ProjectCard project={project} />
                 </motion.div>

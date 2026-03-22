@@ -32,7 +32,7 @@ export const SearchAssistant: React.FC<SearchAssistantProps> = ({
         setSuggestions(parsed);
       }
     } catch {
-      setSuggestions(['MODERN PWA', 'E-COMMERCE API', 'AI ENGINE', 'MOBILE CORE', 'BLOCKCHAIN HUB']);
+      setSuggestions(t('suggestions_fallback', 'ai_tools') as unknown as string[] || ['MODERN PWA', 'E-COMMERCE API', 'AI ENGINE', 'MOBILE CORE', 'BLOCKCHAIN HUB']);
     }
   }, [t]);
 
@@ -169,8 +169,8 @@ export const SearchAssistant: React.FC<SearchAssistantProps> = ({
             </div>
             <div className="grid grid-cols-2 gap-2">
               {[
-                { label: 'CRITICAL', val: 'urgent', icon: <Activity className="w-3 h-3" /> },
-                { label: 'HIGH LOAD', val: 'enterprise', icon: <Zap className="w-3 h-3" /> }
+                { label: t('critical_label', 'ai_tools'), val: 'urgent', icon: <Activity className="w-3 h-3" /> },
+                { label: t('high_load_label', 'ai_tools'), val: 'enterprise', icon: <Zap className="w-3 h-3" /> }
               ].map((modifier) => (
                 <button
                   key={modifier.label}
